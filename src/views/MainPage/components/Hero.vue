@@ -8,7 +8,7 @@
           <div>
             <h1 class="text-4xl lg:text-5xl font-semibold">
               <span
-                v-if="$i18n.locale == 'kz'"
+                v-if="$i18n.locale === 'kz'"
                 class="text-mainColor font-bold"
                 >{{ $t("mainPage.hero.city") }}</span
               >

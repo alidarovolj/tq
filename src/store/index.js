@@ -1,16 +1,18 @@
-import { createStore } from "vuex";
-import Posts from "./modules/posts";
-import Registration from "./modules/registration";
-import Auth from "./modules/auth";
+import {createStore} from "vuex";
+import Posts from "@/store/modules/posts";
+import Registration from "@/store/modules/registration";
+import Auth from "@/store/modules/auth";
+import User from "@/store/modules/user.js";
 
 export default createStore({
-  modules: {
-    Posts,
-    Registration,
-    Auth,
-  },
-  actions: {},
-  mutations: {},
-  state: {},
-  getters: {},
+    modules: {
+        Posts,
+        Registration,
+        Auth,
+        User
+    },
+    actions: {},
+    mutations: {},
+    state: {},
+    getters: {},
 });

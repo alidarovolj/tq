@@ -1,7 +1,7 @@
 <template>
   <div>
     <font-awesome-icon
-      v-if="currentTheme == 'light'"
+      v-if="currentTheme === 'light'"
       class="cursor-pointer bg-secondaryColor dark:bg-darkElBg p-2 rounded-lg text-mainColor"
       @click="setTheme('dark')"
       :icon="['fas', 'sun']"
