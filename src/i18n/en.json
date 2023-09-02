@@ -1,0 +1,18 @@
+{
+  "general": {
+    "tenge": "tng.",
+    "login": "Login",
+    "registration": "Registration"
+  },
+  "header": {
+    "main": "Main page",
+    "about": "About",
+    "owners": "Owners",
+    "models": "Models",
+    "news": "News",
+    "contacts": "Contacts",
+    "cart": "Cart",
+    "refund": "Issue a refund",
+    "admin": "Admin. panel"
+  }
+}

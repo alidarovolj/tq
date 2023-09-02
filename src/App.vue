@@ -1,9 +1,7 @@
 <template>
-  <div class="dark:bg-black">
+  <div class="bg-white dark:bg-black">
     <DefaultLayout>
-      <transition @before-enter="scrollTop" mode="out-in" appear>
-        <router-view></router-view>
-      </transition>
+      <router-view></router-view>
     </DefaultLayout>
   </div>
 </template>

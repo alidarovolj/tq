@@ -1,183 +1,160 @@
 <template>
-  <div>
-    <div class="px-4 lg:px-0 fixed top-5 w-full">
-      <div
-          class="container mx-auto px-4 z-50 dark:text-darkText dark:bg-darkBg bg-white shadow-xl rounded-2xl"
-      >
-        <div class="flex items-center justify-between py-5">
-          <font-awesome-icon
-              :icon="['fas', 'bars']"
-              class="block lg:hidden text-xl"
-              @click="menu = !menu"
-          />
-          <router-link :to="{ name: 'MainPage' }">
-            <img
-                alt=""
-                class="w-28 lg:w-40"
-                src="@/assets/img/logos/logo-main.png"
-            />
-          </router-link>
-          <div class="hidden lg:flex">
-            <router-link
-                :to="{ name: 'MainPage' }"
-                class="px-3 transition-all hover:text-mainColor"
-            >{{ $t("header.links.services") }}
-            </router-link
-            >
-            <router-link
-                :to="{ name: 'MainPage' }"
-                class="px-3 transition-all hover:text-mainColor"
-            >{{ $t("header.links.about") }}
-            </router-link
-            >
-            <router-link
-                :to="{ name: 'MainPage' }"
-                class="px-3 transition-all hover:text-mainColor"
-            >{{ $t("header.links.price") }}
-            </router-link
-            >
-            <router-link
-                :to="{ name: 'MainPage' }"
-                class="px-3 transition-all hover:text-mainColor"
-            >{{ $t("header.links.contacts") }}
-            </router-link
-            >
-            <div v-if="getCurrentUser">
-              <router-link
-                  v-if="getCurrentUser.admin === 1"
-                  :to="{ name: 'MainPage' }"
-                  class="px-3 transition-all hover:text-mainColor"
-              >{{ $t("header.links.admin") }}
-              </router-link
-              >
-            </div>
-          </div>
-          <router-link
-              class="transition-all hover:text-mainColor text-xs lg:text-base hidden lg:block"
-              to="/"
-          >8 (747) 236-75-03
-          </router-link
-          >
-          <div class="flex items-center">
-            <div class="flex items-center mr-3">
-              <Locale/>
-              <div v-if="!getCurrentUser" class="hidden lg:flex items-center">
-                <router-link
-                    :to="{ name: 'Login' }"
-                    class="mx-3 cursor-pointer hover:text-mainColor transition-all"
-                >
-                  {{ $t("header.links.login") }}
-                </router-link>
-                <div class="font-semibold">
-                  <router-link :to="{ name: 'Registration' }"
-                               class="px-9 py-4 rounded-2xl bg-mainColor text-white cursor-pointer">
-                    {{ $t('header.links.register') }}
-                  </router-link>
-                </div>
+  <div
+      class="header shadow-xl fixed z-50 w-full h-max left-0 top-0 bg-whiteColor dark:bg-black dark:text-whiteColor transition-all dark:border-b dark:border-gray-700">
+    <div class="relative">
+      <div class="border-b dark:border-gray-700 py-2">
+        <div class="container mx-auto px-4 lg:px-0">
+          <div v-if="getCurrentUser" class="flex justify-between items-center text-xs lg:text-sm">
+            <div class="block lg:flex items-center">
+              <div class="flex justify-end items-center mr-3">
+                <font-awesome-icon :icon="['fas', 'message']" class="text-mainColor"/>
+                <a class="ml-1" href="mailto:office@tq.kz">office@tq.kz</a>
               </div>
-              <div v-else class="hidden lg:flex items-center">
-                <router-link :to="{ name: 'MainPage' }"
-                             class="mx-3 px-9 py-4 rounded-2xl bg-mainColor text-white cursor-pointer">{{
-                    getCurrentUser.name
-                  }}
-                </router-link>
+              <div class="text-mainColor text-base">
+                <font-awesome-icon :icon="['fab', 'instagram']" class="mr-3 cursor-pointer"/>
+                <font-awesome-icon :icon="['fab', 'twitter']" class="mr-3 cursor-pointer"/>
+                <font-awesome-icon :icon="['fab', 'vk']" class="mr-3 cursor-pointer"/>
+                <font-awesome-icon :icon="['fab', 'youtube']" class="cursor-pointer"/>
               </div>
             </div>
-            <ThemeSwitcher/>
+            <div class="flex">
+              <div class="flex items-center mr-4">
+                <ThemeSwitcher/>
+                <font-awesome-icon
+                    v-if="currentTheme === 'light'"
+                    :icon="['fas', 'sun']"
+                    class="ml-4 text-whiteColor bg-mainColor rounded-md p-2 cursor-pointer"
+                    @click="setTheme('dark')"
+                />
+                <font-awesome-icon
+                    v-else
+                    :icon="['fas', 'moon']"
+                    class="ml-4 text-whiteColor bg-mainColor rounded-md p-2 cursor-pointer"
+                    @click="setTheme('light')"
+                />
+
+              </div>
+              <div v-if="!getCurrentUser" class="block lg:flex items-center">
+                <p class="flex items-center cursor-pointer" @click="modalStateLogin = true">
+                  <font-awesome-icon :icon="['fa', 'user']" class="text-mainColor mr-1"/>
+                  <p>{{ $t('general.login') }}</p>
+                </p>
+                <p class="flex items-center ml-0 lg:ml-4 cursor-pointer" @click="modalStateRegistration = true">
+                  <font-awesome-icon :icon="['fas', 'key']" class="text-mainColor mr-1"/>
+                  <p>{{ $t('general.registration') }}</p>
+                </p>
+              </div>
+              <div class="flex items-center cursor-pointer bg-white rounded-md px-2">
+                <font-awesome-icon :icon="['fa', 'user']" class="text-mainColor mr-1"/>
+                <DropdownBlock :text="getCurrentUser.data.email">
+                  <p class="lg:hover:bg-gray-100 hover:dark:bg-darkBg px-2 lg:px-3 py-2">Профиль</p>
+                  <p class="lg:hover:bg-gray-100 hover:dark:bg-darkBg px-2 lg:px-3 py-2">Выйти</p>
+                </DropdownBlock>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div v-if="menu === true" class="px-4 lg:px-0 fixed w-full top-28">
-      <div class="container mx-auto">
-        <div class="px-4 pt-5 pb-10 w-full bg-white dark:bg-darkBg dark:text-darkText shadow-xl rounded-2xl">
-          <div class="mb-10">
-            <router-link
-                :to="{ name: 'MainPage' }"
-                class="px-3 transition-all block mb-3 hover:text-mainColor"
-            >{{ $t("header.links.services") }}
-            </router-link
-            >
-            <router-link
-                :to="{ name: 'MainPage' }"
-                class="px-3 transition-all block mb-3 hover:text-mainColor"
-            >{{ $t("header.links.about") }}
-            </router-link
-            >
-            <router-link
-                :to="{ name: 'MainPage' }"
-                class="px-3 transition-all block mb-3 hover:text-mainColor"
-            >{{ $t("header.links.price") }}
-            </router-link
-            >
-            <router-link
-                :to="{ name: 'MainPage' }"
-                class="px-3 transition-all block mb-3 hover:text-mainColor"
-            >{{ $t("header.links.contacts") }}
-            </router-link
-            >
-            <router-link
-                class="transition-all hover:text-mainColor text-xs lg:text-base hidden lg:block"
-                to="/"
-            >8 (747) 236-75-03
-            </router-link
-            >
-          </div>
-          <div class="block">
-            <div v-if="!getCurrentUser">
-              <router-link
-                  :to="{ name: 'Login' }"
-                  class="mx-3 cursor-pointer hover:text-mainColor transition-all"
-              >
-                {{ $t("header.links.login") }}
+      <div class="py-4">
+        <div class="container mx-auto px-4 lg:px-0">
+          <div class="flex justify-between items-center">
+            <router-link :to="{ name: 'MainPage' }" class="flex">
+              <font-awesome-icon :icon="['fas', 'bars']" class="mr-3 text-lg block lg:hidden"/>
+              <img v-if="currentTheme === 'light'" alt="" class="w-40 object-contain" src="@/assets/img/logo.png">
+              <img v-if="currentTheme === 'dark'" alt="" class="w-40 object-contain"
+                   src="@/assets/img/logo_white.png">
+            </router-link>
+            <div class="text-sm hidden lg:flex">
+              <router-link :to="{ name: 'MainPage' }" class="hover:text-mainColor transition-all">
+                {{ $t('header.refund') }}
               </router-link>
-              <div class="font-semibold">
-                <router-link :to="{ name: 'Registration' }"
-                             class="px-9 py-4 rounded-2xl bg-mainColor text-white cursor-pointer">
-                  {{ $t('header.links.register') }}
-                </router-link>
-              </div>
+              <router-link :to="{ name: 'MainPage' }" class="ml-4 hover:text-mainColor transition-all">
+                {{ $t('header.about') }}
+              </router-link>
+              <router-link :to="{ name: 'MainPage' }" class="ml-4 hover:text-mainColor transition-all">
+                {{ $t('header.owners') }}
+              </router-link>
+              <router-link :to="{ name: 'MainPage' }" class="ml-4 hover:text-mainColor transition-all">
+                {{ $t('header.models') }}
+              </router-link>
+              <router-link :to="{ name: 'MainPage' }" class="ml-4 hover:text-mainColor transition-all">
+                {{ $t('header.news') }}
+              </router-link>
+              <router-link :to="{ name: 'MainPage' }" class="ml-4 hover:text-mainColor transition-all">
+                {{ $t('header.contacts') }}
+              </router-link>
+              <span v-if="getCurrentUser">
+                <router-link v-if="getCurrentUser.data.is_admin" :to="{ name: 'MainPage' }"
+                             class="ml-4 hover:text-mainColor transition-all">
+                {{ $t('header.admin') }}
+              </router-link>
+              </span>
             </div>
-            <div v-else>
-              <router-link :to="{ name: 'MainPage' }"
-                           class="mx-3 px-9 py-4 rounded-2xl bg-mainColor text-white cursor-pointer">{{
-                  getCurrentUser.name
-                }}
-              </router-link>
+            <div class="text-sm lg:text-2xl text-mainColor flex items-center">
+              <div class="mr-4 relative">
+                <font-awesome-icon :icon="['fas', 'heart']" class="cursor-pointer"/>
+              </div>
+              <div class="relative">
+                <font-awesome-icon :icon="['fas', 'cart-shopping']" class="cursor-pointer"/>
+              </div>
+              <div class="text-xs lg:text-sm ml-3 text-blackColor dark:text-whiteColor">
+                <p class="mb-1 text-end">
+                  {{ $t('header.cart') }}: <span class="font-semibold">0 {{ $t('general.tenge') }}</span>
+                </p>
+                <p class="px-4 py-1 rounded-md border-gray-700 dark:border-whiteColor border cursor-pointer hover:bg-mainColor hover:border-mainColor hover:text-whiteColor transition-all">
+                  {{ $t('header.refund') }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <Modal
+      :is-visible="modalStateRegistration"
+      component-name="Registration"
+      @close_modal="(val) => (modalStateRegistration = val)"
+  />
+  <Modal
+      :is-visible="modalStateLogin"
+      component-name="Login"
+      @close_modal="(val) => (modalStateLogin = val)"
+  />
 </template>
 
 <script>
-import Button from "@/components/General/Button.vue";
-import Locale from "@/components/General/Locale.vue";
-import ThemeSwitcher from "@/components/General/ThemeSwitcher.vue";
+import ThemeSwitcher from "@/components/General/LocaleSwitcher.vue";
+import Modal from "@/components/Modal.vue";
 import {mapActions, mapGetters} from "vuex";
+import DropdownBlock from "@/components/General/Dropdown.vue";
 
 export default {
   name: "Header",
+  components: {DropdownBlock, ThemeSwitcher, Modal},
   data() {
     return {
-      menu: false,
+      modalStateRegistration: false,
+      modalStateLogin: false,
+      currentTheme: localStorage.getItem("theme"),
     };
   },
   computed: {
     ...mapGetters(['getCurrentUser'])
   },
-  components: {
-    Button,
-    Locale,
-    ThemeSwitcher,
-  },
   mounted() {
     this.currentUser()
   },
   methods: {
-    ...mapActions(['currentUser'])
+    ...mapActions(['currentUser']),
+    setTheme(theme) {
+      localStorage.setItem("theme", theme);
+      document.querySelector("html").classList.add(theme);
+      document
+          .querySelector("html")
+          .classList.remove(theme === "light" ? "dark" : "light");
+      this.currentTheme = theme;
+    },
   }
-};
+}
 </script>

@@ -1,82 +1,36 @@
 <template>
-  <section class="mt-20">
-    <div class="container mx-auto px-4 lg:px-0 dark:text-darkText">
-      <div class="block lg:flex justify-between">
-        <div
-          class="w-full lg:w-1/2 flex flex-col justify-between mb-10 lg:mb-0"
-        >
-          <div>
-            <h1 class="text-4xl lg:text-5xl font-semibold">
-              <span
-                v-if="$i18n.locale === 'kz'"
-                class="text-mainColor font-bold"
-                >{{ $t("mainPage.hero.city") }}</span
-              >
-              <p>{{ $t("mainPage.hero.header") }}</p>
-              <span
-                v-if="$i18n.locale != 'kz'"
-                class="text-mainColor font-bold"
-                >{{ $t("mainPage.hero.city") }}</span
-              >
-            </h1>
-            <p class="my-5">
-              {{ $t("mainPage.hero.paragraph") }}
-            </p>
+  <div class="relative py-60 text-whiteColor mb-20">
+    <video
+        autoplay
+        class="w-full h-full absolute left-0 top-0 object-cover z-10"
+        height="1080"
+        loop
+        muted
+        width="1920">
+      <source src="@/assets/video/hero.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="w-full h-full bg-black opacity-40 absolute left-0 top-0 z-20"></div>
+    <div class="container mx-auto px-4 lg:px-0 relative z-30">
+      <div class="flex justify-center items-center">
+        <div class="w-full lg:w-3/5">
+          <img alt="" class="h-40 mb-10 mx-auto" src="@/assets/img/logo_hor_white.png">
+          <div class="flex mb-2">
+            <input class="border rounded-l-md w-full px-5 py-2 text-lg" placeholder="Поиск по товарам" type="text">
+            <button class="bg-mainColor rounded-r-md px-4 flex items-center text-base">
+              <font-awesome-icon :icon="['fas', 'magnifying-glass']" class="mr-2"/>
+              <p>Найти</p>
+            </button>
           </div>
-          <div class="flex flex-wrap mb-5">
-            <p
-              v-for="(item, index) of keywords"
-              :key="index"
-              class="rounded-full px-5 py-3 hover:text-white bg-secondaryColor dark:bg-darkBg dark:border-darkBg hover:dark:bg-mainColor hover:bg-mainColor border border-secondaryColor mb-3 mr-3 cursor-pointer transition-all"
-            >
-              {{ item }}
-            </p>
-          </div>
-          <div class="relative">
-            <div>
-              <input
-                class="!pl-14 dark:bg-darkBg dark:border-darkBg"
-                type="text"
-                :placeholder="$t('mainPage.hero.input')"
-              />
-              <font-awesome-icon
-                class="absolute left-5 top-1/2 -translate-y-1/2"
-                :icon="['fas', 'magnifying-glass']"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="w-full lg:w-1/3">
-          <SendMessage />
+          <p>Например: <span class="underline cursor-pointer hover:no-underline">DCL750</span></p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
-  
-  <script>
-import SendMessage from "@/components/SendMessage.vue";
 
+<script>
 export default {
-  name: "HeroBlock",
-  data() {
-    return {
-      keywords: [
-        "VueJS",
-        "Laravel",
-        "PHP",
-        "Python",
-        "NodeJS",
-        "Django",
-        "1C",
-        "ReactJS",
-        "NextJS",
-        "GatsbyJS",
-      ],
-    };
-  },
-  components: {
-    SendMessage,
-  },
-};
+  name: "HeroComponent"
+}
 </script>

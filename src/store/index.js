@@ -1,18 +1,9 @@
 import {createStore} from "vuex";
-import Posts from "@/store/modules/posts";
-import Registration from "@/store/modules/registration";
-import Auth from "@/store/modules/auth";
-import User from "@/store/modules/user.js";
+import categories from "@/store/modules/categories.js";
+import auth from "@/store/modules/auth.js";
 
 export default createStore({
     modules: {
-        Posts,
-        Registration,
-        Auth,
-        User
-    },
-    actions: {},
-    mutations: {},
-    state: {},
-    getters: {},
+        categories, auth
+    }, actions: {}, mutations: {}, state: {}, getters: {},
 });

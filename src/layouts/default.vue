@@ -1,26 +1,23 @@
 <template>
-  <div>
-    <Header />
-    <div class="pt-10">
-      <slot />
+  <div class="bg-white dark:bg-black">
+    <Header/>
+    <div class=" pt-28 bg-white dark:bg-black">
+      <slot/>
     </div>
-    <Blog />
-    <Footer />
+    <FooterBlock />
   </div>
 </template>
-  
-  <script>
+
+<script>
 import Header from "@/components/Header.vue";
-import Footer from "@/components/Footer.vue";
-import Blog from "@/components/Blog.vue";
+import FooterBlock from "@/components/Footer.vue";
 
 export default {
   name: "DefaultLayout",
   components: {
-    Header,
-    Footer,
-    Blog,
-  },
+    FooterBlock,
+    Header
+  }
 };
 </script>
   

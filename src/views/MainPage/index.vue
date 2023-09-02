@@ -1,25 +1,20 @@
 <template>
   <div>
-    <Hero />
-    <About />
-    <Steps />
-    <Benefits />
+    <HeroComponent/>
+    <About/>
+    <Catalog/>
+    <ContactsBlock/>
   </div>
 </template>
 
 <script>
-import Hero from "./components/Hero.vue";
-import About from "./components/About.vue";
-import Steps from "./components/Steps.vue";
-import Benefits from "./components/Benefits.vue";
+import HeroComponent from "@/views/MainPage/components/Hero.vue";
+import Catalog from "@/views/MainPage/components/Catalog.vue";
+import About from "@/views/MainPage/components/About.vue";
+import ContactsBlock from "@/views/MainPage/components/Contacts.vue";
 
 export default {
   name: "MainPage",
-  components: {
-    Hero,
-    About,
-    Steps,
-    Benefits,
-  },
+  components: {ContactsBlock, About, Catalog, HeroComponent},
 };
 </script>
