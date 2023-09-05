@@ -25,7 +25,7 @@
                     :class="{
                       'border-red-500': v$.form.name.$errors.length,
                     }"
-                    class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBg dark:text-darkText"
+                    class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                     name="first_name"
                     placeholder="Введите имя"
                     type="text"
@@ -43,7 +43,7 @@
                     :class="{
                       'border-red-500': v$.form.email.$errors.length,
                     }"
-                    class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBg dark:text-darkText"
+                    class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                     name="first_name"
                     placeholder="mail@mail.com"
                     type="text"
@@ -61,7 +61,7 @@
                     :class="{
                       'border-red-500': v$.form.phone.$errors.length,
                     }"
-                    class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBg dark:text-darkText"
+                    class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                     name="first_name"
                     placeholder="+7(###) ###-##-##"
                     type="text"
@@ -79,7 +79,7 @@
                     :class="{
                       'border-red-500': v$.form.city.$errors.length,
                     }"
-                    class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBg dark:text-darkText"
+                    class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                     name="first_name"
                     placeholder="Введите название города"
                     type="text"
@@ -103,7 +103,7 @@
                     :class="{
                       'border-red-500': v$.form.delivery_type.$errors.length,
                     }"
-                    class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBg dark:text-darkText"
+                    class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                     name="">
                   <option :value="null">Выберите тип</option>
                   <option value="Внутригородская">Внутригородская</option>
@@ -122,7 +122,7 @@
                     :class="{
                       'border-red-500': v$.form.password.$errors.length,
                     }"
-                    class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBg dark:text-darkText"
+                    class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                     name="first_name"
                     placeholder="Введите пароль"
                     type="password"
@@ -136,7 +136,7 @@
               class="w-max text-black mr-3 flex items-center rounded-md px-5 py-2 cursor-pointer"
               @click="close_modal"
           >
-            <p class="dark:text-darkText">Отменить</p>
+            <p class="dark:text-white">Отменить</p>
           </div>
           <div>
             <button

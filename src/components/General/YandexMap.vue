@@ -8,7 +8,7 @@
         <div class="flex">
           <input
               v-model="searchQuery"
-              class="py-2 px-4 border rounded-md w-full bg-white dark:bg-darkBg"
+              class="py-2 px-4 border rounded-md w-full bg-white dark:bg-darkBgColor dark:text-white"
               placeholder="Введите адрес"
               type="text"
               @input="updateSuggestions"

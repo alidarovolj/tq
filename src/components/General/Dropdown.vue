@@ -5,7 +5,7 @@
         @click="isOpen = !isOpen"
     >
       <div class="flex items-center justify-center">
-        <button class="rounded text-lg lg:text-xs">
+        <button class="rounded lg:text-xs">
           {{ text }}
         </button>
         <font-awesome-icon
@@ -17,10 +17,10 @@
     </div>
     <div
         v-if="isOpen"
-        class="w-full pt-2 lg:pt-0 absolute bg-white border-0 lg:border dark:bg-darkBg dark:lg:bg-darkElBg text-black lg:text-[#5e5873] dark:text-darkText top-full left-0 lg:right-0 rounded shadow-lg z-50"
+        class="w-full pt-2 lg:pt-0 absolute bg-white border-0 lg:border lg:dark:border-gray-700 dark:bg-darkBg dark:lg:bg-darkElBg text-black lg:text-[#5e5873] dark:text-darkText top-full left-0 lg:right-0 rounded shadow-lg z-50"
     >
       <div
-          class="w-full no-underline transition-all items-center text-black lg:text-[#5e5873] dark:text-darkText whitespace-nowrap">
+          class="w-full no-underline transition-all items-center text-black lg:text-[#5e5873] dark:text-whiteColor whitespace-nowrap">
         <slot/>
       </div>
     </div>

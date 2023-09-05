@@ -24,7 +24,7 @@
                       :class="{
                       'border-red-500': v$.form.email.$errors.length,
                     }"
-                      class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBg dark:text-darkText"
+                      class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                       name="first_name"
                       placeholder="mail@mail.com"
                       type="text"
@@ -42,7 +42,7 @@
                       :class="{
                       'border-red-500': v$.form.password.$errors.length,
                     }"
-                      class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBg dark:text-darkText"
+                      class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                       name="first_name"
                       placeholder="Введите пароль"
                       type="password"
@@ -53,7 +53,7 @@
           </div>
           <div class="flex justify-center mt-3">
             <div
-                class="w-max text-black mr-3 flex items-center rounded-md px-5 py-2 cursor-pointer"
+                class="w-max text-black dark:text-white mr-3 flex items-center rounded-md px-5 py-2 cursor-pointer"
                 @click="close_modal"
             >
               <p class="dark:text-darkText">Отменить</p>
@@ -116,7 +116,7 @@ export default {
     ...mapGetters(["getAuth", "getUser"]),
   },
   methods: {
-    ...mapActions(["authUser", "setUser"]),
+    ...mapActions(["authUser", "setUser", "currentUser"]),
     close_modal() {
       this.$emit("requestToClose", false);
     },
@@ -135,6 +135,7 @@ export default {
             this.toast(true, "Авторизация успешна");
             this.close_modal();
             this.setUser();
+            this.currentUser()
           })
           .catch((error) => {
             if (error.response.data.errors) {

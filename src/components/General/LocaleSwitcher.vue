@@ -2,7 +2,7 @@
   <select
       id=""
       v-model="currentLang"
-      class="border rounded-md px-4 py-2 cursor-pointer dark:bg-black dark:text-whiteColor text-xs"
+      class="border rounded-md px-2 lg:px-4 py-1 lg:py-2 cursor-pointer dark:bg-darkBg dark:text-whiteColor text-xs"
       name=""
       @change="switchLocale($event)"
   >
@@ -42,11 +42,6 @@ export default {
           id: 2,
           value: "kz",
           title: "KZ",
-        },
-        {
-          id: 3,
-          value: "en",
-          title: "EN",
         },
       ],
     };

@@ -1,5 +1,5 @@
 <template>
-  <div class="dark:bg-black">
+  <div class="dark:bg-darkBg">
     <div class="container mx-auto px-4 lg:px-0 mb-20">
       <div class="block lg:flex justify-between">
         <img class="w-full mb-3 lg:mb-0 lg:w-fourth object-cover object-center rounded-2xl" src="@/assets/img/blocks/1.png" alt="">

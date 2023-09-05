@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-white dark:bg-black">
+  <div class="bg-white dark:bg-darkBg">
     <Header/>
-    <div class=" pt-28 bg-white dark:bg-black">
+    <div class=" pt-28 bg-white dark:bg-darkBg">
       <slot/>
     </div>
     <FooterBlock />

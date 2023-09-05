@@ -7,15 +7,16 @@
       ></div>
       <div
           :class="{ '!p-0': componentName === 'AssignCourier', 'lg:w-[1200px]' : componentName === 'FinalDeliveryPrint' }"
-          class="fixed w-full lg:w-[800px] rounded-md bg-white lg:max-h-[800px] overflow-y-auto dark:bg-darkElBg text-black dark:text-darkText left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 py-4 px-4 h-full lg:h-auto z-40"
+          class="fixed w-full lg:w-[800px] rounded-md bg-white lg:max-h-[800px] overflow-y-auto dark:bg-darkBg text-black dark:text-darkText left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 py-4 px-4 h-full lg:h-auto z-40"
       >
         <div
-            class="absolute z-30 right-0 top-0 bg-white dark:bg-darkBg rounded-md flex justify-center items-center cursor-pointer w-8 h-8"
+            class="absolute z-30 right-0 top-0 bg-white dark:bg-blackColor dark:text-white rounded-md flex justify-center items-center cursor-pointer w-8 h-8"
             @click="close_modal"
         >
           <font-awesome-icon :icon="['fas', 'xmark']"/>
         </div>
         <component
+            class="dark:text-white"
             :is="componentName"
             :tran-id="recId"
             @request-to-close="close_modal"
