@@ -4,19 +4,23 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {fab} from "@fortawesome/free-brands-svg-icons";
 import {
+    faArrowLeft,
     faBars,
     faCartShopping,
+    faCheck,
     faChevronDown,
-    faChevronRight,
+    faChevronRight, faClock, faEye,
     faHeart,
     faKey,
     faMagnifyingGlass,
     faMessage,
     faMoon,
+    faPhone,
     faSun,
     faUser,
     faXmark
 } from "@fortawesome/free-solid-svg-icons";
+
 import {notify} from "@/utils/toasts.js";
 
 import App from "./App.vue";
@@ -41,6 +45,12 @@ library.add(fab)
 library.add(faMoon)
 library.add(faXmark)
 library.add(faChevronDown)
+library.add(faCheck)
+library.add(faPhone)
+library.add(faEye)
+library.add(faClock)
+library.add(faArrowLeft)
+library.add()
 
 createApp(App)
     .use(store)

@@ -9,7 +9,7 @@ export default {
                 darkBg: "#131313",
                 darkBgColor: "#373737"
             }, width: {
-                half: "49%", third: "32%", sixth: "16%", fourth: "24.5%"
+                half: "49%", third: "32%", sixth: "16%", fourth: "24.5%", fifth: "19%"
             },
         },
     }, plugins: [],

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white dark:bg-darkBg">
+  <div class="bg-whiteColor dark:bg-darkBg">
     <DefaultLayout>
       <router-view></router-view>
     </DefaultLayout>
@@ -25,6 +25,9 @@ export default {
       localStorage.setItem("theme", "dark");
     } else {
       document.documentElement.classList.remove("dark");
+    }
+    if (!localStorage.cart) {
+      localStorage.setItem('cart', JSON.stringify([]))
     }
   },
   methods: {

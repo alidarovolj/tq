@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-whiteColor dark:bg-darkBg dark:border-t dark:border-gray-700 py-10 mt-10 dark:text-whiteColor">
+  <div class="bg-white dark:bg-darkBg dark:border-t dark:border-gray-700 py-10 mt-10 dark:text-whiteColor">
     <div class="container mx-auto px-4 lg:px-0">
       <div class="flex mb-5">
         <div class="mr-10">

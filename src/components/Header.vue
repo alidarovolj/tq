@@ -1,6 +1,6 @@
 <template>
   <div
-      class="header shadow-xl fixed z-50 w-full h-max left-0 top-0 bg-whiteColor dark:bg-darkBg dark:text-whiteColor transition-all dark:border-b dark:border-gray-700">
+      class="nav header shadow-xl fixed z-50 w-full h-max left-0 top-0 bg-whiteColor dark:bg-darkBg dark:text-whiteColor transition-all dark:border-b dark:border-gray-700">
     <div class="relative">
       <div class="border-b dark:border-gray-700 py-2">
         <div class="container mx-auto px-4 lg:px-0">
@@ -68,21 +68,15 @@
             </div>
             <div class="text-sm hidden lg:flex">
               <router-link :to="{ name: 'MainPage' }" class="hover:text-mainColor transition-all">
-                {{ $t('header.refund') }}
+                {{ $t('header.main') }}
               </router-link>
-              <router-link :to="{ name: 'MainPage' }" class="ml-4 hover:text-mainColor transition-all">
+              <router-link :to="{ name: 'AboutPage' }" class="ml-4 hover:text-mainColor transition-all">
                 {{ $t('header.about') }}
               </router-link>
-              <router-link :to="{ name: 'MainPage' }" class="ml-4 hover:text-mainColor transition-all">
-                {{ $t('header.owners') }}
-              </router-link>
-              <router-link :to="{ name: 'MainPage' }" class="ml-4 hover:text-mainColor transition-all">
-                {{ $t('header.models') }}
-              </router-link>
-              <router-link :to="{ name: 'MainPage' }" class="ml-4 hover:text-mainColor transition-all">
+              <router-link :to="{ name: 'NewsPage' }" class="ml-4 hover:text-mainColor transition-all">
                 {{ $t('header.news') }}
               </router-link>
-              <router-link :to="{ name: 'MainPage' }" class="ml-4 hover:text-mainColor transition-all">
+              <router-link :to="{ name: 'ContactsPage' }" class="ml-4 hover:text-mainColor transition-all">
                 {{ $t('header.contacts') }}
               </router-link>
               <span v-if="getCurrentUser">
@@ -92,22 +86,29 @@
               </router-link>
               </span>
             </div>
-            <div class="text-sm lg:text-2xl text-mainColor flex items-center justify-between w-full lg:w-max">
+            <div v-if="getCart" class="text-sm lg:text-2xl text-mainColor flex items-center justify-between w-full lg:w-max">
               <div class="flex items-center">
                 <div class="mr-4 relative">
                   <font-awesome-icon :icon="['fas', 'heart']" class="cursor-pointer"/>
                 </div>
                 <div class="relative">
                   <font-awesome-icon :icon="['fas', 'cart-shopping']" class="cursor-pointer"/>
+                  <div
+                      class="absolute right-0 top-0 w-4 h-4 bg-white translate-x-1/2 -translate-y-1/2 border border-mainColor text-mainColor flex items-center justify-center rounded-full">
+                    <p class="text-xs">{{ getCart.products.length }}</p>
+                  </div>
                 </div>
               </div>
-              <div class="text-xs lg:text-sm ml-3 text-blackColor dark:text-whiteColor flex lg:block items-center">
+              <div
+                   class="text-xs lg:text-sm ml-3 text-blackColor dark:text-whiteColor flex lg:block items-center">
                 <p class="mb-0 lg:mb-1 text-end">
-                  {{ $t('header.cart') }}: <span class="font-semibold">0 {{ $t('general.tenge') }}</span>
+                  {{ $t('header.cart') }}: <span class="font-semibold">{{ getCart.price }} {{
+                    $t('general.tenge')
+                  }}</span>
                 </p>
-                <p class="px-4 py-1 rounded-md border-gray-700 dark:border-whiteColor border ml-2 lg:ml-0 cursor-pointer hover:bg-mainColor hover:border-mainColor hover:text-whiteColor transition-all">
-                  {{ $t('header.refund') }}
-                </p>
+                <!--                <p class="px-4 py-1 rounded-md border-gray-700 dark:border-whiteColor border ml-2 lg:ml-0 cursor-pointer hover:bg-mainColor hover:border-mainColor hover:text-whiteColor transition-all">-->
+                <!--                  {{ $t('header.refund') }}-->
+                <!--                </p>-->
               </div>
             </div>
           </div>
@@ -144,13 +145,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getCurrentUser'])
+    ...mapGetters(['getCurrentUser', 'getCart'])
   },
   mounted() {
     this.currentUser()
+    this.cart()
   },
   methods: {
-    ...mapActions(['currentUser']),
+    ...mapActions(['currentUser', 'cart']),
     logout() {
       localStorage.removeItem('user');
       localStorage.removeItem('token');
