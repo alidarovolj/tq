@@ -2,7 +2,7 @@
   <div v-if="isSubcategory">
     <router-view></router-view>
   </div>
-  <div v-else class="py-24">
+  <div v-else class="pt-24 lg:pt-10">
     <div v-if="getCategory" class="container mx-auto px-4 lg:px-0">
       <BreadcrumbsComponent :get-links="links" class="mb-4"/>
       <div v-if="getCategory.data.sub_category_limitless.length > 0">
@@ -14,7 +14,7 @@
             <router-link v-for="(item, index) of getCategory.data.sub_category_limitless"
                          :key="index"
                          :to="{ name: 'SubCategory', params: { cat_id: $route.params.cat_id, sub_id: item.id } }"
-                         class="w-full lg:w-fourth flex flex-col justify-between bg-white rounded-2xl p-4 mb-2 hover:bg-mainColor transition-all cursor-pointer hover:text-white">
+                         class="w-full lg:w-fourth flex flex-col justify-between bg-white rounded-2xl p-4 mb-2 hover:bg-mainColor transition-all cursor-pointer hover:text-white dark:bg-darkBgColor dark:text-whiteColor">
               <img :src="item.icon" alt="" class="w-32 h-32 mx-auto object-contain">
               <p class=" text-center font-semibold">{{ item.name }}</p>
             </router-link>

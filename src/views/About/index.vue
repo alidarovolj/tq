@@ -1,5 +1,5 @@
 <template>
-  <div class="py-24">
+  <div class="pt-24 lg:pt-10 text-blackColor dark:text-whiteColor">
     <div class="container mx-auto px-4 lg:px-0">
       <div class=" mb-10">
         <h1 class="text-2xl font-semibold dark:text-whiteColor mb-3">О компании</h1>
@@ -39,7 +39,7 @@
       <div class="mb-10">
         <p class="mb-5 text-xl font-semibold">Наши Преимущества</p>
         <div class="flex flex-wrap justify-between">
-          <div class="flex items-center shadow-lg w-full lg:w-third bg-white p-3 rounded-xl mb-10 dark:border dark:border-white">
+          <div class="flex items-center shadow-lg w-full lg:w-third bg-white dark:bg-darkBgColor p-3 rounded-xl mb-10">
             <font-awesome-icon :icon="['fas', 'check']" class="bg-green-500 text-white rounded-full p-2 mr-3"/>
             <div class="text-sm flex flex-col justify-between h-full">
               <p class="text-lg font-semibold mb-3">Широкий ассортимент</p>
@@ -48,7 +48,7 @@
                 потребности всех автовладельцев.</p>
             </div>
           </div>
-          <div class="flex items-center shadow-lg w-full lg:w-third bg-white p-3 rounded-xl mb-10 dark:border dark:border-white">
+          <div class="flex items-center shadow-lg w-full lg:w-third bg-white dark:bg-darkBgColor p-3 rounded-xl mb-10">
             <font-awesome-icon :icon="['fas', 'check']" class="bg-green-500 text-white rounded-full p-2 mr-3"/>
             <div class="text-sm flex flex-col justify-between h-full">
               <p class="text-lg font-semibold mb-3">Качество</p>
@@ -57,7 +57,7 @@
                 продукции. Все товары проходят строгий контроль качества.</p>
             </div>
           </div>
-          <div class="flex items-center shadow-lg w-full lg:w-third bg-white p-3 rounded-xl mb-10 dark:border dark:border-white">
+          <div class="flex items-center shadow-lg w-full lg:w-third bg-white dark:bg-darkBgColor p-3 rounded-xl mb-10">
             <font-awesome-icon :icon="['fas', 'check']" class="bg-green-500 text-white rounded-full p-2 mr-3"/>
             <div class="text-sm flex flex-col justify-between h-full">
               <p class="text-lg font-semibold mb-3">Профессиональные консультации</p>
@@ -66,7 +66,7 @@
                 учитывая марку и модель вашего автомобиля.</p>
             </div>
           </div>
-          <div class="flex items-center shadow-lg w-full lg:w-third bg-white p-3 rounded-xl mb-10 dark:border dark:border-white">
+          <div class="flex items-center shadow-lg w-full lg:w-third bg-white dark:bg-darkBgColor p-3 rounded-xl mb-10">
             <font-awesome-icon :icon="['fas', 'check']" class="bg-green-500 text-white rounded-full p-2 mr-3"/>
             <div class="text-sm flex flex-col justify-between h-full">
               <p class="text-lg font-semibold mb-3">Доставка</p>
@@ -76,7 +76,7 @@
                 удобным для клиентов.</p>
             </div>
           </div>
-          <div class="flex items-center shadow-lg w-full lg:w-third bg-white p-3 rounded-xl mb-10 dark:border dark:border-white">
+          <div class="flex items-center shadow-lg w-full lg:w-third bg-white dark:bg-darkBgColor dark:bg-darkBgColor p-3 rounded-xl mb-10">
             <font-awesome-icon :icon="['fas', 'check']" class="bg-green-500 text-white rounded-full p-2 mr-3"/>
             <div class="text-sm flex flex-col justify-between h-full">
               <p class="text-lg font-semibold mb-3">Цены и акции</p>

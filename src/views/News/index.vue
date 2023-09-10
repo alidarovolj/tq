@@ -1,9 +1,9 @@
 <template>
-  <div class="py-24">
+  <div class="pt-24 lg:pt-10">
     <div>
       <div class="container mx-auto px-4 lg:px-0">
         <h2 class="text-2xl font-semibold mb-10 dark:text-whiteColor">Новости компании</h2>
-        <div class="w-full flex border rounded-xl mb-10 bg-white">
+        <div class="w-full block lg:flex rounded-xl mb-10 bg-white dark:bg-darkBgColor text-blackColor dark:text-white shadow-lg">
           <img :src="news[0].img" alt="" class="w-full rounded-l-xl">
           <div class="p-5 flex flex-col justify-between">
             <div class="mb-5">
@@ -22,8 +22,8 @@
             </div>
           </div>
         </div>
-        <div class="flex justify-between">
-          <div v-for="(item, index) of news" :key="index" class="w-third flex flex-col justify-between border rounded-xl bg-white">
+        <div class="block lg:flex justify-between">
+          <div v-for="(item, index) of news" :key="index" class="w-full mb-4 lg:mb-0 lg:w-third flex flex-col justify-between rounded-xl bg-white dark:bg-darkBgColor text-blackColor dark:text-white shadow-lg">
             <img :src="item.img" alt="" class="w-full rounded-t-xl">
             <div class="p-5">
               <div class="mb-5">

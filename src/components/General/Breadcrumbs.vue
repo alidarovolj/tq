@@ -1,6 +1,6 @@
 <template>
-  <div v-if="getLinks" class="breadcrumbs w-max rounded-lg flex text-sm items-center">
-    <div class="block lg:flex items-center">
+  <div v-if="getLinks" class="breadcrumbs rounded-lg flex text-sm items-center">
+    <div class="flex flex-wrap items-center">
       <router-link
           v-if="getLinks.length > 1"
           :to="getLinks[getLinks.length - 2].to"

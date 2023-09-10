@@ -1,5 +1,5 @@
 <template>
-  <div class="py-24">
+  <div class="pt-24 lg:pt-10">
     <div v-if="getCategory" class="container mx-auto px-4 lg:px-0">
       <BreadcrumbsComponent :get-links="links" class="mb-4"/>
       <div v-if="getCategory.data.sub_category_limitless.length > 0">

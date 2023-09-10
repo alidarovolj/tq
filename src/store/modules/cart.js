@@ -1,50 +1,63 @@
 // import axios from "@/utils/axios.js";
 
 const actions = {
-    async addProduct({commit}, product) {
-        commit("updateAddedProduct", product);
+    async addProduct({commit}, {product, method}) {
+        commit("updateAddedProduct", {product, method});
         commit("updateCart");
     }, async cart({commit}) {
         commit("updateCart");
     },
 };
 const mutations = {
-    updateAddedProduct: (state, res) => {
+    updateAddedProduct: (state, {product, method}) => {
+        console.log(method)
+        console.log(product)
         let products = localStorage.getItem('cart');
         let parsedProducts = JSON.parse(products);
         let stateProduct = {
-            index: null,
-            status: false, // Initialize status to false (not found)
+            index: null, status: false,
         };
 
-        parsedProducts.forEach((item, index) => {
-            if (item.id === res.id) {
-                stateProduct.status = true; // Set status to true (found)
-                stateProduct.index = index; // Store the index
+        for (let index = 0; index < parsedProducts.length; index++) {
+            if (parsedProducts[index].id === product.id) {
+                stateProduct.status = true;
+                stateProduct.index = index;
+                break; // Exit the loop when a matching product is found
             }
-        });
+        }
+
+        if (stateProduct.status === true) {
+            if (method === 'plus') {
+                parsedProducts[stateProduct.index].amount += 1;
+                parsedProducts[stateProduct.index].price_main += product.price;
+            } else {
+                parsedProducts[stateProduct.index].amount -= 1;
+                parsedProducts[stateProduct.index].price_main -= product.price;
+                if (parsedProducts[stateProduct.index].amount <= 0) {
+                    parsedProducts.splice(stateProduct.index, 1);
+                }
+            }
+        } else {
+            parsedProducts.push({
+                ...product, amount: 1, price_main: product.price,
+            });
+        }
 
         console.log(stateProduct);
-
-        if (stateProduct.status) {
-            // If found, remove the item from the array
-            parsedProducts.splice(stateProduct.index, 1);
-        } else {
-            // If not found, add the item to the array
-            parsedProducts.push(res);
-        }
-
         localStorage.setItem('cart', JSON.stringify(parsedProducts));
     }, updateCart: (state, res) => {
-        let products = localStorage.getItem('cart')
-        let parsedProducts = JSON.parse(products)
-        let price = 0
+        let products = localStorage.getItem('cart');
+        let parsedProducts = JSON.parse(products);
+        let price_main = 0;
+
         parsedProducts.forEach((item) => {
-            price = item.price + price
-        })
+            price_main += item.price * item.amount; // Add the product price multiplied by its amount
+        });
+
         let cartState = {
-            products: parsedProducts, price: price
-        }
+            products: parsedProducts, price_main: price_main,
+        };
+
         state.cart = cartState;
     }
 };

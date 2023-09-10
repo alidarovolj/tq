@@ -2,12 +2,12 @@
   <div v-if="$route.name != 'NewsPage'" class="mt-10">
     <div class="container mx-auto px-4 lg:px-0">
       <h2 class="text-2xl font-semibold mb-10 dark:text-whiteColor">Новости компании</h2>
-      <div class="flex justify-between">
-        <div v-for="(item, index) of news" :key="index" class="w-third flex flex-col justify-between border rounded-xl bg-white">
+      <div class="block lg:flex justify-between">
+        <div v-for="(item, index) of news" :key="index" class="w-full lg:w-third flex flex-col justify-between bg-white dark:bg-darkBgColor text-blackColor dark:text-white rounded-xl mb-4">
           <img :src="item.img" alt="" class="w-full rounded-t-xl">
           <div class="p-5">
             <div class="mb-5">
-              <p class="font-semibold mb-3">{{ item.title }}</p>
+              <p class="font-bold mb-3">{{ item.title }}</p>
               <p>{{ item.description }}</p>
             </div>
             <div class="flex justify-between">

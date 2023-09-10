@@ -9,14 +9,20 @@ import {
     faCartShopping,
     faCheck,
     faChevronDown,
-    faChevronRight, faClock, faEye,
+    faChevronRight,
+    faClock,
+    faEye,
     faHeart,
     faKey,
     faMagnifyingGlass,
     faMessage,
     faMoon,
+    faPersonWalking,
     faPhone,
     faSun,
+    faTag,
+    faTrash,
+    faTruck,
     faUser,
     faXmark
 } from "@fortawesome/free-solid-svg-icons";
@@ -50,7 +56,10 @@ library.add(faPhone)
 library.add(faEye)
 library.add(faClock)
 library.add(faArrowLeft)
-library.add()
+library.add(faTag)
+library.add(faPersonWalking)
+library.add(faTruck)
+library.add(faTrash)
 
 createApp(App)
     .use(store)

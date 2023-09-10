@@ -16,11 +16,14 @@
         <div class="w-full lg:w-3/5">
           <img alt="" class="h-40 mb-10 mx-auto" src="@/assets/img/logo_hor_white.png">
           <div class="flex mb-2">
-            <input class="border rounded-l-md w-full px-5 py-2 text-lg" placeholder="Поиск по товарам" type="text">
-            <button class="bg-mainColor rounded-r-md px-4 flex items-center text-base">
-              <font-awesome-icon :icon="['fas', 'magnifying-glass']" class="mr-2"/>
-              <p>Найти</p>
-            </button>
+            <SelectSearch
+                :data="getSearchedProduct"
+                @tran-data="recProducts"
+            />
+<!--            <button class="bg-mainColor rounded-r-md px-4 flex items-center text-base">-->
+<!--              <font-awesome-icon :icon="['fas', 'magnifying-glass']" class="mr-2"/>-->
+<!--              <p>Найти</p>-->
+<!--            </button>-->
           </div>
           <p>Например: <span class="underline cursor-pointer hover:no-underline">DCL750</span></p>
         </div>
@@ -30,7 +33,26 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from "vuex";
+import SelectSearch from "@/components/General/SelectSearch.vue";
 export default {
-  name: "HeroComponent"
+  name: "HeroComponent",
+  components: {
+    SelectSearch
+  },
+  data() {
+    return {
+
+    }
+  },
+  computed: {
+    ...mapGetters(['getSearchedProduct']),
+  },
+  methods: {
+    ...mapActions(['searchProduct']),
+    recProducts(value) {
+      console.log(value)
+    },
+  }
 }
 </script>
