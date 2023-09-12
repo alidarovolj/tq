@@ -29,6 +29,16 @@ export default {
     if (!localStorage.cart) {
       localStorage.setItem('cart', JSON.stringify([]))
     }
+    if (!localStorage.orderNumber) {
+      const symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let result = "";
+      for (let i = 0; i < 6; i++) {
+        const randomIndex = Math.floor(Math.random() * symbols.length);
+        result += symbols.charAt(randomIndex);
+      }
+      localStorage.setItem('orderNumber', JSON.stringify(result))
+    }
+
   },
   methods: {
     scrollTop() {

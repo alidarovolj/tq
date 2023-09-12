@@ -1,17 +1,20 @@
 // import axios from "@/utils/axios.js";
 
+import axios from "@/utils/axios.js";
+
 const actions = {
     async addProduct({commit}, {product, method}) {
         commit("updateAddedProduct", {product, method});
         commit("updateCart");
     }, async cart({commit}) {
         commit("updateCart");
+    }, async createOrder({commit}, form) {
+        const {data} = await axios.post("/orders", form);
+        commit("updateCreatedOrder", data);
     },
 };
 const mutations = {
     updateAddedProduct: (state, {product, method}) => {
-        console.log(method)
-        console.log(product)
         let products = localStorage.getItem('cart');
         let parsedProducts = JSON.parse(products);
         let stateProduct = {
@@ -59,13 +62,15 @@ const mutations = {
         };
 
         state.cart = cartState;
+    }, updateCreatedOrder: (state, res) => {
+        state.createdOrder = res;
     }
 };
 const state = {
-    cart: null
+    cart: null, createdOrder: null,
 };
 const getters = {
-    getCart: (state) => state.cart
+    getCart: (state) => state.cart, getCreatedOrder: (state) => state.createdOrder
 };
 
 export default {state, getters, mutations, actions};

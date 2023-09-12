@@ -7,12 +7,15 @@
             class="bg-white dark:bg-darkBgColor text-blackColor dark:text-white w-full lg:w-[65%] p-7 rounded-lg shadow-lg mb-5 lg:mb-0">
           <h1 class="text-xl font-semibold mb-3">{{ getProduct.data.name }}</h1>
           <div class="block lg:flex items-start">
-            <img :src="getProduct.data.icon" alt="" class="w-full lg:w-1/3 mr-3">
-            <div class="w-full lg:w-1/3">
-              <p class="font-semibold mb-5 text-xl">Описание:</p>
-              <p>{{ getProduct.data.description }}</p>
+              <img :src="getProduct.data.icon" alt="" class="w-full lg:w-1/3 mr-3">
+              <div class="flex flex-col justify-between h-full w-full lg:w-1/3">
+                <div class="w-full mb-5">
+                  <p class="font-semibold mb-5 text-xl">Описание:</p>
+                  <p>{{ getProduct.data.description }}</p>
+                </div>
+                <p class="italic">Категория: {{ getProduct.data.category.name }}</p>
+              </div>
             </div>
-          </div>
         </div>
         <div
             class="bg-white dark:bg-darkBgColor text-blackColor dark:text-white w-full lg:w-1/3 p-7 rounded-lg shadow-lg">
@@ -24,7 +27,7 @@
             </div>
           </div>
           <p class="text-3xl font-bold mb-5">{{ getProduct.data.price }} {{ $t('general.tenge') }}</p>
-          <div v-if="!isInCart(getProduct.data)"
+          <div v-if="isInCart(getProduct.data)"
                class="bg-mainColor text-center py-3 font-bold text-white rounded-lg mb-5 cursor-pointer"
                @click="addProduct({ product: getProduct.data, method: 'minus' })">
             Добавить в корзину
@@ -35,11 +38,11 @@
           </div>
           <div v-if="isInCart(getProduct.data)" class="flex items-center justify-between mb-5 text-lg">
             <p
-                class="w-10 h-10 bg-whiteColor rounded-full text-mainColor flex items-center justify-center text-lg"
+                class="w-10 h-10 bg-whiteColor rounded-full text-mainColor flex items-center justify-center text-lg cursor-pointer"
                 @click="addProduct({ product: getProduct.data, method: 'minus' })">-</p>
             <p>Кол-во: {{ isInCart(getProduct.data).amount }}</p>
             <p
-                class="w-10 h-10 bg-whiteColor rounded-full text-mainColor flex items-center justify-center text-lg"
+                class="w-10 h-10 bg-whiteColor rounded-full text-mainColor flex items-center justify-center text-lg cursor-pointer"
                 @click="addProduct({ product: getProduct.data, method: 'plus' })">+</p>
           </div>
           <div class="flex items-center mb-5">
