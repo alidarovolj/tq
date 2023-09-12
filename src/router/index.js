@@ -7,6 +7,8 @@ import ContactsPage from "@/views/Contacts/index.vue";
 import NewsPage from "@/views/News/index.vue";
 import SubCategory from "@/views/Categories/SubCategory/index.vue";
 import Cart from "@/views/Cart/index.vue";
+import Admin from "@/views/Admin/index.vue";
+import AdminProducts from "@/views/Admin/Products/index.vue"
 
 const router = createRouter({
     history: createWebHistory(), routes: [{
@@ -25,6 +27,10 @@ const router = createRouter({
         path: "/products/:prod_id", name: "Product", component: Products,
     }, {
         path: "/cart", name: "Cart", component: Cart,
+    }, {
+        path: "/admin", name: "AdminPage", component: Admin, children: [{
+            path: "products", name: "AdminProducts", component: AdminProducts
+        }]
     }],
 });
 

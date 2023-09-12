@@ -1,19 +1,24 @@
 <template>
   <div class="bg-whiteColor dark:bg-darkBg">
-    <DefaultLayout>
+    <DefaultLayout v-if="$route.name !== 'AdminPage' && $route.name !== 'AdminProducts'">
       <router-view></router-view>
     </DefaultLayout>
+    <AdminLayout v-else>
+      <router-view></router-view>
+    </AdminLayout>
   </div>
 </template>
 
 <script>
 import DefaultLayout from "@/layouts/default.vue";
+import AdminLayout from "@/layouts/AdminLayout.vue";
 import "vue3-toastify/dist/index.css";
 
 export default {
   name: "App",
   components: {
     DefaultLayout,
+    AdminLayout
   },
   beforeCreate() {
     if (

@@ -6,6 +6,7 @@ import {fab} from "@fortawesome/free-brands-svg-icons";
 import {
     faArrowLeft,
     faBars,
+    faBoxesStacked,
     faCartShopping,
     faCheck,
     faChevronDown,
@@ -17,6 +18,8 @@ import {
     faMagnifyingGlass,
     faMessage,
     faMoon,
+    faNewspaper,
+    faPenToSquare,
     faPersonWalking,
     faPhone,
     faSun,
@@ -24,6 +27,7 @@ import {
     faTrash,
     faTruck,
     faUser,
+    faUsers,
     faXmark
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -60,6 +64,10 @@ library.add(faTag)
 library.add(faPersonWalking)
 library.add(faTruck)
 library.add(faTrash)
+library.add(faUsers)
+library.add(faBoxesStacked)
+library.add(faNewspaper)
+library.add(faPenToSquare)
 
 createApp(App)
     .use(store)

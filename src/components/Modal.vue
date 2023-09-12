@@ -16,9 +16,9 @@
           <font-awesome-icon :icon="['fas', 'xmark']"/>
         </div>
         <component
-            class="dark:text-white"
             :is="componentName"
             :tran-id="recId"
+            class="dark:text-white"
             @request-to-close="close_modal"
             @send-add-id="acc_data"
         >
@@ -32,12 +32,18 @@
 <script>
 import Registration from "@/components/Modal/Registration.vue";
 import Login from "@/components/Modal/Login.vue";
+import CreateProduct from "@/components/Modal/CreateProduct.vue";
+import EditProduct from "@/components/Modal/EditProduct.vue";
+import RemoveProduct from "@/components/Modal/RemoveProduct.vue";
 
 export default {
   name: "ModalSlot",
   components: {
     Registration,
-    Login
+    Login,
+    CreateProduct,
+    EditProduct,
+    RemoveProduct
   },
   props: {
     isVisible: {

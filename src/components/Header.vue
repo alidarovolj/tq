@@ -20,19 +20,7 @@
             <div class="flex flex-col lg:flex-row">
               <div class="flex items-center justify-end lg:justify-start mr-0 lg:mr-4 mb-2 lg:mb-0">
                 <LocaleSwitcher/>
-                <font-awesome-icon
-                    v-if="currentTheme === 'light'"
-                    :icon="['fas', 'sun']"
-                    class="ml-4 text-whiteColor bg-mainColor rounded-md p-2 cursor-pointer"
-                    @click="setTheme('dark')"
-                />
-                <font-awesome-icon
-                    v-else
-                    :icon="['fas', 'moon']"
-                    class="ml-4 text-whiteColor bg-mainColor rounded-md p-2 cursor-pointer"
-                    @click="setTheme('light')"
-                />
-
+                <ThemeSwitcher/>
               </div>
               <div v-if="!getCurrentUser" class="flex items-center">
                 <p class="flex items-center cursor-pointer" @click="modalStateLogin = true">
@@ -81,7 +69,7 @@
                 {{ $t('header.contacts') }}
               </router-link>
               <span v-if="getCurrentUser">
-                <router-link v-if="getCurrentUser.data.is_admin" :to="{ name: 'MainPage' }"
+                <router-link v-if="getCurrentUser.data.is_admin" :to="{ name: 'AdminPage' }"
                              class="ml-4 hover:text-mainColor transition-all">
                 {{ $t('header.admin') }}
               </router-link>
@@ -120,21 +108,25 @@
         <div class="container mx-auto">
           <div class="px-4 py-5 w-full bg-white dark:bg-darkBg dark:text-darkText shadow-xl rounded-2xl">
             <div>
-              <router-link @click="menu = false" :to="{ name: 'MainPage' }" class="hover:text-mainColor transition-all">
+              <router-link :to="{ name: 'MainPage' }" class="hover:text-mainColor transition-all" @click="menu = false">
                 {{ $t('header.main') }}
               </router-link>
-              <router-link @click="menu = false" :to="{ name: 'AboutPage' }" class="ml-4 hover:text-mainColor transition-all">
+              <router-link :to="{ name: 'AboutPage' }" class="ml-4 hover:text-mainColor transition-all"
+                           @click="menu = false">
                 {{ $t('header.about') }}
               </router-link>
-              <router-link @click="menu = false" :to="{ name: 'NewsPage' }" class="ml-4 hover:text-mainColor transition-all">
+              <router-link :to="{ name: 'NewsPage' }" class="ml-4 hover:text-mainColor transition-all"
+                           @click="menu = false">
                 {{ $t('header.news') }}
               </router-link>
-              <router-link @click="menu = false" :to="{ name: 'ContactsPage' }" class="ml-4 hover:text-mainColor transition-all">
+              <router-link :to="{ name: 'ContactsPage' }" class="ml-4 hover:text-mainColor transition-all"
+                           @click="menu = false">
                 {{ $t('header.contacts') }}
               </router-link>
               <span v-if="getCurrentUser">
-                <router-link @click="menu = false" v-if="getCurrentUser.data.is_admin" :to="{ name: 'MainPage' }"
-                             class="ml-4 hover:text-mainColor transition-all">
+                <router-link v-if="getCurrentUser.data.is_admin" :to="{ name: 'AdminPage' }"
+                             class="ml-4 hover:text-mainColor transition-all"
+                             @click="menu = false">
                 {{ $t('header.admin') }}
               </router-link>
               </span>
@@ -157,20 +149,22 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from "vuex";
+
 import LocaleSwitcher from "@/components/General/LocaleSwitcher.vue";
 import Modal from "@/components/Modal.vue";
-import {mapActions, mapGetters} from "vuex";
 import DropdownBlock from "@/components/General/Dropdown.vue";
+import ThemeSwitcher from "@/components/General/ThemeSwitcher.vue";
 
 export default {
   name: "Header",
-  components: {DropdownBlock, LocaleSwitcher, Modal},
+  components: {DropdownBlock, LocaleSwitcher, Modal, ThemeSwitcher},
   data() {
     return {
       modalStateRegistration: false,
       modalStateLogin: false,
-      currentTheme: localStorage.getItem("theme"),
       menu: false,
+      currentTheme: localStorage.getItem("theme"),
     };
   },
   computed: {
@@ -187,14 +181,6 @@ export default {
       localStorage.removeItem('token');
       localStorage.removeItem('token_exp');
       this.$router.go()
-    },
-    setTheme(theme) {
-      localStorage.setItem("theme", theme);
-      document.querySelector("html").classList.add(theme);
-      document
-          .querySelector("html")
-          .classList.remove(theme === "light" ? "dark" : "light");
-      this.currentTheme = theme;
     },
   }
 }
