@@ -12,11 +12,12 @@
           <font-awesome-icon :icon="['fas', 'boxes-stacked']" class="mr-3 text-xl w-5"/>
           <p>Товары</p>
         </router-link>
-        <router-link :to="{ name: 'AdminPage' }" class="flex items-center hover:text-mainColor cursor-pointer mb-5">
+        <router-link :to="{ name: 'AdminCategories' }"
+                     class="flex items-center hover:text-mainColor cursor-pointer mb-5">
           <font-awesome-icon :icon="['fas', 'tag']" class="mr-3 text-xl w-5"/>
           <p>Категории</p>
         </router-link>
-        <router-link :to="{ name: 'AdminPage' }" class="flex items-center hover:text-mainColor cursor-pointer mb-5">
+        <router-link :to="{ name: 'AdminOrders' }" class="flex items-center hover:text-mainColor cursor-pointer mb-5">
           <font-awesome-icon :icon="['fas', 'cart-shopping']" class="mr-3 text-xl w-5"/>
           <p>Заказы</p>
         </router-link>

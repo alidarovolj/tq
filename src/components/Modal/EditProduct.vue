@@ -17,16 +17,6 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Картинка
-                  </label>
-                  <input type="file" @change="attachFile"/>
-                  <p v-if="v$.form.icon.$errors.length" class="text-red-500">Пожалуйста, загрузите картинку</p>
-                </div>
-                <div class="flex flex-col mb-2 w-full">
-                  <label
-                      class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
-                      for="first_name"
-                  >
                     Название
                   </label>
                   <input
@@ -149,6 +139,17 @@
                     <option v-for="(item, index) of getCategories.data" :value="item.id">{{ item.name }}</option>
                   </select>
                 </div>
+                <div class="flex flex-col mb-2 w-full">
+                  <label
+                      class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
+                      for="first_name"
+                  >
+                    Картинка
+                  </label>
+                  <input type="file" @change="attachFile"/>
+                  <p v-if="v$.form.icon.$errors.length" class="text-red-500">Пожалуйста, загрузите картинку</p>
+                </div>
+                <img class="w-1/3" :src="form.icon" alt="">
               </div>
             </div>
           </div>
@@ -187,7 +188,7 @@ import {useVuelidate} from "@vuelidate/core";
 import {required} from "@vuelidate/validators";
 
 export default {
-  name: "CreateProduct",
+  name: "EditProduct",
   props: {
     tranId: {
       required: true,
@@ -236,8 +237,18 @@ export default {
   },
   async mounted() {
     this.categories()
-    await this.product()
-
+    if (this.tranId) {
+      this.form.name = this.tranId.name
+      this.form.name_kz = this.tranId.name_kz
+      this.form.icon = this.tranId.icon
+      this.form.description = this.tranId.description
+      this.form.description_kz = this.tranId.description_kz
+      this.form.category_id = this.tranId.category_id
+      this.form.price = this.tranId.price
+      this.form.user_price = this.tranId.user_price
+    } else {
+      console.log('no')
+    }
   },
   methods: {
     ...mapActions(['categories', 'createProduct', "editProduct"]),

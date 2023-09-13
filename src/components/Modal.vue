@@ -35,6 +35,9 @@ import Login from "@/components/Modal/Login.vue";
 import CreateProduct from "@/components/Modal/CreateProduct.vue";
 import EditProduct from "@/components/Modal/EditProduct.vue";
 import RemoveProduct from "@/components/Modal/RemoveProduct.vue";
+import CreateCategory from "@/components/Modal/CreateCategory.vue";
+import RemoveCategory from "@/components/Modal/RemoveCategory.vue";
+import EditCategory from "@/components/Modal/EditCategory.vue";
 
 export default {
   name: "ModalSlot",
@@ -43,7 +46,10 @@ export default {
     Login,
     CreateProduct,
     EditProduct,
-    RemoveProduct
+    RemoveProduct,
+    CreateCategory,
+    RemoveCategory,
+    EditCategory
   },
   props: {
     isVisible: {

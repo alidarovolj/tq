@@ -53,97 +53,6 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Описание
-                  </label>
-                  <textarea
-                      v-model="form.description"
-                      :class="{
-                      'border-red-500': v$.form.description.$errors.length,
-                    }"
-                      class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
-                      name="first_name"
-                      placeholder="Введите описание"
-                      type="text"
-                  />
-                </div>
-                <div class="flex flex-col mb-2 w-full">
-                  <label
-                      class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
-                      for="first_name"
-                  >
-                    Описание на каз
-                  </label>
-                  <textarea
-                      v-model="form.description_kz"
-                      :class="{
-                      'border-red-500': v$.form.description_kz.$errors.length,
-                    }"
-                      class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
-                      name="first_name"
-                      placeholder="Введите описание на каз"
-                      type="text"
-                  />
-                </div>
-                <div class="flex flex-col mb-2 w-full">
-                  <label
-                      class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
-                      for="first_name"
-                  >
-                    Розничная цена
-                  </label>
-                  <input
-                      v-model="form.price"
-                      :class="{
-                      'border-red-500': v$.form.price.$errors.length,
-                    }"
-                      class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
-                      name="first_name"
-                      placeholder="Введите розничную цену"
-                      type="text"
-                  />
-                </div>
-                <div class="flex flex-col mb-2 w-full">
-                  <label
-                      class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
-                      for="first_name"
-                  >
-                    Оптовая цена
-                  </label>
-                  <input
-                      v-model="form.user_price"
-                      :class="{
-                      'border-red-500': v$.form.user_price.$errors.length,
-                    }"
-                      class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
-                      name="first_name"
-                      placeholder="Введите оптовую цену"
-                      type="text"
-                  />
-                </div>
-                <div class="flex flex-col mb-2 w-full">
-                  <label
-                      class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
-                      for="first_name"
-                  >
-                    Категория
-                  </label>
-                  <select v-if="getCategories"
-                          id=""
-                          v-model="form.category_id"
-                          :class="{
-                  'border-red-500': v$.form.user_price.$errors.length,
-                  }"
-                          class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
-                          name="">
-                    <option value="">Выберите категорию</option>
-                    <option v-for="(item, index) of getCategories.data" :value="item.id">{{ item.name }}</option>
-                  </select>
-                </div>
-                <div class="flex flex-col mb-2 w-full">
-                  <label
-                      class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
-                      for="first_name"
-                  >
                     Картинка
                   </label>
                   <input type="file" @change="attachFile"/>
@@ -203,11 +112,6 @@ export default {
         name: "",
         name_kz: "",
         icon: "",
-        description: "",
-        description_kz: "",
-        category_id: "",
-        price: "",
-        user_price: "",
       }
     }
   },
@@ -217,22 +121,14 @@ export default {
         name: {required},
         name_kz: {required},
         icon: {required},
-        description: {required},
-        description_kz: {required},
-        category_id: {required},
-        price: {required},
-        user_price: {required},
       },
     };
   },
   computed: {
-    ...mapGetters(['getCategories', 'getCreatedProduct']),
-  },
-  mounted() {
-    this.categories()
+    ...mapGetters(['getCategories']),
   },
   methods: {
-    ...mapActions(['categories', 'createProduct']),
+    ...mapActions(['categories', 'createCategory']),
     attachFile(event) {
       const file = event.target.files[0];
       this.form.icon = file;
@@ -249,12 +145,12 @@ export default {
         this.toast(false, "Не все поля заполнены");
         return;
       }
-      await this.createProduct(this.form)
+      await this.createCategory(this.form)
           .then(() => {
             this.loading = false;
-            this.toast(true, "Продукт успешно создан");
+            this.toast(true, "Категория успешно создана");
             this.close_modal();
-            this.products();
+            this.categories();
           })
           .catch((error) => {
             if (error.response.data.errors) {

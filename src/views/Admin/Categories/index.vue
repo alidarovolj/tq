@@ -2,17 +2,17 @@
   <div class="py-20">
     <div class="bg-white rounded-xl">
       <div class="flex justify-between py-3 px-7 border-b">
-        <h1 class="text-xl font-semibold">Продукты</h1>
+        <h1 class="text-xl font-semibold">Категории</h1>
         <p class="bg-mainColor text-white px-5 py-2 rounded-md cursor-pointer" @click="modalState = true">Добавить
-          продукт</p>
+          категорию</p>
       </div>
       <div class="overflow-y-auto">
         <TableComponent
-            v-if="getProducts"
+            v-if="getCategories"
             :columns="columns"
             :numbered="true"
-            :source="getProducts.data"
-            @call_to_refresh="products()"
+            :source="getCategories"
+            @call_to_refresh="categories()"
         >
           <template #default="{ row, column }">
             <template v-if="column.name === 'Картинка'">
@@ -46,19 +46,19 @@
   </div>
   <Modal
       :is-visible="modalState"
-      component-name="CreateProduct"
+      component-name="CreateCategory"
       @close_modal="(val) => (modalState = val)"
   />
   <Modal
       :is-visible="modalStateEdit"
       :rec-id="editData"
-      component-name="EditProduct"
+      component-name="EditCategory"
       @close_modal="(val) => (modalStateEdit = val)"
   />
   <Modal
       :is-visible="modalStateRemove"
       :rec-id="removeData"
-      component-name="RemoveProduct"
+      component-name="RemoveCategory"
       @close_modal="(val) => (modalStateRemove = val)"
   />
 </template>
@@ -69,8 +69,7 @@ import {mapActions, mapGetters} from "vuex";
 import Modal from "@/components/Modal.vue";
 
 export default {
-  name: "AdminProducts",
-  components: {Modal, TableComponent},
+  name: "AdminCategories",
   data() {
     return {
       modalState: false,
@@ -80,23 +79,21 @@ export default {
       removeData: null,
       columns: [
         {name: "ID", fname: "id"},
-        {name: "Название", fname: "name"},
+        {name: "Имя", fname: "name"},
         {name: "Картинка", fname: "icon"},
-        {name: "Описание", fname: "description"},
-        {name: "Цена", fname: "price"},
-        {name: "ID категории", fname: "category_id"},
-        {name: "Действия", fname: ""},
+        {name: "Действия", fname: "actions"},
       ],
     }
   },
   computed: {
-    ...mapGetters(['getProducts', 'getCategories'])
+    ...mapGetters(['getCategories'])
   },
+  components: {Modal, TableComponent},
   mounted() {
-    this.products()
+    this.categories();
   },
   methods: {
-    ...mapActions(['products', 'categories']),
+    ...mapActions(['categories']),
     removeProduct(id) {
       this.modalStateRemove = true;
       this.removeData = id;

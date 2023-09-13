@@ -5,11 +5,11 @@
         Подтвердите удаление
       </h2>
       <p class="text-sm text-center">
-        Вы уверены что хотите удалить данный продукт? Вы больше не сможете
+        Вы уверены что хотите удалить данную категорию? Вы больше не сможете
         восстановить эти данные.
       </p>
     </div>
-    <form class="flex justify-center text-sm mt-5" @submit.prevent="removeProductLocal">
+    <form class="flex justify-center text-sm mt-5" @submit.prevent="removeCategoryLocal">
       <div class="flex justify-center">
         <div
             class="w-max text-black mr-3 flex items-center rounded-md px-5 py-2 cursor-pointer"
@@ -62,15 +62,15 @@ export default {
     ...mapGetters(["getRemovedProduct"]),
   },
   methods: {
-    ...mapActions(["removeProduct", "products"]),
+    ...mapActions(["removeCategory", "products"]),
     close_modal() {
       this.$emit("requestToClose", false);
     },
-    async removeProductLocal() {
+    async removeCategoryLocal() {
       this.loading = true;
-      await this.removeProduct(this.tranId)
+      await this.removeCategory(this.tranId)
           .then(() => {
-            this.toast(false, "Продукт удален");
+            this.toast(false, "Категория удалена");
             this.products();
             this.close_modal();
           })

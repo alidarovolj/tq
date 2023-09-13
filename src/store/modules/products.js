@@ -11,7 +11,7 @@ const actions = {
         const {data} = await axios.get("/products/same-products/" + id);
         commit("updateSameProducts", data);
     }, async createProduct({commit}, form) {
-        const {data} = await axios.get("/products", form);
+        const {data} = await axios.post("/products", form);
         commit("updateCreatedProduct", data);
     }, async removeProduct({commit}, id) {
         const {data} = await axios.delete("/products/" + id);

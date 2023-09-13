@@ -9,6 +9,8 @@ import SubCategory from "@/views/Categories/SubCategory/index.vue";
 import Cart from "@/views/Cart/index.vue";
 import Admin from "@/views/Admin/index.vue";
 import AdminProducts from "@/views/Admin/Products/index.vue"
+import AdminCategories from "@/views/Admin/Categories/index.vue"
+import AdminOrders from "@/views/Admin/Orders/index.vue"
 
 const router = createRouter({
     history: createWebHistory(), routes: [{
@@ -28,34 +30,28 @@ const router = createRouter({
     }, {
         path: "/cart", name: "Cart", component: Cart,
     }, {
-        path: "/admin", name: "AdminPage", component: Admin, children: [{
-            path: "products", name: "AdminProducts", component: AdminProducts
+        path: "/admin", name: "AdminPage", meta: {requiresAuth: true}, component: Admin, children: [{
+            path: "products", name: "AdminProducts", meta: {requiresAuth: true}, component: AdminProducts
+        }, {
+            path: "categories", name: "AdminCategories", meta: {requiresAuth: true}, component: AdminCategories
+        }, {
+            path: "orders", name: "AdminOrders", meta: {requiresAuth: true}, component: AdminOrders
         }]
     }],
 });
 
-// router.beforeEach((to, from, next) => {
-//     const isAuthenticated = localStorage.getItem("token");
-//     if (to.matched.some((record) => record.meta.requiresAuth)) {
-//         if (!isAuthenticated) {
-//             next("/auth");
-//         } else {
-//             next();
-//         }
-//     } else if (to.matched.some((record) => record.path === "/auth")) {
-//         if (isAuthenticated) {
-//             next("/");
-//         } else {
-//             next();
-//         }
-//     } else {
-//         next();
-//     }
-// });
 router.beforeEach((to, from, next) => {
-    // Scroll to the top of the page when navigating to a new route
     window.scrollTo(0, 0);
-    next();
+    const isAuthenticated = localStorage.getItem("token");
+    if (to.matched.some((record) => record.meta.requiresAuth)) {
+        if (!isAuthenticated) {
+            next("/");
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
 });
 
 
