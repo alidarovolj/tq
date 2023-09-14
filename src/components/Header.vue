@@ -27,7 +27,7 @@
                   <font-awesome-icon :icon="['fa', 'user']" class="text-mainColor mr-1"/>
                   <p>{{ $t('general.login') }}</p>
                 </p>
-                <p class="flex items-center ml-4 cursor-pointer" @click="modalStateRegistration = true">
+                <p class="flex items-center ml-4 cursor-pointer" @click="modalStateVerify = true">
                   <font-awesome-icon :icon="['fas', 'key']" class="text-mainColor mr-1"/>
                   <p>{{ $t('general.registration') }}</p>
                 </p>
@@ -35,7 +35,9 @@
               <div v-else class="flex items-center cursor-pointer bg-white rounded-md px-2 dark:bg-blackColor">
                 <font-awesome-icon :icon="['fa', 'user']" class="text-mainColor mr-1"/>
                 <DropdownBlock :text="getCurrentUser.data.email">
-                  <p class="lg:hover:bg-gray-100 hover:dark:bg-darkBg px-2 lg:px-3 py-2">Профиль</p>
+                  <router-link :to="{ name: 'ProfilePage' }"
+                               class="block lg:hover:bg-gray-100 hover:dark:bg-darkBg px-2 lg:px-3 py-2">Профиль
+                  </router-link>
                   <p class="lg:hover:bg-gray-100 hover:dark:bg-darkBg px-2 lg:px-3 py-2" @click="logout">Выйти</p>
                 </DropdownBlock>
               </div>
@@ -107,25 +109,26 @@
       <div v-if="menu === true" class="px-4 lg:px-0 fixed w-full top-44">
         <div class="container mx-auto">
           <div class="px-4 py-5 w-full bg-white dark:bg-darkBg dark:text-darkText shadow-xl rounded-2xl">
-            <div>
-              <router-link :to="{ name: 'MainPage' }" class="hover:text-mainColor transition-all" @click="menu = false">
+            <div class="text-lg">
+              <router-link :to="{ name: 'MainPage' }" class="block hover:text-mainColor transition-all"
+                           @click="menu = false">
                 {{ $t('header.main') }}
               </router-link>
-              <router-link :to="{ name: 'AboutPage' }" class="ml-4 hover:text-mainColor transition-all"
+              <router-link :to="{ name: 'AboutPage' }" class="block ml-0 lg:ml-4 hover:text-mainColor transition-all"
                            @click="menu = false">
                 {{ $t('header.about') }}
               </router-link>
-              <router-link :to="{ name: 'NewsPage' }" class="ml-4 hover:text-mainColor transition-all"
+              <router-link :to="{ name: 'NewsPage' }" class="block ml-0 lg:ml-4 hover:text-mainColor transition-all"
                            @click="menu = false">
                 {{ $t('header.news') }}
               </router-link>
-              <router-link :to="{ name: 'ContactsPage' }" class="ml-4 hover:text-mainColor transition-all"
+              <router-link :to="{ name: 'ContactsPage' }" class="block ml-0 lg:ml-4 hover:text-mainColor transition-all"
                            @click="menu = false">
                 {{ $t('header.contacts') }}
               </router-link>
               <span v-if="getCurrentUser">
                 <router-link v-if="getCurrentUser.data.is_admin" :to="{ name: 'AdminPage' }"
-                             class="ml-4 hover:text-mainColor transition-all"
+                             class="block ml-0 lg:ml-4 hover:text-mainColor transition-all"
                              @click="menu = false">
                 {{ $t('header.admin') }}
               </router-link>
@@ -138,8 +141,15 @@
   </div>
   <Modal
       :is-visible="modalStateRegistration"
+      :rec-id="sendData"
       component-name="Registration"
       @close_modal="(val) => (modalStateRegistration = val)"
+  />
+  <Modal
+      :is-visible="modalStateVerify"
+      component-name="Verification"
+      @acc_data="receiveVerification"
+      @close_modal="(val) => (modalStateVerify = val)"
   />
   <Modal
       :is-visible="modalStateLogin"
@@ -163,6 +173,8 @@ export default {
     return {
       modalStateRegistration: false,
       modalStateLogin: false,
+      modalStateVerify: false,
+      sendData: null,
       menu: false,
       currentTheme: localStorage.getItem("theme"),
     };
@@ -182,6 +194,10 @@ export default {
       localStorage.removeItem('token_exp');
       this.$router.go()
     },
+    receiveVerification(phone) {
+      this.sendData = phone
+      this.modalStateRegistration = true
+    }
   }
 }
 </script>

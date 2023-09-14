@@ -2,7 +2,7 @@
   <div v-if="isSingleAdminRoute">
     <router-view></router-view>
   </div>
-  <div v-else class="py-20">
+  <div v-else class="py-0 lg:py-10 pb-10">
     <div class="bg-white rounded-xl">
       <div class="flex justify-between py-3 px-7 border-b">
         <h1 class="text-xl font-semibold">Пользователи</h1>
@@ -11,10 +11,11 @@
           v-if="getUsers"
           :columns="columns"
           :numbered="true"
-          :source="getUsers.details"
+          :pagination="getUsers.meta"
+          :source="getUsers"
           @call_to_refresh="users()"
       >
-        <template #default="{ row, column }">
+        <template #default="{ row, column, index }">
           <template v-if="column.name === 'Адрес'">
             <p>{{ row.city }}, {{ row.delivery_address }}</p>
           </template>
@@ -40,7 +41,6 @@ export default {
   data() {
     return {
       columns: [
-        {name: "ID", fname: "id"},
         {name: "Имя", fname: "name"},
         {name: "Телефон", fname: "phone"},
         {name: "Email", fname: "email"},
@@ -54,7 +54,7 @@ export default {
     ...mapGetters(['getUsers']),
     isSingleAdminRoute() {
       const route = useRoute();
-      return route.name === "AdminProducts" || route.name === "AdminCategories" || route.name === "AdminOrders";
+      return route.name === "AdminProducts" || route.name === "AdminCategories" || route.name === "AdminOrders" || route.name === "AdminNews";
     },
   },
   mounted() {

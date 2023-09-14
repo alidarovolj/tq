@@ -4,6 +4,9 @@ const actions = {
     async categories({commit}) {
         const {data} = await axios.get("/categories");
         commit("updateCategories", data);
+    }, async catalogList({commit}) {
+        const {data} = await axios.get("/catalog");
+        commit("updateCatalogList", data);
     }, async categoriesWithProducts({commit}) {
         const {data} = await axios.get("/category-with-products");
         commit("updateCategoriesWithProducts", data);
@@ -25,6 +28,13 @@ const mutations = {
     updateCategories: (state, res) => {
         state.categories = res;
     }, updateCategoriesWithProducts: (state, res) => {
+        let arr = []
+        res.data.forEach((item) => {
+            if (item.products.length > 0) {
+                arr.push(item)
+            }
+        })
+        res.data = arr
         state.categoriesWithProducts = res;
     }, updateCategory: (state, res) => {
         state.category = res;
@@ -34,6 +44,8 @@ const mutations = {
         state.removedCategory = res;
     }, updateEditedCategory: (state, res) => {
         state.editedCategory = res;
+    }, updateCatalogList: (state, res) => {
+        state.catalogList = res;
     },
 };
 const state = {
@@ -42,7 +54,8 @@ const state = {
     category: null,
     createdCategory: null,
     editedCategory: null,
-    removedCategory: null
+    removedCategory: null,
+    catalogList: null,
 };
 const getters = {
     getCategories: (state) => state.categories,
@@ -50,7 +63,8 @@ const getters = {
     getCategory: (state) => state.category,
     getCreatedCategory: (state) => state.createdCategory,
     getRemovedCategory: (state) => state.removedProduct,
-    getEditedCategory: (state) => state.editedCategory
+    getEditedCategory: (state) => state.editedCategory,
+    getCatalogList: (state) => state.catalogList
 };
 
 export default {state, getters, mutations, actions};

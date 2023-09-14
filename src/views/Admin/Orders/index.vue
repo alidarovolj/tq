@@ -1,5 +1,5 @@
 <template>
-  <div class="py-20">
+  <div class="py-0 lg:py-10 pb-10">
     <div class="bg-white rounded-xl">
       <div class="flex justify-between py-3 px-7 border-b">
         <h1 class="text-xl font-semibold">Заказы</h1>
@@ -9,6 +9,7 @@
             v-if="getOrders"
             :columns="columns"
             :numbered="true"
+            :pagination="getOrders.meta"
             :source="getOrders"
             @call_to_refresh="orders()"
         >
@@ -52,7 +53,6 @@ export default {
       editData: null,
       removeData: null,
       columns: [
-        {name: "ID", fname: "id"},
         {name: "Имя", fname: "name"},
         {name: "Тип доставки", fname: "delivery_type"},
         {name: "Адрес доставки", fname: "delivery_address"},

@@ -45,7 +45,7 @@
                 :key="index"
                 :class="[column.tdClass, { 'position-relative': linked }]"
                 :data-column-name="column.name"
-                class="py-2 lg:py-5 px-3 border-b border-gray-300 dark:border-gray-600"
+                class="py-2 lg:py-3 px-3 border-b border-gray-300 dark:border-gray-600"
             >
               <slot
                   :column="column"
@@ -166,7 +166,7 @@
                 :key="index"
                 :class="[column.tdClass, { 'position-relative': linked }]"
                 :data-column-name="column.name"
-                class="py-2 lg:py-5 px-3 border-b border-gray-300 dark:border-gray-600"
+                class="py-2 lg:py-3 px-3 border-b border-gray-300 dark:border-gray-600"
             >
               <slot
                   :column="column"
@@ -242,26 +242,26 @@
         </div>
       </div>
     </div>
-    <!--    <div-->
-    <!--        v-if="pagination"-->
-    <!--        class="block lg:flex items-center justify-center lg:justify-between px-4 mt-4"-->
-    <!--    >-->
-    <!--      <PageInfo :pages-data="pagination" class="mb-3 lg:mb-0"/>-->
-    <!--      <Pagination :pages-data="pagination" @first-link="secondLink"/>-->
-    <!--    </div>-->
+    <div
+        v-if="pagination"
+        class="block lg:flex items-center justify-center lg:justify-between px-4 mt-4 pb-4"
+    >
+      <PageInfo :pages-data="pagination" class="mb-3 lg:mb-0"/>
+      <Pagination :pages-data="pagination" @first-link="secondLink"/>
+    </div>
   </div>
 </template>
 
 <script>
-// import Pagination from "./Pagination.vue";
-// import PageInfo from "./PageInfo.vue";
+import Pagination from "@/components/General/Pagination.vue";
+import PageInfo from "@/components/General/PerPage.vue";
 
 export default {
   name: "TableComponent",
-  // components: {
-  //   Pagination,
-  //   PageInfo,
-  // },
+  components: {
+    Pagination,
+    PageInfo,
+  },
   props: {
     colorBG: {
       type: String,
@@ -342,6 +342,6 @@ table {
 }
 
 td {
-  width: 9%;
+  width: 5%;
 }
 </style>

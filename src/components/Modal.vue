@@ -38,6 +38,7 @@ import RemoveProduct from "@/components/Modal/RemoveProduct.vue";
 import CreateCategory from "@/components/Modal/CreateCategory.vue";
 import RemoveCategory from "@/components/Modal/RemoveCategory.vue";
 import EditCategory from "@/components/Modal/EditCategory.vue";
+import Verification from "@/components/Modal/Verification.vue";
 
 export default {
   name: "ModalSlot",
@@ -49,7 +50,8 @@ export default {
     RemoveProduct,
     CreateCategory,
     RemoveCategory,
-    EditCategory
+    EditCategory,
+    Verification
   },
   props: {
     isVisible: {

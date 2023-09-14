@@ -59,7 +59,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getRemovedProduct"]),
+    ...mapGetters(["getRemovedCategory"]),
   },
   methods: {
     ...mapActions(["removeCategory", "products"]),

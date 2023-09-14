@@ -2,7 +2,6 @@
   <div>
     <div class="lg:w-full mb-5">
       <h2 class="text-center text-2xl font-medium mb-2">Регистрация</h2>
-      <p class="text-center text-sm">Выполните регистрацию для создания заказов в своем личном кабинете</p>
     </div>
     <div
         class="flex flex-col justify-between h-full text-xs"
@@ -58,9 +57,11 @@
                 </label>
                 <input
                     v-model="form.phone"
+                    v-mask="'+7(###) ###-##-##'"
                     :class="{
                       'border-red-500': v$.form.phone.$errors.length,
                     }"
+                    :disabled="tranId"
                     class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                     name="first_name"
                     placeholder="+7(###) ###-##-##"
@@ -97,18 +98,16 @@
                 >
                   Тип доставки
                 </label>
-                <select
-                    id=""
+                <input
                     v-model="form.delivery_type"
                     :class="{
                       'border-red-500': v$.form.delivery_type.$errors.length,
                     }"
                     class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
-                    name="">
-                  <option :value="null">Выберите тип</option>
-                  <option value="Внутригородская">Внутригородская</option>
-                  <option value="Междугородняя">Междугородняя</option>
-                </select>
+                    name="first_name"
+                    placeholder="Введите тип доставки"
+                    type="text"
+                />
               </div>
               <div class="flex flex-col mb-2 w-full">
                 <label
@@ -131,6 +130,8 @@
             </div>
           </div>
         </div>
+        <p class="text-xs">Регистрацией на сайте GazBas.kz вы подтверждаете что являетесь оптовым клиентом.
+          Оптовые цены будут отображены после проверки учетной записи модератором.</p>
         <div class="flex justify-center mt-3">
           <div
               class="w-max text-black mr-3 flex items-center rounded-md px-5 py-2 cursor-pointer"
@@ -143,7 +144,7 @@
                 v-if="loading === false"
                 class="w-max px-6 py-2.5 rounded-md text-center bg-mainColor dark:bg-mainColor text-white cursor-pointer"
                 type="submit">
-              Сохранить
+              Зарегистрироваться
             </button>
             <div
                 v-else
@@ -160,6 +161,7 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
+import {mask} from "vue-the-mask";
 import {inject} from "vue";
 import {useVuelidate} from "@vuelidate/core";
 import {email, minLength, required} from "@vuelidate/validators";
@@ -167,7 +169,16 @@ import YandexMap from "@/components/General/YandexMap.vue";
 
 export default {
   name: "Registration",
+  props: {
+    tranId: {
+      type: String,
+      required: true
+    }
+  },
   components: {YandexMap},
+  directives: {
+    mask,
+  },
   emits: ["requestToClose", "sendAddId", "close_modal"],
   setup() {
     const toast = inject('notify');
@@ -179,6 +190,7 @@ export default {
   data() {
     return {
       loading: false,
+      cleanPhoneNumber: null,
       form: {
         name: null,
         phone: null,
@@ -206,6 +218,9 @@ export default {
       },
     };
   },
+  mounted() {
+    this.form.phone = this.tranId
+  },
   methods: {
     ...mapActions([
       "registerUser"
@@ -220,6 +235,10 @@ export default {
         delivery_type: null,
         email: null
       };
+    },
+    removeSymbols() {
+      this.cleanPhoneNumber = this.form.phone.replace(/\D/g, "");
+      this.form.phone = this.cleanPhoneNumber
     },
     addressSet(val) {
       this.form.delivery_address = val.address
@@ -236,7 +255,7 @@ export default {
         this.toast(false, "Не все поля заполнены");
         return;
       }
-
+      this.removeSymbols()
       await this.registerUser(this.form)
           .then(response => {
             console.log(response)

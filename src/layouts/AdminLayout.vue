@@ -1,9 +1,9 @@
 <template>
   <div class="bg-whiteColor dark:bg-darkBg h-screen">
-    <div class="flex justify-between h-full">
+    <div class="block lg:flex justify-between h-full">
       <AdminHeader/>
-      <div class="layoutArea h-full flex flex-col justify-between">
-        <div class="container mx-auto px-4 lg:px-0">
+      <div class="lg:layoutArea h-full flex flex-col justify-between">
+        <div class="w-full px-4">
           <slot/>
         </div>
         <AdminFooter/>

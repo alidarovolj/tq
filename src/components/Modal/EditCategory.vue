@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="lg:w-full mb-5">
-      <h2 class="text-center text-2xl font-medium mb-2">Добавить продукт</h2>
-      <p class="text-center text-sm">Выполните добавление товара в список</p>
+      <h2 class="text-center text-2xl font-medium mb-2">Редактирование категорий</h2>
+      <p class="text-center text-sm">Выполните редактирование категории</p>
       <div
           class="flex flex-col justify-between h-full text-xs"
       >
@@ -143,7 +143,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['categories']),
+    ...mapActions(['categories', 'editCategory']),
     attachFile(event) {
       const file = event.target.files[0];
       this.form.icon = file;

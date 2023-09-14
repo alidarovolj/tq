@@ -1,5 +1,5 @@
 <template>
-  <div class="py-20">
+  <div class="py-0 lg:py-10 pb-10">
     <div class="bg-white rounded-xl">
       <div class="flex justify-between py-3 px-7 border-b">
         <h1 class="text-xl font-semibold">Продукты</h1>
@@ -11,10 +11,11 @@
             v-if="getProducts"
             :columns="columns"
             :numbered="true"
+            :pagination="getProducts.meta"
             :source="getProducts.data"
             @call_to_refresh="products()"
         >
-          <template #default="{ row, column }">
+          <template #default="{ row, column, index }">
             <template v-if="column.name === 'Картинка'">
               <img v-if="row.icon" :src="row.icon" class="w-10 h-10 rounded-md"/>
               <p v-else class="text-red-500">Нет данных</p>
@@ -79,7 +80,6 @@ export default {
       editData: null,
       removeData: null,
       columns: [
-        {name: "ID", fname: "id"},
         {name: "Название", fname: "name"},
         {name: "Картинка", fname: "icon"},
         {name: "Описание", fname: "description"},

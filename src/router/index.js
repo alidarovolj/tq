@@ -11,10 +11,14 @@ import Admin from "@/views/Admin/index.vue";
 import AdminProducts from "@/views/Admin/Products/index.vue"
 import AdminCategories from "@/views/Admin/Categories/index.vue"
 import AdminOrders from "@/views/Admin/Orders/index.vue"
+import AdminNews from "@/views/Admin/News/index.vue"
+import Profile from "@/views/Profile/index.vue";
 
 const router = createRouter({
     history: createWebHistory(), routes: [{
         path: "/", name: "MainPage", component: MainPage
+    }, {
+        path: "/profile", name: "ProfilePage", meta: {requiresAuth: true}, component: Profile
     }, {
         path: "/about", name: "AboutPage", component: AboutPage
     }, {
@@ -36,6 +40,8 @@ const router = createRouter({
             path: "categories", name: "AdminCategories", meta: {requiresAuth: true}, component: AdminCategories
         }, {
             path: "orders", name: "AdminOrders", meta: {requiresAuth: true}, component: AdminOrders
+        }, {
+            path: "news", name: "AdminNews", meta: {requiresAuth: true}, component: AdminNews
         }]
     }],
 });

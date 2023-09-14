@@ -1,5 +1,5 @@
 <template>
-  <div v-if="getCategoriesWithProducts" class="container mx-auto px-4 lg:px-0 mb-20 lg:mb-0">
+  <div v-if="getCategoriesWithProducts && getCatalogList" class="container mx-auto px-4 lg:px-0 mb-20 lg:mb-0">
     <div class="block lg:flex justify-between">
       <div class="w-full lg:w-1/4 mr-4 relative">
         <div class="shadow sticky top-44">
@@ -8,8 +8,8 @@
             <p>Каталог товаров</p>
           </div>
           <div class="rounded-b-lg">
-            <div v-for="(item, index) of getCategoriesWithProducts.data" :key="index"
-                 :class="{ 'mb-3 rounded-b-lg' : index + 1 === getCategoriesWithProducts.data.length }"
+            <div v-for="(item, index) of getCatalogList.data"
+                 :key="index" :class="{ 'mb-3 rounded-b-lg' : index + 1 === getCatalogList.data.length }"
                  class="relative bg-white flex items-center justify-between px-2 py-1 cursor-pointer dark:text-whiteColor hover:bg-mainColor hover:text-whiteColor transition-all dark:bg-darkBgColor dark:hover:bg-mainColor"
                  @mouseleave="openedTab = null"
                  @mouseover="openedTab = index">
@@ -21,15 +21,16 @@
               <font-awesome-icon :icon="['fas', 'chevron-right']"/>
               <div
                   v-if="openedTab === index"
-                  class="absolute left-full h-max w-full z-50 overflow-y-hidden top-0 shadow-lg">
-                <div
-                    v-for="(it, ind) of item.sub_category" v-if="openedTab === index" :key="ind"
+                  class="static lg:absolute left-full h-max w-full z-50 overflow-y-hidden top-0 shadow-lg">
+                <router-link
+                    v-for="(it, ind) of item.sub_category"
+                    v-if="openedTab === index" :key="ind" :to="{ name: 'Category', params: { cat_id: it.id } }"
                     class="flex items-center dark:bg-darkBgColor dark:hover:bg-mainColor hover:bg-mainColor text-blackColor hover:text-whiteColor bg-white overflow-y-hidden p-2"
                     @mouseover="openedTab = index">
                   <img :src="it.icon" alt="" class="w-10 h-10 object-contain mr-2">
                   <p v-if="$i18n.locale === 'ru'">{{ it.name }}</p>
                   <p v-else>{{ it.name_kz }}</p>
-                </div>
+                </router-link>
               </div>
             </div>
           </div>
@@ -39,7 +40,7 @@
         <div class="mb-10">
           <h2 class="text-2xl font-semibold mb-10 dark:text-whiteColor">Популярные категории</h2>
           <div class="flex justify-between flex-wrap">
-            <router-link v-for="(item, index) of getCategoriesWithProducts.data"
+            <router-link v-for="(item, index) of getCatalogList.data"
                          :key="index"
                          :to="{ name: 'Category', params: { cat_id: item.id } }"
                          class="w-half dark:bg-darkBgColor dark:text-whiteColor lg:w-fourth mb-2 bg-white p-4 rounded-2xl cursor-pointer hover:bg-mainColor hover:text-whiteColor transition-all">
@@ -49,28 +50,18 @@
             </router-link>
           </div>
         </div>
-        <div class="relative">
-          <div
-              :class="{ 'max-h-[500px] h-[500px]' : !openedBlock }" class="overflow-y-hidden">
+        <div>
+          <div>
             <div v-for="(item, index) of getCategoriesWithProducts.data" :key="index" class="mb-10">
               <h2 v-if="$i18n.locale === 'ru'" class="text-2xl font-semibold mb-10 dark:text-whiteColor">{{
                   item.name
                 }}</h2>
               <h2 v-else class="text-2xl font-semibold mb-10 dark:text-whiteColor">{{ item.name }}</h2>
-              <div
-                  v-for="(it, ind) of item.sub_category"
-                  :key="ind"
-                  class="flex justify-between w-full overflow-x-auto">
-                <ProductsList :data="it.products"/>
+              <div class="flex justify-between overflow-x-auto">
+                <ProductsList :data="item.products"/>
               </div>
             </div>
           </div>
-          <p
-              class="absolute left-1/2 -translate-x-1/2 translate-y-full -bottom-5 bg-blackColor cursor-pointer dark:bg-white dark:text-blackColor text-center px-3 py-2 text-whiteColor rounded-md w-full lg:w-half"
-              @click="openedBlock = !openedBlock">
-            <span v-if="openedBlock === false">Открыть полностью</span>
-            <span v-else>Закрыть</span>
-          </p>
         </div>
       </div>
     </div>
@@ -86,13 +77,14 @@ export default {
   name: "CatalogComponent",
   components: {ProductsList},
   computed: {
-    ...mapGetters(['getCategoriesWithProducts'])
+    ...mapGetters(['getCategoriesWithProducts', 'getCatalogList'])
   },
   mounted() {
     this.categoriesWithProducts()
+    this.catalogList()
   },
   methods: {
-    ...mapActions(['categoriesWithProducts'])
+    ...mapActions(['categoriesWithProducts', 'catalogList'])
   },
   data() {
     return {
