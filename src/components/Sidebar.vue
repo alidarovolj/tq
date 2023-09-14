@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-between px-4 py-7">
+  <div class="flex lg:hidden items-center justify-between px-4 py-7">
     <div class="w-10 h-10 bg-white shadow-lg rounded-full flex items-center justify-center"
          @click="setSidebarMob">
       <font-awesome-icon

@@ -2,7 +2,7 @@
   <div class="bg-whiteColor dark:bg-darkBg h-screen">
     <div class="block lg:flex justify-between h-full">
       <AdminHeader/>
-      <div class="lg:layoutArea h-full flex flex-col justify-between">
+      <div class="layoutArea h-full flex flex-col justify-between">
         <div class="w-full px-4">
           <slot/>
         </div>
@@ -26,9 +26,11 @@ export default {
 </script>
 
 <style>
-.layoutArea {
-  width: calc(100% - 250px);
-  min-width: calc(100% - 250px);
-  max-width: calc(100% - 250px);
+@media only screen and (min-width: 1024px) {
+  .layoutArea {
+    width: calc(100% - 250px);
+    min-width: calc(100% - 250px);
+    max-width: calc(100% - 250px);
+  }
 }
 </style>

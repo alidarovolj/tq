@@ -1,5 +1,5 @@
 <template>
-  <div v-if="source">
+  <div class="w-full" v-if="source">
     <div v-if="source.data" class="rounded-lg overflow-x-auto">
       <table
           :class="[{ 'pe-none': spinner }, { 'archiveTable' : $route.name === 'ArchiveGroups' }]"

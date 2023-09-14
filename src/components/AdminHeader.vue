@@ -30,8 +30,8 @@
     <div class="flex items-center justify-start">
       <ThemeSwitcher/>
     </div>
+    <SidebarComponent/>
   </div>
-  <SidebarComponent/>
 </template>
 
 <script>
