@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="lg:w-full mb-5">
-      <h2 class="text-center text-2xl font-medium mb-2">Редактирование категорий</h2>
-      <p class="text-center text-sm">Выполните редактирование категории</p>
+      <h2 class="text-center text-2xl font-medium mb-2">Добавить новость</h2>
+      <p class="text-center text-sm">Выполните добавление новости в список</p>
       <div
           class="flex flex-col justify-between h-full text-xs"
       >
@@ -20,9 +20,9 @@
                     Название
                   </label>
                   <input
-                      v-model="form.name"
+                      v-model="form.title"
                       :class="{
-                      'border-red-500': v$.form.name.$errors.length,
+                      'border-red-500': v$.form.title.$errors.length,
                     }"
                       class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                       name="first_name"
@@ -38,10 +38,7 @@
                     Название на каз
                   </label>
                   <input
-                      v-model="form.name_kz"
-                      :class="{
-                      'border-red-500': v$.form.name_kz.$errors.length,
-                    }"
+                      v-model="form.title_kz"
                       class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                       name="first_name"
                       placeholder="Введите название на каз"
@@ -53,9 +50,70 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
+                    Описание
+                  </label>
+                  <textarea
+                      v-model="form.description"
+                      :class="{
+                      'border-red-500': v$.form.description.$errors.length,
+                    }"
+                      class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
+                      name="first_name"
+                      placeholder="Введите описание"
+                      type="text"
+                  />
+                </div>
+                <div class="flex flex-col mb-2 w-full">
+                  <label
+                      class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
+                      for="first_name"
+                  >
+                    Описание на каз
+                  </label>
+                  <textarea
+                      v-model="form.description_kz"
+                      class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
+                      name="first_name"
+                      placeholder="Введите описание на каз"
+                      type="text"
+                  />
+                </div>
+                <p class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText">Выберите язык</p>
+                <div class="flex mb-2">
+                  <p @click="current_lang = true" :class="{ 'bg-mainColor text-white' : current_lang === true }" class="w-max px-5 py-2 rounded-lg font-semibold">РУС</p>
+                  <p @click="current_lang = false" :class="{ 'bg-mainColor text-white' : current_lang === false }" class="w-max px-5 py-2 rounded-lg font-semibold">КАЗ</p>
+                </div>
+                <div v-if="current_lang" class="flex flex-col mb-2 w-full">
+                  <label
+                      class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
+                      for="first_name"
+                  >
+                    Контент
+                  </label>
+                  <quill-editor v-model:content="form.content" class="h-48" contentType="html"
+                                theme="snow"></quill-editor>
+                  <p v-if="v$.form.content.$errors.length">Заполните контент</p>
+                </div>
+                <div v-else class="flex flex-col mb-2 w-full">
+                  <label
+                      class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
+                      for="first_name"
+                  >
+                    Контент на каз
+                  </label>
+                  <quill-editor v-model:content="form.content_kz" class="h-48" contentType="html"
+                                theme="snow"></quill-editor>
+                  <p v-if="v$.form.content_kz.$errors.length">Заполните контент</p>
+                </div>
+                <div class="flex flex-col mb-2 w-full">
+                  <label
+                      class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
+                      for="first_name"
+                  >
                     Картинка
                   </label>
                   <input type="file" @change="attachFile"/>
+                  <p v-if="v$.form.icon.$errors.length" class="text-red-500">Пожалуйста, загрузите картинку</p>
                 </div>
               </div>
             </div>
@@ -93,14 +151,13 @@ import {mapGetters, mapActions} from "vuex";
 import {inject} from "vue";
 import {useVuelidate} from "@vuelidate/core";
 import {required} from "@vuelidate/validators";
+import {QuillEditor} from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 export default {
-  name: "CreateProduct",
-  props: {
-    tranId: {
-      type: Object,
-      required: true
-    }
+  name: "CreateNews",
+  components: {
+    QuillEditor
   },
   emits: ["requestToClose"],
   setup() {
@@ -113,34 +170,34 @@ export default {
   data() {
     return {
       loading: false,
+      current_lang: true,
       form: {
-        name: "",
-        name_kz: "",
-        icon: null,
+        title: "",
+        title_kz: "",
+        description: "",
+        description_kz: "",
+        content: "",
+        content_kz: "",
+        icon: "",
       }
     }
   },
   validations() {
     return {
       form: {
-        name: {required},
-        name_kz: {required},
+        title: {required},
+        description: {required},
+        content: {required},
+        content_kz: {required},
+        icon: {required},
       },
     };
   },
   computed: {
-    ...mapGetters(['getCategories']),
-  },
-  async mounted() {
-    if (this.tranId) {
-      this.form.name = this.tranId.name
-      this.form.name_kz = this.tranId.name_kz
-    } else {
-      console.log("Нет данных")
-    }
+    ...mapGetters([]),
   },
   methods: {
-    ...mapActions(['categories', 'editCategory']),
+    ...mapActions(['createNews', 'news']),
     attachFile(event) {
       const file = event.target.files[0];
       this.form.icon = file;
@@ -157,12 +214,12 @@ export default {
         this.toast(false, "Не все поля заполнены");
         return;
       }
-      await this.editCategory({id: this.tranId.id, form: this.form})
+      await this.createNews(this.form)
           .then(() => {
             this.loading = false;
-            this.toast(true, "Категория успешно отредактирована");
+            this.toast(true, "Новость успешно создана");
             this.close_modal();
-            this.categories();
+            this.news();
           })
           .catch((error) => {
             if (error.response.data.errors) {

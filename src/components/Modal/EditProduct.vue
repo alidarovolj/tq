@@ -147,9 +147,8 @@
                     Картинка
                   </label>
                   <input type="file" @change="attachFile"/>
-                  <p v-if="v$.form.icon.$errors.length" class="text-red-500">Пожалуйста, загрузите картинку</p>
                 </div>
-                <img class="w-1/3" :src="form.icon" alt="">
+                <img :src="form.icon" alt="" class="w-1/3">
               </div>
             </div>
           </div>
@@ -223,7 +222,6 @@ export default {
       form: {
         name: {required},
         name_kz: {required},
-        icon: {required},
         description: {required},
         description_kz: {required},
         category_id: {required},
@@ -240,7 +238,6 @@ export default {
     if (this.tranId) {
       this.form.name = this.tranId.name
       this.form.name_kz = this.tranId.name_kz
-      this.form.icon = this.tranId.icon
       this.form.description = this.tranId.description
       this.form.description_kz = this.tranId.description_kz
       this.form.category_id = this.tranId.category_id
@@ -251,7 +248,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['categories', 'createProduct', "editProduct"]),
+    ...mapActions(['categories', 'createProduct', "editProduct", "products"]),
     attachFile(event) {
       const file = event.target.files[0];
       this.form.icon = file;
@@ -268,7 +265,7 @@ export default {
         this.toast(false, "Не все поля заполнены");
         return;
       }
-      await this.editProduct(this.form)
+      await this.editProduct({id: this.tranId.id, form: this.form})
           .then(() => {
             this.loading = false;
             this.toast(true, "Продукт успешно отредактирован");

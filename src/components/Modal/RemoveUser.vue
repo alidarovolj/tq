@@ -5,11 +5,11 @@
         Подтвердите удаление
       </h2>
       <p class="text-sm text-center">
-        Вы уверены что хотите удалить данную категорию? Вы больше не сможете
+        Вы уверены что хотите удалить данного пользователя? Вы больше не сможете
         восстановить эти данные.
       </p>
     </div>
-    <form class="flex justify-center text-sm mt-5" @submit.prevent="removeCategoryLocal">
+    <form class="flex justify-center text-sm mt-5" @submit.prevent="removeUserLocal">
       <div class="flex justify-center">
         <div
             class="w-max text-black mr-3 flex items-center rounded-md px-5 py-2 cursor-pointer"
@@ -59,19 +59,19 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getRemovedCategory"]),
+    ...mapGetters(["getRemovedUser"]),
   },
   methods: {
-    ...mapActions(["removeCategory", "categories"]),
+    ...mapActions(["removeUser", "users"]),
     close_modal() {
       this.$emit("requestToClose", false);
     },
-    async removeCategoryLocal() {
+    async removeUserLocal() {
       this.loading = true;
-      await this.removeCategory(this.tranId)
+      await this.removeUser(this.tranId)
           .then(() => {
-            this.toast(false, "Категория удалена");
-            this.categories();
+            this.toast(false, "Пользователь удален");
+            this.users();
             this.close_modal();
           })
           .catch((error) => {

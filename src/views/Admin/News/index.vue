@@ -3,6 +3,8 @@
     <div class="bg-white rounded-xl">
       <div class="flex justify-between py-3 px-7 border-b">
         <h1 class="text-xl font-semibold">Новости</h1>
+        <p class="bg-mainColor text-white px-5 py-2 rounded-md cursor-pointer" @click="modalState = true">Добавить
+          новость</p>
       </div>
       <div class="overflow-y-auto">
         <TableComponent
@@ -22,7 +24,7 @@
               <div class="flex text-lg">
                 <div
                     class="flex items-center cursor-pointer text-secondaryColor"
-                    @click="editProduct(row)"
+                    @click="editNews(row)"
                 >
                   <font-awesome-icon
                       :icon="['fas', 'pen-to-square']"
@@ -31,7 +33,7 @@
                 </div>
                 <div
                     class="flex items-center cursor-pointer text-red-500"
-                    @click="removeProduct(row.id)"
+                    @click="removeNews(row.id)"
                 >
                   <font-awesome-icon :icon="['fas', 'trash']" class="w-6"/>
                 </div>
@@ -45,19 +47,19 @@
   </div>
   <Modal
       :is-visible="modalState"
-      component-name="CreateCategory"
+      component-name="CreateNews"
       @close_modal="(val) => (modalState = val)"
   />
   <Modal
       :is-visible="modalStateEdit"
       :rec-id="editData"
-      component-name="EditCategory"
+      component-name="EditNews"
       @close_modal="(val) => (modalStateEdit = val)"
   />
   <Modal
       :is-visible="modalStateRemove"
       :rec-id="removeData"
-      component-name="RemoveCategory"
+      component-name="RemoveNews"
       @close_modal="(val) => (modalStateRemove = val)"
   />
 </template>
@@ -95,11 +97,11 @@ export default {
   },
   methods: {
     ...mapActions(['news']),
-    removeProduct(id) {
+    removeNews(id) {
       this.modalStateRemove = true;
       this.removeData = id;
     },
-    editProduct(id) {
+    editNews(id) {
       this.editData = id;
       this.modalStateEdit = true;
     },

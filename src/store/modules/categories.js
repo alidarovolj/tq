@@ -1,8 +1,11 @@
 import axios from "@/utils/axios.js";
+import router from "@/router/index.js";
 
 const actions = {
     async categories({commit}) {
-        const {data} = await axios.get("/categories");
+        const {data} = await axios.get("/categories", {
+            params: router.currentRoute.value.query,
+        });
         commit("updateCategories", data);
     }, async catalogList({commit}) {
         const {data} = await axios.get("/catalog");
@@ -14,13 +17,19 @@ const actions = {
         const {data} = await axios.get("/categories/" + id);
         commit("updateCategory", data);
     }, async createCategory({commit}, form) {
-        const {data} = await axios.post("/categories/", form);
+        const headers = {
+            'Content-Type': 'multipart/form-data'
+        };
+        const {data} = await axios.post("/categories/", form, {headers: headers});
         commit("updateCreatedCategory", data);
     }, async removeCategory({commit}, id) {
-        const {data} = await axios.post("/categories/" + id);
+        const {data} = await axios.delete("/categories/" + id);
         commit("updateRemovedCategory", data);
     }, async editCategory({commit}, {id, form}) {
-        const {data} = await axios.post("/categories/" + id, form);
+        const headers = {
+            'Content-Type': 'multipart/form-data'
+        };
+        const {data} = await axios.post("/categories/" + id, form, {headers: headers});
         commit("updateEditedCategory", data);
     },
 };
@@ -62,7 +71,7 @@ const getters = {
     getCategoriesWithProducts: (state) => state.categoriesWithProducts,
     getCategory: (state) => state.category,
     getCreatedCategory: (state) => state.createdCategory,
-    getRemovedCategory: (state) => state.removedProduct,
+    getRemovedCategory: (state) => state.removedCategory,
     getEditedCategory: (state) => state.editedCategory,
     getCatalogList: (state) => state.catalogList
 };

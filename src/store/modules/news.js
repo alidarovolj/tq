@@ -1,9 +1,32 @@
 import axios from "@/utils/axios.js";
+import router from "@/router/index.js";
 
 const actions = {
     async news({commit}) {
-        const {data} = await axios.get("/news");
+        const {data} = await axios.get("/news", {
+            params: router.currentRoute.value.query,
+        });
         commit("updateNews", data);
+    }, async newsDetails({commit}, id) {
+        const {data} = await axios.get("/news/" + id, {
+            params: router.currentRoute.value.query,
+        });
+        commit("updateNewsDetails", data);
+    }, async createNews({commit}, form) {
+        const headers = {
+            'Content-Type': 'multipart/form-data'
+        };
+        const {data} = await axios.post("/news/", form, {headers: headers});
+        commit("updateCreatedNews", data);
+    }, async removeNews({commit}, id) {
+        const {data} = await axios.delete("/news/" + id);
+        commit("updateRemovedNews", data);
+    }, async editNews({commit}, {id, form}) {
+        const headers = {
+            'Content-Type': 'multipart/form-data'
+        };
+        const {data} = await axios.post("/news/" + id, form, {headers: headers});
+        commit("updateEditedNews", data);
     },
 };
 const mutations = {
@@ -24,16 +47,28 @@ const mutations = {
                 ...comment, created_at: `${formattedDate} ${formattedTime}`,
             };
         });
-        res = formattedTime;
+        res.data = formattedTime;
 
         state.news = res;
+    }, updateCreatedNews: (state, res) => {
+        state.createdNews = res;
+    }, updateRemovedNews: (state, res) => {
+        state.removedNews = res;
+    }, updateEditedNews: (state, res) => {
+        state.editedNews = res;
+    }, updateNewsDetails: (state, res) => {
+        state.newsDetails = res;
     },
 };
 const state = {
-    news: null,
+    news: null, createdNews: null, editedNews: null, removedNews: null, newsDetails: null
 };
 const getters = {
     getNews: (state) => state.news,
+    getCreatedNews: (state) => state.createdNews,
+    getRemovedNews: (state) => state.removedNews,
+    getEditedNews: (state) => state.editedNews,
+    getNewsDetails: (state) => state.newsDetails
 };
 
 export default {state, getters, mutations, actions};

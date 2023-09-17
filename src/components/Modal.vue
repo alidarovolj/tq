@@ -39,6 +39,10 @@ import CreateCategory from "@/components/Modal/CreateCategory.vue";
 import RemoveCategory from "@/components/Modal/RemoveCategory.vue";
 import EditCategory from "@/components/Modal/EditCategory.vue";
 import Verification from "@/components/Modal/Verification.vue";
+import CreateNews from "@/components/Modal/CreateNews.vue"
+import EditNews from "@/components/Modal/EditNews.vue";
+import RemoveNews from "@/components/Modal/RemoveNews.vue";
+import RemoveUser from "@/components/Modal/RemoveUser.vue";
 
 export default {
   name: "ModalSlot",
@@ -51,7 +55,11 @@ export default {
     CreateCategory,
     RemoveCategory,
     EditCategory,
-    Verification
+    Verification,
+    CreateNews,
+    EditNews,
+    RemoveNews,
+    RemoveUser
   },
   props: {
     isVisible: {

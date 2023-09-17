@@ -232,7 +232,7 @@ export default {
     this.categories()
   },
   methods: {
-    ...mapActions(['categories', 'createProduct']),
+    ...mapActions(['categories', 'createProduct', 'products']),
     attachFile(event) {
       const file = event.target.files[0];
       this.form.icon = file;
@@ -253,8 +253,8 @@ export default {
           .then(() => {
             this.loading = false;
             this.toast(true, "Продукт успешно создан");
-            this.close_modal();
             this.products();
+            this.close_modal();
           })
           .catch((error) => {
             if (error.response.data.errors) {

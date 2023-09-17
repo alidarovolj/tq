@@ -24,22 +24,41 @@
                class="text-green-500 bg-green-500 bg-opacity-25 px-4 py-1 rounded-lg w-max">Да</p>
             <p v-else class="text-red-500 bg-red-500 bg-opacity-25 px-4 py-1 rounded-lg w-max">Нет</p>
           </template>
+          <template v-if="column.name === 'Действия'">
+            <div class="flex text-lg">
+              <div
+                  class="flex items-center cursor-pointer text-red-500"
+                  @click="removeUsers(row.id)"
+              >
+                <font-awesome-icon :icon="['fas', 'trash']" class="w-6"/>
+              </div>
+            </div>
+          </template>
         </template>
       </TableComponent>
     </div>
   </div>
+  <Modal
+      :is-visible="modalStateRemove"
+      :rec-id="removeData"
+      component-name="RemoveUser"
+      @close_modal="(val) => (modalStateRemove = val)"
+  />
 </template>
 
 <script>
 import TableComponent from "@/components/General/Table.vue";
 import {mapActions, mapGetters} from "vuex";
 import {useRoute} from "vue-router";
+import Modal from "@/components/Modal.vue";
 
 export default {
   name: "AdminPage",
-  components: {TableComponent},
+  components: {Modal, TableComponent},
   data() {
     return {
+      modalStateRemove: null,
+      removeData: null,
       columns: [
         {name: "Имя", fname: "name"},
         {name: "Телефон", fname: "phone"},
@@ -47,6 +66,7 @@ export default {
         {name: "Адрес", fname: "delivery_address"},
         {name: "Тип доставки", fname: "delivery_type"},
         {name: "Администратор", fname: "is_admin"},
+        {name: "Действия", fname: "actions"},
       ],
     }
   },
@@ -61,7 +81,11 @@ export default {
     this.users()
   },
   methods: {
-    ...mapActions(['users'])
+    ...mapActions(['users']),
+    removeUsers(id) {
+      this.modalStateRemove = true;
+      this.removeData = id;
+    },
   }
 }
 </script>

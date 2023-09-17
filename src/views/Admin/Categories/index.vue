@@ -24,7 +24,7 @@
               <div class="flex text-lg">
                 <div
                     class="flex items-center cursor-pointer text-secondaryColor"
-                    @click="editProduct(row)"
+                    @click="editCategory(row)"
                 >
                   <font-awesome-icon
                       :icon="['fas', 'pen-to-square']"
@@ -33,7 +33,7 @@
                 </div>
                 <div
                     class="flex items-center cursor-pointer text-red-500"
-                    @click="removeProduct(row.id)"
+                    @click="removeCategory(row.id)"
                 >
                   <font-awesome-icon :icon="['fas', 'trash']" class="w-6"/>
                 </div>
@@ -94,11 +94,11 @@ export default {
   },
   methods: {
     ...mapActions(['categories']),
-    removeProduct(id) {
+    removeCategory(id) {
       this.modalStateRemove = true;
       this.removeData = id;
     },
-    editProduct(id) {
+    editCategory(id) {
       this.editData = id;
       this.modalStateEdit = true;
     },
