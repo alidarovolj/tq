@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-whiteColor dark:bg-darkBg h-screen">
-    <div class="block lg:flex justify-between h-full">
-      <AdminHeader/>
-      <div class="layoutArea h-full flex flex-col justify-between">
+  <div class="bg-whiteColor dark:bg-darkBg h-full min-h-screen">
+    <div class="block lg:flex justify-between h-full min-h-screen">
+      <AdminHeader />
+      <div class="layoutArea h-full min-h-screen flex flex-col justify-between">
         <div class="w-full px-4">
           <slot/>
         </div>

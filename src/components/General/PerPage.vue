@@ -3,7 +3,7 @@
     <p class="text-sm  mr-3 dark:text-darkText">Показать</p>
     <select
         v-model="perPage"
-        class="text-sm font-bold px-4 py-2 border rounded-md dark:bg-darkInp dark:text-darkText"
+        class="text-sm font-bold px-4 py-2 border rounded-md dark:bg-darkBgColor dark:text-whiteColor"
         @change="setPerPage"
     >
       <option value="10">10</option>

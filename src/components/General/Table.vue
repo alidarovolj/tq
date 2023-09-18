@@ -1,9 +1,9 @@
 <template>
   <div class="w-full" v-if="source">
-    <div v-if="source.data" class="rounded-lg overflow-x-auto">
+    <div v-if="source.data" class="overflow-x-auto">
       <table
           :class="[{ 'pe-none': spinner }, { 'archiveTable' : $route.name === 'ArchiveGroups' }]"
-          class="hidden lg:block custom-table dark:border-darkElBg text-black dark:text-darkText min-w-full bg-white dark:bg-darkElBg text-sm"
+          class="hidden lg:block custom-table dark:border-gray-600 text-black dark:text-whiteColor min-w-full bg-white dark:bg-darkBgColor text-sm"
       >
         <div
             v-if="spinner"
@@ -16,13 +16,13 @@
         </div>
         <thead
             :class="{ 'top-0': !source?.hasOwnProperty('total') }"
-            class="position-sticky text-left bg-[#F3F2F7] dark:bg-darkInp"
+            class="position-sticky text-left bg-[#F3F2F7] dark:bg-black"
         >
         <tr class="">
           <th
               v-for="(column, key) in columns"
               :key="key"
-              class="py-2 lg:py-3 px-3 font-bold text-[#757575] dark:text-darkText text-xs whitespace-nowrap"
+              class="py-2 lg:py-3 px-3 font-bold text-[#757575] dark:text-whiteColor text-xs whitespace-nowrap"
           >
             {{ column.name }}
           </th>
@@ -62,7 +62,7 @@
       </table>
       <div
           :class="{ 'pe-none': spinner }"
-          class="block lg:hidden text-[#757575] dark:text-darkText dark:bg-darkElBg text-xs"
+          class="block lg:hidden text-[#757575] dark:text-whiteColor dark:bg-darkBgColor text-xs"
       >
         <div
             v-if="spinner"
@@ -88,7 +88,7 @@
                   class="text-xs h-48 border-b py-3 pb-10 truncate relative"
               >
                 <div
-                    class="absolute w-full bottom-0 py-2 text-center bg-gray-50 dark:bg-darkInp"
+                    class="absolute w-full bottom-0 py-2 text-center bg-gray-50 dark:bg-black"
                     @click="openTab(key)"
                 >
                   <font-awesome-icon
@@ -121,10 +121,10 @@
         </div>
       </div>
     </div>
-    <div v-else class="rounded-lg">
+    <div v-else>
       <table
           :class="[{ 'pe-none': spinner }, { 'archiveTable' : $route.name === 'ArchiveGroups' }]"
-          class="hidden lg:block custom-table dark:border-darkElBg text-black dark:text-darkText min-w-full bg-white dark:bg-darkElBg text-sm overflow-x-auto"
+          class="hidden lg:block custom-table dark:border-darkElBg text-black dark:text-whiteColor min-w-full bg-white dark:bg-darkBgColor text-sm overflow-x-auto"
       >
         <div
             v-if="spinner"
@@ -137,13 +137,13 @@
         </div>
         <thead
             :class="{ 'top-0': !source?.hasOwnProperty('total') }"
-            class="position-sticky text-left bg-[#F3F2F7] dark:bg-darkInp"
+            class="position-sticky text-left bg-[#F3F2F7] dark:bg-black"
         >
         <tr class="">
           <th
               v-for="(column, key) in columns"
               :key="key"
-              class="py-2 lg:py-3 px-3 font-bold text-[#757575] dark:text-darkText text-xs whitespace-nowrap"
+              class="py-2 lg:py-3 px-3 font-bold text-[#757575] dark:text-whiteColor text-xs whitespace-nowrap"
           >
             {{ column.name }}
           </th>
@@ -183,7 +183,7 @@
       </table>
       <div
           :class="{ 'pe-none': spinner }"
-          class="block lg:hidden text-[#757575] dark:text-darkText dark:bg-darkElBg text-xs"
+          class="block lg:hidden text-[#757575] dark:text-whiteColor dark:bg-darkBgColor text-xs"
       >
         <div
             v-if="spinner"
@@ -209,7 +209,7 @@
                   class="text-xs h-48 border-b py-3 pb-10 truncate relative"
               >
                 <div
-                    class="absolute w-full bottom-0 py-2 text-center bg-gray-50 dark:bg-darkInp"
+                    class="absolute w-full bottom-0 py-2 text-center bg-gray-50 dark:bg-black"
                     @click="openTab(key)"
                 >
                   <font-awesome-icon
@@ -244,7 +244,7 @@
     </div>
     <div
         v-if="pagination"
-        class="block lg:flex items-center justify-center lg:justify-between px-4 mt-4 pb-4"
+        class="block dark:bg-darkBgColor dark:text-whiteColor lg:flex items-center justify-center lg:justify-between px-4 pt-4 pb-4"
     >
       <PageInfo :pages-data="pagination" class="mb-3 lg:mb-0"/>
       <Pagination :pages-data="pagination" @first-link="secondLink"/>

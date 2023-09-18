@@ -8,7 +8,7 @@
         :class="{
         'bg-mainColor text-white': page.active,
       }"
-        class="mx-2 lg:mx-1 text-black dark:bg-darkElBg px-2 lg:px-4 py-1 lg:py-2 text-sm rounded-md dark:text-darkText hover:bg-mainColor hover:text-white cursor-pointer"
+        class="mx-2 lg:mx-1 text-black dark:bg-darkElBg px-2 lg:px-4 py-1 lg:py-2 text-sm rounded-md dark:text-whiteColor hover:bg-mainColor hover:text-white cursor-pointer"
         @click="sendToParent(page.label)"
     >
       {{ page.label }}

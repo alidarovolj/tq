@@ -4,7 +4,7 @@
   </div>
   <div v-else class="py-0 lg:py-10 pb-10">
     <div class="bg-white rounded-xl">
-      <div class="flex justify-between py-3 px-7 border-b">
+      <div class="flex justify-between py-3 px-7 border-b dark:bg-darkBgColor dark:text-whiteColor dark:border-0 rounded-t-lg">
         <h1 class="text-xl font-semibold">Пользователи</h1>
       </div>
       <TableComponent
@@ -51,10 +51,14 @@ import TableComponent from "@/components/General/Table.vue";
 import {mapActions, mapGetters} from "vuex";
 import {useRoute} from "vue-router";
 import Modal from "@/components/Modal.vue";
+import {useMeta} from "vue-meta";
 
 export default {
   name: "AdminPage",
   components: {Modal, TableComponent},
+  setup() {
+    useMeta({title: "Пользователи"});
+  },
   data() {
     return {
       modalStateRemove: null,

@@ -1,7 +1,7 @@
 <template>
   <div class="py-0 lg:py-10 pb-10">
     <div class="bg-white rounded-xl">
-      <div class="flex justify-between py-3 px-7 border-b">
+      <div class="flex justify-between py-3 px-7 border-b dark:bg-darkBgColor dark:text-whiteColor dark:border-0 rounded-t-lg">
         <h1 class="text-xl font-semibold">Заказы</h1>
       </div>
       <div class="overflow-y-auto">
@@ -14,6 +14,11 @@
             @call_to_refresh="orders()"
         >
           <template #default="{ row, column }">
+            <template v-if="column.fname === 'is_paid'">
+              <p v-if="row.is_paid === true"
+                 class="text-green-500 bg-green-500 bg-opacity-25 px-4 py-1 rounded-lg w-max">Да</p>
+              <p v-else class="text-red-500 bg-red-500 bg-opacity-25 px-4 py-1 rounded-lg w-max">Нет</p>
+            </template>
           </template>
         </TableComponent>
       </div>
@@ -42,9 +47,13 @@
 import TableComponent from "@/components/General/Table.vue";
 import {mapActions, mapGetters} from "vuex";
 import Modal from "@/components/Modal.vue";
+import {useMeta} from "vue-meta";
 
 export default {
   name: "AdminCategories",
+  setup() {
+    useMeta({title: "Заказы"});
+  },
   data() {
     return {
       modalState: false,
@@ -58,6 +67,7 @@ export default {
         {name: "Адрес доставки", fname: "delivery_address"},
         {name: "Телефон", fname: "phone"},
         {name: "Стоимость заказа", fname: "amount"},
+        {name: "Оплачен", fname: "is_paid"},
       ],
     }
   },

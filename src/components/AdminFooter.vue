@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white py-10 border-t">
+  <div class="bg-white dark:bg-darkBgColor dark:text-whiteColor py-10 border-t dark:border-gray-600">
     <div class="container mx-auto">
       <div class="flex items-center justify-between">
         <p>TrustQuality © 2023</p>

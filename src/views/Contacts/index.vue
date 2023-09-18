@@ -60,7 +60,12 @@
 </template>
 
 <script>
+import {useMeta} from "vue-meta";
+
 export default {
-  name: "AboutPage"
+  name: "AboutPage",
+  setup() {
+    useMeta({title: "Контакты"});
+  },
 }
 </script>

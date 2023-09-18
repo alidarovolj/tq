@@ -1,4 +1,10 @@
 <template>
+  <metainfo>
+    <template #title="{ content }">{{
+        content ? `${content} | TrustQuality` : `SITE_NAME`
+      }}
+    </template>
+  </metainfo>
   <div class="bg-whiteColor dark:bg-darkBg">
     <DefaultLayout
         v-if="$route.name !== 'AdminPage' && $route.name !== 'AdminProducts' && $route.name !== 'AdminCategories' && $route.name !== 'AdminOrders' && $route.name !== 'AdminNews'">
@@ -14,12 +20,19 @@
 import DefaultLayout from "@/layouts/default.vue";
 import AdminLayout from "@/layouts/AdminLayout.vue";
 import "vue3-toastify/dist/index.css";
+import {useMeta} from "vue-meta";
 
 export default {
   name: "App",
   components: {
     DefaultLayout,
     AdminLayout
+  },
+  setup() {
+    useMeta({
+      title: "TrustQuality",
+      htmlAttrs: {lang: "en", amp: true},
+    });
   },
   beforeCreate() {
     if (

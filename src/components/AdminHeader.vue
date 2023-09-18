@@ -1,16 +1,24 @@
 <template>
   <div
-      class="hidden lg:flex nav w-[250px] min-w-[250px] max-w-[250px] bg-white dark:bg-darkBgColor text-blackColor dark:text-whiteColor h-full p-5 flex-col justify-between shadow-lg border-r">
+      class="hidden lg:flex nav w-[250px] min-w-[250px] max-w-[250px] bg-white dark:bg-darkBgColor text-blackColor dark:text-whiteColor min-h-screen h-auto p-5 flex-col justify-between shadow-lg border-r dark:border-gray-600">
     <div class="hidden lg:flex flex-col justify-between h-full">
       <div>
-        <router-link v-if="currentTheme === 'light'" :to="{ name: 'MainPage' }"><img alt="" class="w-full mb-20" src="@/assets/img/logo.png"></router-link>
-        <router-link v-else :to="{ name: 'MainPage' }"><img alt="" class="w-full mb-20" src="@/assets/img/logo_white.png"></router-link>
+        <div class="mb-20">
+          <router-link v-if="currentTheme === 'light'" :to="{ name: 'MainPage' }">
+            <img alt="" class="w-full mb-5" src="@/assets/img/logo.png">
+          </router-link>
+          <router-link v-else :to="{ name: 'MainPage' }">
+            <img alt="" class="w-full mb-5" src="@/assets/img/logo_white.png">
+          </router-link>
+          <router-link class="text-mainColor" :to="{ name: 'MainPage' }">Вернуться на сайт</router-link>
+        </div>
         <div class="">
           <router-link :to="{ name: 'AdminPage' }" class="flex items-center hover:text-mainColor cursor-pointer mb-5">
             <font-awesome-icon :icon="['fas', 'users']" class="mr-3 text-xl w-5"/>
             <p>Пользователи</p>
           </router-link>
-          <router-link :to="{ name: 'AdminProducts' }" class="flex items-center hover:text-mainColor cursor-pointer mb-5">
+          <router-link :to="{ name: 'AdminProducts' }"
+                       class="flex items-center hover:text-mainColor cursor-pointer mb-5">
             <font-awesome-icon :icon="['fas', 'boxes-stacked']" class="mr-3 text-xl w-5"/>
             <p>Товары</p>
           </router-link>

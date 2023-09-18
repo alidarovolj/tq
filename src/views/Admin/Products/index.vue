@@ -1,7 +1,7 @@
 <template>
   <div class="py-0 lg:py-10 pb-10">
     <div class="bg-white rounded-xl">
-      <div class="flex justify-between py-3 px-7 border-b">
+      <div class="flex justify-between py-3 px-7 border-b dark:bg-darkBgColor dark:text-whiteColor dark:border-0 rounded-t-lg">
         <h1 class="text-xl font-semibold">Продукты</h1>
         <p class="bg-mainColor text-white px-5 py-2 rounded-md cursor-pointer" @click="modalState = true">Добавить
           продукт</p>
@@ -68,10 +68,14 @@
 import TableComponent from "@/components/General/Table.vue";
 import {mapActions, mapGetters} from "vuex";
 import Modal from "@/components/Modal.vue";
+import {useMeta} from "vue-meta";
 
 export default {
   name: "AdminProducts",
   components: {Modal, TableComponent},
+  setup() {
+    useMeta({title: "Продукты"});
+  },
   data() {
     return {
       modalState: false,
