@@ -7,7 +7,7 @@
   </metainfo>
   <div class="bg-whiteColor dark:bg-darkBg">
     <DefaultLayout
-        v-if="$route.name !== 'AdminPage' && $route.name !== 'AdminProducts' && $route.name !== 'AdminCategories' && $route.name !== 'AdminOrders' && $route.name !== 'AdminNews'">
+        v-if="$route.name !== 'AdminPage' && $route.name !== 'AdminProducts' && $route.name !== 'AdminCategories' && $route.name !== 'AdminOrders' && $route.name !== 'AdminNews' && $route.name !== 'AdminFeedback'">
       <router-view></router-view>
     </DefaultLayout>
     <AdminLayout v-else>

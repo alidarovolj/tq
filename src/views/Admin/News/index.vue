@@ -17,7 +17,7 @@
         >
           <template #default="{ row, column }">
             <template v-if="column.name === 'Картинка'">
-              <img v-if="row.img" :src="row.img" class="w-10 h-10 rounded-md"/>
+              <img v-if="row.img" :src="row.img" class="w-10 h-10 rounded-md object-cover"/>
               <p v-else class="text-red-500">Нет данных</p>
             </template>
             <template v-if="column.name === 'Действия'">

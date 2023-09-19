@@ -13,6 +13,8 @@ import AdminCategories from "@/views/Admin/Categories/index.vue"
 import AdminOrders from "@/views/Admin/Orders/index.vue"
 import AdminNews from "@/views/Admin/News/index.vue"
 import Profile from "@/views/Profile/index.vue";
+import NewsDetails from "@/views/News/Details/index.vue"
+import AdminFeedback from "@/views/Admin/Feedback/index.vue"
 
 const router = createRouter({
     history: createWebHistory(), routes: [{
@@ -24,7 +26,9 @@ const router = createRouter({
     }, {
         path: "/contacts", name: "ContactsPage", component: ContactsPage
     }, {
-        path: "/news", name: "NewsPage", component: NewsPage
+        path: "/news", name: "NewsPage", component: NewsPage, children: [{
+            path: ":news_id", name: "NewsDetails", component: NewsDetails
+        }]
     }, {
         path: "/categories/:cat_id", name: "Category", component: Category, children: [{
             path: "subcategory/:sub_id", name: "SubCategory", component: SubCategory
@@ -42,6 +46,8 @@ const router = createRouter({
             path: "orders", name: "AdminOrders", meta: {requiresAuth: true}, component: AdminOrders
         }, {
             path: "news", name: "AdminNews", meta: {requiresAuth: true}, component: AdminNews
+        }, {
+            path: "feedback", name: "AdminFeedback", meta: {requiresAuth: true}, component: AdminFeedback
         }]
     }],
 });

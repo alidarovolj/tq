@@ -25,7 +25,7 @@
                 <router-link
                     v-for="(it, ind) of item.sub_category"
                     v-if="openedTab === index" :key="ind" :to="{ name: 'Category', params: { cat_id: it.id } }"
-                    class="flex items-center dark:bg-darkBgColor dark:hover:bg-mainColor hover:bg-mainColor text-blackColor hover:text-whiteColor bg-white overflow-y-hidden p-2"
+                    class="flex items-center dark:bg-darkBgColor dark:hover:bg-mainColor hover:bg-mainColor text-blackColor dark:text-whiteColor hover:text-whiteColor bg-white overflow-y-hidden p-2"
                     @mouseover="openedTab = index">
                   <img :src="it.icon" alt="" class="w-10 h-10 object-contain mr-2">
                   <p v-if="$i18n.locale === 'ru'">{{ it.name }}</p>

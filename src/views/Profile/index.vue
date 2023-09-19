@@ -36,7 +36,8 @@
             <p v-if="getCurrentUser.data.is_admin === true" class="w-half">Да</p>
             <p v-else class="w-half">Нет</p>
           </div>
-          <p class="bg-mainColor px-10 py-2 w-max text-white rounded-md" @click="logout">Выйти</p>
+          <p v-if="editState === false" class="bg-mainColor px-10 py-2 w-max text-white rounded-md cursor-pointer" @click="editState = true">Изменить</p>
+          <p v-else class="bg-mainColor px-10 py-2 w-max text-white rounded-md cursor-pointer" @click="editState = false">Отменить</p>
         </div>
         <div class="w-full lg:w-1/3">
           <p class="font-semibold text-xl mb-4">Смена пароля</p>
@@ -132,10 +133,14 @@ export default {
   },
   data() {
     return {
+      editState: false,
       form: {
         current_password: null,
         new_password: null,
         confirm_password: null,
+      },
+      changeUserData: {
+        name: null,
       }
     }
   },

@@ -78,7 +78,7 @@ export default {
     ...mapGetters(['getUsers']),
     isSingleAdminRoute() {
       const route = useRoute();
-      return route.name === "AdminProducts" || route.name === "AdminCategories" || route.name === "AdminOrders" || route.name === "AdminNews";
+      return route.name === "AdminProducts" || route.name === "AdminCategories" || route.name === "AdminOrders" || route.name === "AdminNews" || route.name === "AdminFeedback";
     },
   },
   mounted() {

@@ -10,7 +10,7 @@
           <router-link v-else :to="{ name: 'MainPage' }">
             <img alt="" class="w-full mb-5" src="@/assets/img/logo_white.png">
           </router-link>
-          <router-link class="text-mainColor" :to="{ name: 'MainPage' }">Вернуться на сайт</router-link>
+          <router-link :to="{ name: 'MainPage' }" class="text-mainColor">Вернуться на сайт</router-link>
         </div>
         <div class="">
           <router-link :to="{ name: 'AdminPage' }" class="flex items-center hover:text-mainColor cursor-pointer mb-5">
@@ -35,6 +35,10 @@
             <font-awesome-icon :icon="['fas', 'newspaper']" class="mr-3 text-xl w-5"/>
             <p>Новости</p>
           </router-link>
+          <router-link :to="{ name: 'AdminFeedback' }" class="flex items-center hover:text-mainColor cursor-pointer mb-5">
+            <font-awesome-icon :icon="['fas', 'envelope']" class="mr-3 text-xl w-5"/>
+            <p>Письма</p>
+          </router-link>
         </div>
       </div>
     </div>
@@ -57,6 +61,16 @@ export default {
       barState: localStorage.getItem("sidebar"),
       currentTheme: localStorage.getItem('theme')
     };
+  },
+  watch: {
+    currentTheme: {
+      deep: true,
+      immediate: true,
+      handler(newData) {
+        console.log(newData)
+        this.currentTheme = localStorage.getItem('theme')
+      },
+    },
   },
   components: {
     SidebarComponent,

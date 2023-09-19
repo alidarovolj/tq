@@ -187,7 +187,7 @@ export default {
         description_kz: "",
         content: "",
         content_kz: "",
-        icon: null,
+        img: null,
       }
     }
   },
@@ -216,7 +216,7 @@ export default {
     ...mapActions(['editNews', 'news']),
     attachFile(event) {
       const file = event.target.files[0];
-      this.form.icon = file;
+      this.form.img = file;
     },
     close_modal() {
       this.$emit("requestToClose", false);

@@ -19,27 +19,27 @@
                  class="text-green-500 bg-green-500 bg-opacity-25 px-4 py-1 rounded-lg w-max">Да</p>
               <p v-else class="text-red-500 bg-red-500 bg-opacity-25 px-4 py-1 rounded-lg w-max">Нет</p>
             </template>
+            <template v-if="column.name === 'Действия'">
+              <div class="flex text-lg">
+                <div
+                    class="flex items-center cursor-pointer text-green-500"
+                    @click="confirmOrder(row.id)"
+                >
+                  <font-awesome-icon :icon="['fas', 'check']" class="w-6"/>
+                </div>
+              </div>
+
+            </template>
           </template>
         </TableComponent>
       </div>
     </div>
   </div>
   <Modal
-      :is-visible="modalState"
-      component-name="CreateCategory"
-      @close_modal="(val) => (modalState = val)"
-  />
-  <Modal
-      :is-visible="modalStateEdit"
-      :rec-id="editData"
-      component-name="EditCategory"
-      @close_modal="(val) => (modalStateEdit = val)"
-  />
-  <Modal
-      :is-visible="modalStateRemove"
-      :rec-id="removeData"
-      component-name="RemoveCategory"
-      @close_modal="(val) => (modalStateRemove = val)"
+      :is-visible="modalStateConfirm"
+      :rec-id="confirmData"
+      component-name="ConfirmOrder"
+      @close_modal="(val) => (modalStateConfirm = val)"
   />
 </template>
 
@@ -56,11 +56,8 @@ export default {
   },
   data() {
     return {
-      modalState: false,
-      modalStateEdit: false,
-      modalStateRemove: false,
-      editData: null,
-      removeData: null,
+      modalStateConfirm: false,
+      confirmData: null,
       columns: [
         {name: "Имя", fname: "name"},
         {name: "Тип доставки", fname: "delivery_type"},
@@ -68,6 +65,7 @@ export default {
         {name: "Телефон", fname: "phone"},
         {name: "Стоимость заказа", fname: "amount"},
         {name: "Оплачен", fname: "is_paid"},
+        {name: "Действия", fname: "actions"},
       ],
     }
   },
@@ -80,13 +78,9 @@ export default {
   },
   methods: {
     ...mapActions(['orders']),
-    removeProduct(id) {
-      this.modalStateRemove = true;
-      this.removeData = id;
-    },
-    editProduct(id) {
-      this.editData = id;
-      this.modalStateEdit = true;
+    confirmOrder(id) {
+      this.modalStateConfirm = true;
+      this.confirmData = id;
     },
   }
 }

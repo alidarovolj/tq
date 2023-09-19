@@ -2,10 +2,16 @@
   <div v-for="(product, productIndex) in data"
        :key="productIndex"
        class="bg-white flex flex-col dark:bg-darkBgColor dark:text-whiteColor justify-between w-full lg:w-[200px] mr-0 lg:mr-3 mb-3 p-4 rounded-2xl cursor-pointer shadow transition-all">
-<!--    <img alt="" class="absolute left-3 top-3 w-10 h-10 object-contain" src="@/assets/img/logo_hor.png">-->
-    <img :src="product.icon" alt="" class="w-32 h-32 mx-auto object-contain">
-    <p class="text-center text-lg font-semibold">{{ product.name }}</p>
-    <p class="text-base font-semibold text-center my-3">{{ product.price }} тнг.</p>
+    <!--    <img alt="" class="absolute left-3 top-3 w-10 h-10 object-contain" src="@/assets/img/logo_hor.png">-->
+    <router-link :to="{ name: 'Product', params: { prod_id: product.id } }" class="w-32 h-32 mx-auto">
+      <img :src="product.icon" alt="" class="w-full h-full object-contain">
+    </router-link>
+    <router-link :to="{ name: 'Product', params: { prod_id: product.id } }" class="text-center text-lg font-semibold">
+      {{ product.name }}
+    </router-link>
+    <router-link :to="{ name: 'Product', params: { prod_id: product.id } }"
+                 class="text-base font-semibold text-center my-3">{{ product.price }} тнг.
+    </router-link>
     <div class="block">
       <p class="w-full text-center">В избранное</p>
       <div v-if="isInCart(product).status === true"
@@ -22,9 +28,6 @@
          class="bg-blackColor my-3 dark:bg-whiteColor dark:text-blackColor text-center px-3 py-2 text-whiteColor rounded-md w-full hover:bg-mainColor transition-all"
          @click="addProduct({ product: product, method: null })">В корзину
       </p>
-      <router-link :to="{ name: 'Product', params: { prod_id: product.id } }"
-                   class="text-center mx-auto w-max flex justify-center">Перейти на страницу
-      </router-link>
     </div>
   </div>
 </template>

@@ -11,7 +11,7 @@ import {
     faCheck,
     faChevronDown,
     faChevronRight,
-    faClock,
+    faClock, faEnvelope,
     faEye,
     faHeart,
     faKey,
@@ -68,6 +68,7 @@ library.add(faUsers)
 library.add(faBoxesStacked)
 library.add(faNewspaper)
 library.add(faPenToSquare)
+library.add(faEnvelope)
 
 createApp(App)
     .use(store)

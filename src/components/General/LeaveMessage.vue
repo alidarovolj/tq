@@ -12,30 +12,56 @@
       <div class="w-full lg:w-2/3 p-7 flex flex-col justify-center">
         <h3 class="text-2xl font-semibold mb-3">Оставьте нам сообщение</h3>
         <p class="text-sm mb-10">Оставьте заявку и мы перезвоним через 30 мин</p>
-        <form action="">
+        <form action="" @submit.prevent="sendForm">
           <div class="mb-4">
             <p class="mb-1">Email</p>
-            <input class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white" placeholder="Введите email" type="text">
+            <input
+                v-model="form.email"
+                :class="{
+                      'border-red-500': v$.form.email.$errors.length,
+                    }"
+                class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
+                placeholder="Введите email" type="text">
           </div>
           <div class="mb-4">
             <p class="mb-1">Имя</p>
-            <input class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white" placeholder="Введите имя" type="text">
+            <input
+                v-model="form.name"
+                :class="{
+                      'border-red-500': v$.form.name.$errors.length,
+                    }"
+                class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
+                placeholder="Введите имя" type="text">
           </div>
           <div class="mb-4">
             <p class="mb-1">Телефон</p>
-            <input class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white" placeholder="Введите телефон" type="text">
+            <input
+                v-model="form.phone"
+                :class="{
+                      'border-red-500': v$.form.phone.$errors.length,
+                    }"
+                class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
+                placeholder="Введите телефон" type="text">
           </div>
           <div class="mb-4">
             <p class="mb-1">Примечание</p>
-            <textarea class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white" placeholder="Введите примечание" type="text"/>
+            <textarea
+                v-model="form.note"
+                class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
+                placeholder="Введите примечание" type="text"/>
           </div>
           <div class="flex flex-col lg:flex-row items-center">
             <div class="flex items-center mb-3 lg:mb-0">
-              <input class="mr-2" type="checkbox">
-              <p class="text-xs">Подавая заявку, вы принимаете условия офертового соглашения и соглашаетесь на обработку
+              <input v-model="form.agreement" :class="{
+                      'border-red-500': v$.form.agreement.$errors,
+                    }"
+                     class="mr-2"
+                     type="checkbox">
+              <p :class="{ 'text-red-500' : v$.form.agreement.$error }" class="text-xs">Подавая заявку, вы
+                принимаете условия офертового соглашения и соглашаетесь на обработку
                 ваших персональных данных в соответствии с политикой конфиденциальности</p>
             </div>
-            <button type="submit" class="bg-mainColor text-white px-4 py-2 rounded-md whitespace-nowrap">
+            <button class="bg-mainColor text-white px-4 py-2 rounded-md whitespace-nowrap" type="submit">
               Отправить заявку
             </button>
           </div>
@@ -46,7 +72,79 @@
 </template>
 
 <script>
+import {required, email, sameAs} from "@vuelidate/validators";
+import {inject} from "vue";
+import {useVuelidate} from "@vuelidate/core";
+import {mapActions} from "vuex";
+
 export default {
-  name: "LeaveMessage"
+  name: "LeaveMessage",
+  setup() {
+    const toast = inject('notify');
+    return {
+      v$: useVuelidate(),
+      toast
+    };
+  },
+  data() {
+    return {
+      form: {
+        email: null,
+        name: null,
+        phone: null,
+        note: null,
+        agreement: false,
+      }
+    }
+  },
+  validations() {
+    return {
+      form: {
+        email: {required, email},
+        name: {required},
+        phone: {required},
+        agreement: {
+          checked: sameAs(true)
+        }
+      },
+    };
+  },
+  methods: {
+    ...mapActions(['createFeedback']),
+    async sendForm() {
+      this.loading = true;
+      this.v$.$validate();
+
+      if (this.v$.$invalid) {
+        this.loading = false;
+        this.toast(false, "Не все поля заполнены");
+        return;
+      }
+      await this.createFeedback(this.form)
+          .then(() => {
+            this.loading = false;
+            this.toast(true, "Письмо успешно отправлено");
+            this.form.email = null
+            this.form.name = null
+            this.form.note = null
+            this.form.phone = null
+            this.form.agreement = false
+            this.v$.$reset();
+          })
+          .catch((error) => {
+            if (error.response.data.errors) {
+              if (Object.keys(error.response.data.errors).length > 0) {
+                Object.values(error.response.data.errors).forEach((err) => {
+                  this.toast(false, this.$t(err[0]))
+                })
+              }
+            } else {
+              this.toast(false, this.$t(error.response.data.message))
+            }
+          }).finally(() => {
+            this.loading = false;
+          })
+    },
+  }
 }
 </script>

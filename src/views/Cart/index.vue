@@ -1,8 +1,13 @@
 <template>
   <div class="pt-24 lg:pt-10">
     <form class="container mx-auto px-4 lg:px-0" @submit.prevent="createOrderLocal">
-      <h1 class="text-2xl font-semibold dark:text-whiteColor mb-3">Корзина TrustQuality</h1>
-      <p class="text-lg font-semibold mb-10">Всего товаров: {{ getCart.products.length }}</p>
+      <div class="flex items-center justify-between mb-10">
+        <div>
+          <h1 class="text-2xl font-semibold dark:text-whiteColor mb-3">Корзина TrustQuality</h1>
+          <p class="text-lg font-semibold">Всего товаров: {{ getCart.products.length }}</p>
+        </div>
+        <p @click="clearCart" class="text-red-500">Очистить корзину</p>
+      </div>
       <div class="flex justify-between">
         <div v-if="getCart.products.length > 0" class="w-[65%]">
           <div v-for="(item, index) of getCart.products" :key="index"
@@ -173,7 +178,6 @@ export default {
       },
     };
   },
-
   computed: {
     ...mapGetters(['getProduct', 'getSameProducts', 'getCart', "getCurrentUser"])
   },
@@ -201,7 +205,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['cart', 'product', 'sameProducts', 'addProduct', 'createOrder']),
+    ...mapActions(['cart', 'product', 'sameProducts', 'addProduct', 'createOrder', 'clearCart']),
     async createOrderLocal() {
       this.loading = true;
       this.v$.$validate();

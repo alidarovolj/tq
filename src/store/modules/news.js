@@ -27,6 +27,11 @@ const actions = {
         };
         const {data} = await axios.post("/news/" + id, form, {headers: headers});
         commit("updateEditedNews", data);
+    }, async viewIncrement({commit}) {
+        const {data} = await axios.get("/news/view-increment", {
+            params: router.currentRoute.value.query,
+        });
+        commit("updateViewIncrement", data);
     },
 };
 const mutations = {
@@ -57,11 +62,23 @@ const mutations = {
     }, updateEditedNews: (state, res) => {
         state.editedNews = res;
     }, updateNewsDetails: (state, res) => {
+        // const timestamp = new Date(res.data.created_at);
+        // const formattedDate = timestamp.toLocaleDateString("en-GB", {
+        //     year: "numeric", month: "2-digit", day: "2-digit",
+        // });
+        // const formattedTime = timestamp.toLocaleTimeString("en-GB", {
+        //     hour: "2-digit", minute: "2-digit",
+        // });
+        // return {
+        //     created_at: `${formattedDate} ${formattedTime}`,
+        // };
         state.newsDetails = res;
+    }, updateViewIncrement: (state, res) => {
+        state.viewIncrement = res;
     },
 };
 const state = {
-    news: null, createdNews: null, editedNews: null, removedNews: null, newsDetails: null
+    news: null, createdNews: null, editedNews: null, removedNews: null, newsDetails: null, viewIncrement: null
 };
 const getters = {
     getNews: (state) => state.news,

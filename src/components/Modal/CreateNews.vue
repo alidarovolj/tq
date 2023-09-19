@@ -113,7 +113,7 @@
                     Картинка
                   </label>
                   <input type="file" @change="attachFile"/>
-                  <p v-if="v$.form.icon.$errors.length" class="text-red-500">Пожалуйста, загрузите картинку</p>
+                  <p v-if="v$.form.img.$errors.length" class="text-red-500">Пожалуйста, загрузите картинку</p>
                 </div>
               </div>
             </div>
@@ -178,7 +178,7 @@ export default {
         description_kz: "",
         content: "",
         content_kz: "",
-        icon: "",
+        img: "",
       }
     }
   },
@@ -189,7 +189,7 @@ export default {
         description: {required},
         content: {required},
         content_kz: {required},
-        icon: {required},
+        img: {required},
       },
     };
   },
@@ -200,7 +200,7 @@ export default {
     ...mapActions(['createNews', 'news']),
     attachFile(event) {
       const file = event.target.files[0];
-      this.form.icon = file;
+      this.form.img = file;
     },
     close_modal() {
       this.$emit("requestToClose", false);

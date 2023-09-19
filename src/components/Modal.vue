@@ -43,6 +43,7 @@ import CreateNews from "@/components/Modal/CreateNews.vue"
 import EditNews from "@/components/Modal/EditNews.vue";
 import RemoveNews from "@/components/Modal/RemoveNews.vue";
 import RemoveUser from "@/components/Modal/RemoveUser.vue";
+import ConfirmOrder from "@/components/Modal/ConfirmOrder.vue";
 
 export default {
   name: "ModalSlot",
@@ -59,7 +60,8 @@ export default {
     CreateNews,
     EditNews,
     RemoveNews,
-    RemoveUser
+    RemoveUser,
+    ConfirmOrder
   },
   props: {
     isVisible: {
