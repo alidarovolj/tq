@@ -4,12 +4,12 @@
       <div class="flex items-center justify-between mb-10">
         <div>
           <h1 class="text-2xl font-semibold dark:text-whiteColor mb-3">Корзина TrustQuality</h1>
-          <p class="text-lg font-semibold">Всего товаров: {{ getCart.products.length }}</p>
+          <p class="text-lg font-semibold dark:text-whiteColor">Всего товаров: {{ getCart.products.length }}</p>
         </div>
-        <p @click="clearCart" class="text-red-500">Очистить корзину</p>
+        <p class="text-red-500 cursor-pointer" @click="clearCart">Очистить корзину</p>
       </div>
       <div class="flex justify-between">
-        <div v-if="getCart.products.length > 0" class="w-[65%]">
+        <div v-if="getCart.products.length > 0" class="w-[65%] dark:text-whiteColor">
           <div v-for="(item, index) of getCart.products" :key="index"
                :class="{ '!mb-0' : index + 1 === getCart.products.length }"
                class="bg-white dark:bg-darkBgColor p-5 mb-5 rounded-xl block lg:flex items-center justify-between">
@@ -35,7 +35,8 @@
                 <p class="font-semibold">{{ item.price_main }} {{ $t('general.tenge') }}</p>
               </div>
               <div>
-                <font-awesome-icon :icon="['fas', 'trash']" class="text-red-500 text-2xl cursor-pointer"/>
+                <font-awesome-icon :icon="['fas', 'trash']" class="text-red-500 text-2xl cursor-pointer"
+                                   @click="removeProductFromCart(item)"/>
               </div>
             </div>
           </div>
@@ -51,7 +52,8 @@
         <p v-else class="text-center text-lg font-semibold text-red-500">
           В данный момент ваша корзина пуста
         </p>
-        <div class="w-[33%] bg-white p-5 rounded-xl flex flex-col justify-between h-max sticky top-36">
+        <div
+            class="w-[33%] bg-white p-5 rounded-xl flex flex-col justify-between h-max sticky top-36 dark:bg-darkBgColor dark:text-whiteColor">
           <p class="text-xl font-semibold dark:text-whiteColor mb-3">Заполните данные заказа</p>
           <div>
             <div class="block mb-1">
@@ -60,7 +62,7 @@
                      :class="{
                       'border-red-500': v$.form.name.$errors.length,
                     }"
-                     class="border rounded-md p-2 w-full mb-2" placeholder="Введите имя"
+                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor" placeholder="Введите имя"
                      type="text">
             </div>
             <div class="block mb-1">
@@ -69,7 +71,7 @@
                      :class="{
                       'border-red-500': v$.form.email.$errors.length,
                     }"
-                     class="border rounded-md p-2 w-full mb-2" placeholder="Введите email"
+                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor" placeholder="Введите email"
                      type="text">
             </div>
             <div class="block mb-1">
@@ -78,7 +80,7 @@
                      :class="{
                       'border-red-500': v$.form.phone.$errors.length,
                     }"
-                     class="border rounded-md p-2 w-full mb-2" placeholder="Введите телефон"
+                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor" placeholder="Введите телефон"
                      type="text">
             </div>
             <div class="block mb-1">
@@ -87,7 +89,7 @@
                      :class="{
                       'border-red-500': v$.form.delivery_address.$errors.length,
                     }"
-                     class="border rounded-md p-2 w-full mb-2"
+                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor"
                      placeholder="Введите адрес" type="text">
             </div>
             <div class="block">
@@ -96,7 +98,7 @@
                      :class="{
                       'border-red-500': v$.form.delivery_type.$errors.length,
                     }"
-                     class="border rounded-md p-2 w-full mb-2"
+                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor"
                      placeholder="Введите тип доставки" type="text">
             </div>
             <div class="">
@@ -106,7 +108,7 @@
                        :class="{
                       'border-red-500': v$.form.payment_type.$errors.length,
                     }"
-                       class="mr-2" type="radio"
+                       class="mr-2 dark:text-blackColor" type="radio"
                        value="cart" @click="() => form.payment_type = 'card'">
                 <p>Банковский платеж</p>
               </div>
@@ -115,7 +117,7 @@
                        :class="{
                       'border-red-500': v$.form.payment_type.$errors.length,
                     }"
-                       class="mr-2" type="radio"
+                       class="mr-2 dark:text-blackColor" type="radio"
                        value="by-manager" @click="() => form.payment_type = 'by-manager'">
                 <p>Через менеджера</p>
               </div>
@@ -205,7 +207,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['cart', 'product', 'sameProducts', 'addProduct', 'createOrder', 'clearCart']),
+    ...mapActions(['cart', 'product', 'sameProducts', 'addProduct', 'createOrder', 'clearCart', 'removeProductFromCart']),
     async createOrderLocal() {
       this.loading = true;
       this.v$.$validate();

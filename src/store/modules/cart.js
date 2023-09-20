@@ -6,8 +6,8 @@ const actions = {
     async addProduct({commit}, {product, method}) {
         commit("updateAddedProduct", {product, method});
         commit("updateCart");
-    }, async removeProduct({commit}, {product, method}) {
-        commit("updateRemovedProduct", {product, method});
+    }, async removeProductFromCart({commit}, product) {
+        commit("updateRemovedProductFromCart", product);
         commit("updateCart");
     }, async cart({commit}) {
         commit("updateCart");
@@ -54,39 +54,17 @@ const mutations = {
 
         console.log(stateProduct);
         localStorage.setItem('cart', JSON.stringify(parsedProducts));
-    }, updateRemovedProduct: (state, {product, method}) => {
+    }, updateRemovedProductFromCart: (state, product) => {
         let products = localStorage.getItem('cart');
         let parsedProducts = JSON.parse(products);
-        let stateProduct = {
-            index: null, status: false,
-        };
 
         for (let index = 0; index < parsedProducts.length; index++) {
             if (parsedProducts[index].id === product.id) {
-                stateProduct.status = true;
-                stateProduct.index = index;
+                parsedProducts.splice(index, 1)
                 break; // Exit the loop when a matching product is found
             }
         }
 
-        if (stateProduct.status === true) {
-            if (method === 'plus') {
-                parsedProducts[stateProduct.index].amount += 1;
-                parsedProducts[stateProduct.index].price_main += product.price;
-            } else {
-                parsedProducts[stateProduct.index].amount -= 1;
-                parsedProducts[stateProduct.index].price_main -= product.price;
-                if (parsedProducts[stateProduct.index].amount <= 0) {
-                    parsedProducts.splice(stateProduct.index, 1);
-                }
-            }
-        } else {
-            parsedProducts.push({
-                ...product, amount: 1, price_main: product.price,
-            });
-        }
-
-        console.log(stateProduct);
         localStorage.setItem('cart', JSON.stringify(parsedProducts));
     }, updateCart: (state) => {
         let products = localStorage.getItem('cart');

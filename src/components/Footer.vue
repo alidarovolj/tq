@@ -3,8 +3,8 @@
     <div class="container mx-auto px-4 lg:px-0">
       <div class="flex mb-5">
         <div class="mr-10">
-          <img v-if="currentTheme === 'light'" alt="" class="w-40" src="@/assets/img/logo_hor.png">
-          <img v-else alt="" class="w-40" src="@/assets/img/logo_hor_white.png">
+          <img alt="" class="w-40 block dark:hidden" src="@/assets/img/logo_hor.png">
+          <img alt="" class="w-40 hidden dark:block" src="@/assets/img/logo_hor_white.png">
         </div>
         <div class="mr-10">
           <p class="text-lg font-semibold mb-2">Call Center</p>

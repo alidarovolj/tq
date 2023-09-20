@@ -7,18 +7,18 @@
             class="bg-white dark:bg-darkBgColor text-blackColor dark:text-white w-full lg:w-[65%] p-7 rounded-lg shadow-lg mb-5 lg:mb-0">
           <h1 class="text-xl font-semibold mb-3">{{ getProduct.data.name }}</h1>
           <div class="block lg:flex items-start">
-              <img :src="getProduct.data.icon" alt="" class="w-full lg:w-1/3 mr-3">
-              <div class="flex flex-col justify-between h-full w-full lg:w-1/3">
-                <div class="w-full mb-5">
-                  <p class="font-semibold mb-5 text-xl">Описание:</p>
-                  <p>{{ getProduct.data.description }}</p>
-                </div>
-                <p class="italic">Категория: {{ getProduct.data.category.name }}</p>
+            <img :src="getProduct.data.icon" alt="" class="w-full lg:w-1/3 mr-3">
+            <div class="flex flex-col justify-between h-full w-full lg:w-1/3">
+              <div class="w-full mb-5">
+                <p class="font-semibold mb-5 text-xl">Описание:</p>
+                <p>{{ getProduct.data.description }}</p>
               </div>
+              <p class="italic">Категория: {{ getProduct.data.category.name }}</p>
             </div>
+          </div>
         </div>
         <div
-            class="bg-white dark:bg-darkBgColor text-blackColor dark:text-white w-full lg:w-1/3 p-7 rounded-lg shadow-lg">
+            class="bg-white dark:bg-darkBgColor text-blackColor dark:text-white w-full lg:w-1/3 h-full p-7 rounded-lg shadow-lg">
           <div class="mb-5 flex items-center justify-between text-xs">
             <p class="font-semibold w-half">Артикул: 22510</p>
             <div class="flex items-center w-half">
@@ -45,13 +45,13 @@
                 class="w-10 h-10 bg-whiteColor rounded-full text-mainColor flex items-center justify-center text-lg cursor-pointer"
                 @click="addProduct({ product: getProduct.data, method: 'plus' })">+</p>
           </div>
-          <div class="flex items-center mb-5">
-            <font-awesome-icon :icon="['fas', 'person-walking']" class="mr-2 text-2xl w-5 text-mainColor"/>
-            <p>Самовывоз: 10 сентября из 20 магазинов</p>
-          </div>
+<!--          <div class="flex items-center mb-5">-->
+<!--            <font-awesome-icon :icon="['fas', 'person-walking']" class="mr-2 text-2xl w-5 text-mainColor"/>-->
+<!--            <p>Самовывоз: 10 сентября из 20 магазинов</p>-->
+<!--          </div>-->
           <div class="flex items-center">
             <font-awesome-icon :icon="['fas', 'truck']" class="mr-2 text-lg w-5 text-mainColor"/>
-            <p>Доставка: 11 сентября</p>
+            <p>Отправка: <span v-if="condTime === true">Сегодня</span><span v-else>Завтра</span></p>
           </div>
         </div>
       </div>
@@ -113,6 +113,8 @@ export default {
   },
   data() {
     return {
+      currentTime: "",
+      condTime: false,
       settings: {
         itemsToShow: 1,
         snapAlign: 'center',
@@ -147,9 +149,27 @@ export default {
   mounted() {
     this.product(this.$route.params.prod_id)
     this.sameProducts(this.$route.params.prod_id)
+    this.getCurrentTime();
   },
   methods: {
     ...mapActions(['cart', 'product', 'sameProducts', 'addProduct']),
+    getCurrentTime() {
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      if (hours > 13 && minutes > 30) {
+        this.condTime = false
+      } else {
+        this.condTime = true
+      }
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+      this.currentTime = `${hours}:${minutes}:${seconds}`;
+
+      // Update the time every second
+      setInterval(() => {
+        this.getCurrentTime();
+      }, 1000);
+    },
     isInCart(product) {
       const cartProducts = this.getCart.products;
       for (let i = 0; i < cartProducts.length; i++) {

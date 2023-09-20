@@ -157,7 +157,7 @@
                 class="w-max text-black dark:text-white mr-3 flex items-center rounded-md px-5 py-2 cursor-pointer"
                 @click="close_modal"
             >
-              <p class="dark:text-darkText">Отменить</p>
+              <p class="dark:text-red-500">Отменить</p>
             </div>
             <div>
               <button

@@ -4,11 +4,11 @@
     <div class="hidden lg:flex flex-col justify-between h-full">
       <div>
         <div class="mb-20">
-          <router-link v-if="currentTheme === 'light'" :to="{ name: 'MainPage' }">
-            <img alt="" class="w-full mb-5" src="@/assets/img/logo.png">
+          <router-link :to="{ name: 'MainPage' }">
+            <img alt="" class="w-full mb-5 block dark:hidden" src="@/assets/img/logo.png">
           </router-link>
-          <router-link v-else :to="{ name: 'MainPage' }">
-            <img alt="" class="w-full mb-5" src="@/assets/img/logo_white.png">
+          <router-link :to="{ name: 'MainPage' }">
+            <img alt="" class="w-full mb-5 hidden dark:block" src="@/assets/img/logo_white.png">
           </router-link>
           <router-link :to="{ name: 'MainPage' }" class="text-mainColor">Вернуться на сайт</router-link>
         </div>
@@ -20,7 +20,7 @@
           <router-link :to="{ name: 'AdminProducts' }"
                        class="flex items-center hover:text-mainColor cursor-pointer mb-5">
             <font-awesome-icon :icon="['fas', 'boxes-stacked']" class="mr-3 text-xl w-5"/>
-            <p>Товары</p>
+            <p>Продукты</p>
           </router-link>
           <router-link :to="{ name: 'AdminCategories' }"
                        class="flex items-center hover:text-mainColor cursor-pointer mb-5">

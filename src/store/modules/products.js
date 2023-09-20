@@ -28,6 +28,9 @@ const actions = {
         };
         const {data} = await axios.post("/products/" + id, form, {headers: headers});
         commit("updateEditedProduct", data);
+    }, async confirmProduct({commit}, {conf_state, id}) {
+        const {data} = await axios.patch("/products/" + id + "/status?status=" + conf_state);
+        commit("updateConfirmedProduct", data);
     },
 };
 const mutations = {
@@ -43,10 +46,12 @@ const mutations = {
         state.removedProduct = res;
     }, updateEditedProduct: (state, res) => {
         state.editedProduct = res;
+    }, updateConfirmedProduct: (state, res) => {
+        state.confirmedProduct = res;
     },
 };
 const state = {
-    products: null, product: null, sameProducts: null, createdProduct: null, removedProduct: null, editedProduct: null
+    products: null, product: null, sameProducts: null, createdProduct: null, removedProduct: null, editedProduct: null, confirmedProduct: null,
 };
 const getters = {
     getProducts: (state) => state.products,

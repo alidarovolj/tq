@@ -51,12 +51,13 @@
               </div>
             </div>
           </div>
+          <p class="text-red-500 text-center mb-5">Забыли пароль?</p>
           <div class="flex justify-center mt-3">
             <div
                 class="w-max text-black dark:text-white mr-3 flex items-center rounded-md px-5 py-2 cursor-pointer"
                 @click="close_modal"
             >
-              <p class="dark:text-darkText">Отменить</p>
+              <p class="dark:text-red-500">Отменить</p>
             </div>
             <div>
               <button

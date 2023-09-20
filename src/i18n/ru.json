@@ -2,7 +2,8 @@
   "general": {
     "tenge": "тнг.",
     "login": "Вход",
-    "registration": "Регистрация"
+    "registration": "Регистрация",
+    "forgotPass": "Забыли пароль?"
   },
   "header": {
     "main": "Главная",

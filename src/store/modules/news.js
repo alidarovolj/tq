@@ -62,16 +62,15 @@ const mutations = {
     }, updateEditedNews: (state, res) => {
         state.editedNews = res;
     }, updateNewsDetails: (state, res) => {
-        // const timestamp = new Date(res.data.created_at);
-        // const formattedDate = timestamp.toLocaleDateString("en-GB", {
-        //     year: "numeric", month: "2-digit", day: "2-digit",
-        // });
-        // const formattedTime = timestamp.toLocaleTimeString("en-GB", {
-        //     hour: "2-digit", minute: "2-digit",
-        // });
-        // return {
-        //     created_at: `${formattedDate} ${formattedTime}`,
-        // };
+        console.log(res)
+        const timestamp = new Date(res.data.created_at);
+        const formattedDate = timestamp.toLocaleDateString("en-GB", {
+            year: "numeric", month: "2-digit", day: "2-digit",
+        });
+        const formattedTime = timestamp.toLocaleTimeString("en-GB", {
+            hour: "2-digit", minute: "2-digit",
+        });
+        res.data.created_at = `${formattedDate} ${formattedTime}`
         state.newsDetails = res;
     }, updateViewIncrement: (state, res) => {
         state.viewIncrement = res;

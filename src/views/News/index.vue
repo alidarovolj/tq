@@ -28,9 +28,10 @@
         </router-link>
         <carousel :breakpoints="breakpoints" v-bind="settings">
           <slide
+              @click="$router.push({ name: 'NewsDetails', params: { news_id: item.id } })"
               v-for="(item, index) in getNews.data"
               :key="index"
-              class="bg-white relative flex flex-col dark:bg-darkBgColor dark:text-whiteColor justify-between mr-3 mb-3 p-4 rounded-2xl cursor-pointer shadow transition-all">
+              class="bg-white relative flex flex-col dark:bg-darkBgColor dark:text-whiteColor justify-between mr-3 mb-3 p-4 rounded-2xl cursor-pointer shadow transition-all cursor-pointer">
             <img :src="item.img" alt="" class="w-full rounded-t-xl h-32 object-cover">
             <div class="p-5">
               <div class="mb-5">

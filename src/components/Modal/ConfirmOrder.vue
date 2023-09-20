@@ -5,7 +5,7 @@
         Подтвердите заказ
       </h2>
       <p class="text-sm text-center">
-        Вы уверены что хотите сменить статус данного заказа?
+        Вы уверены что хотите подтвердить оплату данного заказа?
       </p>
     </div>
     <form class="flex justify-center text-sm mt-5" @submit.prevent="confirmOrderLocal">
@@ -17,12 +17,6 @@
               type="submit"
               @click="confirmOrderLocal(1)">
             Подтвердить
-          </button>
-          <button
-              v-if="loading === false"
-              class="w-max px-6 py-2.5 rounded-md text-center bg-red-500 dark:bg-red-500 text-white cursor-pointer"
-              @click="confirmOrderLocal(0)">
-            Отклонить
           </button>
           <div
               v-else
@@ -36,7 +30,7 @@
           class="w-max text-black flex items-center rounded-md px-5 py-2 cursor-pointer"
           @click="close_modal"
       >
-        <p class="dark:text-darkText">Отменить</p>
+        <p class="dark:text-red-500">Отменить</p>
       </div>
     </form>
   </div>

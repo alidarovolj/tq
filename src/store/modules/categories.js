@@ -7,6 +7,9 @@ const actions = {
             params: router.currentRoute.value.query,
         });
         commit("updateCategories", data);
+    }, async categoriesAll({commit}) {
+        const {data} = await axios.get("/categories");
+        commit("updateCategoriesAll", data);
     }, async catalogList({commit}) {
         const {data} = await axios.get("/catalog");
         commit("updateCatalogList", data);
@@ -36,7 +39,10 @@ const actions = {
 const mutations = {
     updateCategories: (state, res) => {
         state.categories = res;
-    }, updateCategoriesWithProducts: (state, res) => {
+    },
+    updateCategoriesAll: (state, res) => {
+        state.categoriesAll = res;
+    },updateCategoriesWithProducts: (state, res) => {
         let arr = []
         res.data.forEach((item) => {
             if (item.products.length > 0) {
@@ -59,6 +65,7 @@ const mutations = {
 };
 const state = {
     categories: null,
+    categoriesAll: null,
     categoriesWithProducts: null,
     category: null,
     createdCategory: null,
@@ -68,6 +75,7 @@ const state = {
 };
 const getters = {
     getCategories: (state) => state.categories,
+    getCategoriesAll: (state) => state.categoriesAll,
     getCategoriesWithProducts: (state) => state.categoriesWithProducts,
     getCategory: (state) => state.category,
     getCreatedCategory: (state) => state.createdCategory,

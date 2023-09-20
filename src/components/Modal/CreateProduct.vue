@@ -127,7 +127,7 @@
                   >
                     Категория
                   </label>
-                  <select v-if="getCategories"
+                  <select v-if="getCategoriesAll"
                           id=""
                           v-model="form.category_id"
                           :class="{
@@ -136,7 +136,7 @@
                           class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                           name="">
                     <option value="">Выберите категорию</option>
-                    <option v-for="(item, index) of getCategories.data" :value="item.id">{{ item.name }}</option>
+                    <option v-for="(item, index) of getCategoriesAll.data" :value="item.id">{{ item.name }}</option>
                   </select>
                 </div>
                 <div class="flex flex-col mb-2 w-full">
@@ -157,7 +157,7 @@
                 class="w-max text-black dark:text-white mr-3 flex items-center rounded-md px-5 py-2 cursor-pointer"
                 @click="close_modal"
             >
-              <p class="dark:text-darkText">Отменить</p>
+              <p class="dark:text-red-500">Отменить</p>
             </div>
             <div>
               <button
@@ -226,13 +226,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getCategories', 'getCreatedProduct']),
+    ...mapGetters(['getCategoriesAll', 'getCreatedProduct']),
   },
   mounted() {
-    this.categories()
+    this.categoriesAll()
   },
   methods: {
-    ...mapActions(['categories', 'createProduct', 'products']),
+    ...mapActions(['categoriesAll', 'createProduct', 'products']),
     attachFile(event) {
       const file = event.target.files[0];
       this.form.icon = file;

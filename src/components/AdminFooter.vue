@@ -3,7 +3,8 @@
     <div class="container mx-auto">
       <div class="flex items-center justify-between">
         <p>TrustQuality © 2023</p>
-        <img class="w-1/5" src="@/assets/img/logo.png" alt="">
+        <img class="w-1/5 block dark:hidden" src="@/assets/img/logo.png" alt="">
+        <img class="w-1/5 hidden dark:block" src="@/assets/img/logo_white.png" alt="">
       </div>
     </div>
   </div>

@@ -44,6 +44,10 @@ import EditNews from "@/components/Modal/EditNews.vue";
 import RemoveNews from "@/components/Modal/RemoveNews.vue";
 import RemoveUser from "@/components/Modal/RemoveUser.vue";
 import ConfirmOrder from "@/components/Modal/ConfirmOrder.vue";
+import RefuseOrder from "@/components/Modal/RefuseOrder.vue";
+import ActivateProduct from "@/components/Modal/ActivateProduct.vue";
+import DeactivateProduct from "@/components/Modal/DeactivateProduct.vue";
+import ForgotPassword from "@/components/Modal/ForgotPassword.vue";
 
 export default {
   name: "ModalSlot",
@@ -61,7 +65,11 @@ export default {
     EditNews,
     RemoveNews,
     RemoveUser,
-    ConfirmOrder
+    ConfirmOrder,
+    RefuseOrder,
+    ActivateProduct,
+    DeactivateProduct,
+    ForgotPassword
   },
   props: {
     isVisible: {

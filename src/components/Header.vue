@@ -27,7 +27,11 @@
                   <font-awesome-icon :icon="['fa', 'user']" class="text-mainColor mr-1"/>
                   <p>{{ $t('general.login') }}</p>
                 </p>
-                <p class="flex items-center ml-4 cursor-pointer" @click="modalStateVerify = true">
+                <p class="flex items-center ml-3 cursor-pointer" @click="modalStateForgot = true">
+                  <font-awesome-icon :icon="['fa', 'key']" class="text-mainColor mr-1"/>
+                  <p class="whitespace-nowrap">{{ $t('general.forgotPass') }}</p>
+                </p>
+                <p class="flex items-center ml-3 cursor-pointer" @click="modalStateVerify = true">
                   <font-awesome-icon :icon="['fas', 'key']" class="text-mainColor mr-1"/>
                   <p>{{ $t('general.registration') }}</p>
                 </p>
@@ -52,8 +56,8 @@
               <font-awesome-icon
                   :icon="['fas', 'bars']" class="mr-3 text-lg block lg:hidden" @click="menu = !menu"/>
               <router-link :to="{ name: 'MainPage' }" class="flex justify-end lg:justify-start w-full lg:w-max">
-                <img v-if="currentTheme === 'light'" alt="" class="w-40 object-contain" src="@/assets/img/logo.png">
-                <img v-if="currentTheme === 'dark'" alt="" class="w-40 object-contain"
+                <img alt="" class="w-40 object-contain block dark:hidden" src="@/assets/img/logo.png">
+                <img alt="" class="w-40 object-contain hidden dark:block"
                      src="@/assets/img/logo_white.png">
               </router-link>
             </div>
@@ -152,6 +156,11 @@
       @close_modal="(val) => (modalStateVerify = val)"
   />
   <Modal
+      :is-visible="modalStateForgot"
+      component-name="ForgotPassword"
+      @close_modal="(val) => (modalStateForgot = val)"
+  />
+  <Modal
       :is-visible="modalStateLogin"
       component-name="Login"
       @close_modal="(val) => (modalStateLogin = val)"
@@ -174,6 +183,7 @@ export default {
       modalStateRegistration: false,
       modalStateLogin: false,
       modalStateVerify: false,
+      modalStateForgot: false,
       sendData: null,
       menu: false,
       currentTheme: localStorage.getItem("theme"),
