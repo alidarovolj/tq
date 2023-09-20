@@ -14,7 +14,7 @@
               <p v-if="$i18n.locale === 'ru'" class="font-semibold mb-3">{{ item.title }}</p>
               <p v-else class="font-semibold mb-3">{{ item.title }}</p>
               <p v-if="$i18n.locale === 'ru'">{{ item.description }}</p>
-              <p>{{ item.description_kz }}</p>
+              <p v-else>{{ item.description_kz }}</p>
             </div>
           </div>
           <div class="w-full flex justify-between text-xs">

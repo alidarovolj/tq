@@ -3,10 +3,10 @@
     <form class="container mx-auto px-4 lg:px-0" @submit.prevent="createOrderLocal">
       <div class="flex items-center justify-between mb-10">
         <div>
-          <h1 class="text-2xl font-semibold dark:text-whiteColor mb-3">Корзина TrustQuality</h1>
-          <p class="text-lg font-semibold dark:text-whiteColor">Всего товаров: {{ getCart.products.length }}</p>
+          <h1 class="text-2xl font-semibold dark:text-whiteColor mb-3">{{ $t('cart.header') }}</h1>
+          <p class="text-lg font-semibold dark:text-whiteColor">{{ $t('cart.overall') }}: {{ getCart.products.length }}</p>
         </div>
-        <p class="text-red-500 cursor-pointer" @click="clearCart">Очистить корзину</p>
+        <p class="text-red-500 cursor-pointer" @click="clearCart">{{ $t('cart.removeCart') }}</p>
       </div>
       <div class="flex justify-between">
         <div v-if="getCart.products.length > 0" class="w-[65%] dark:text-whiteColor">
@@ -16,8 +16,10 @@
             <div class="flex items-center">
               <img :src="item.icon" alt="" class="w-[100px] mr-3 lg:mr-0">
               <div>
-                <p class="text-xl font-semibold">{{ item.name }}</p>
-                <p class="mb-3">{{ item.description }}</p>
+                <p v-if="$i18n.locale === 'ru'" class="text-xl font-semibold">{{ item.name }}</p>
+                <p v-else class="text-xl font-semibold">{{ item.name_kz }}</p>
+                <p v-if="$i18n.locale === 'ru'" class="mb-3">{{ item.description }}</p>
+                <p v-else class="mb-3">{{ item.description_kz }}</p>
                 <div v-if="isInCart(item)" class="flex items-center justify-between mb-5 text-lg w-max">
                   <p
                       class="w-7 h-7 bg-whiteColor rounded-full text-mainColor flex items-center justify-center text-lg cursor-pointer"
@@ -31,7 +33,7 @@
             </div>
             <div class="flex items-center justify-between">
               <div class="flex items-center justify-between text-lg mr-3">
-                <p>Цена:</p>
+                <p>{{ $t('general.price') }}:</p>
                 <p class="font-semibold">{{ item.price_main }} {{ $t('general.tenge') }}</p>
               </div>
               <div>
@@ -45,64 +47,64 @@
             <button
                 class="bg-mainColor text-center py-2 lg:py-3 font-bold text-white rounded-lg lg:mb-5 cursor-pointer px-10 text-sm lg:text-base"
                 type="submit">
-              Оформить заказ
+              {{ $t('cartForm.button') }}
             </button>
           </div>
         </div>
         <p v-else class="text-center text-lg font-semibold text-red-500">
-          В данный момент ваша корзина пуста
+          {{ $t('cart.noItems') }}
         </p>
         <div
             class="w-[33%] bg-white p-5 rounded-xl flex flex-col justify-between h-max sticky top-36 dark:bg-darkBgColor dark:text-whiteColor">
-          <p class="text-xl font-semibold dark:text-whiteColor mb-3">Заполните данные заказа</p>
+          <p class="text-xl font-semibold dark:text-whiteColor mb-3">{{ $t('cartForm.heading') }}</p>
           <div>
             <div class="block mb-1">
-              <p class="font-semibold">Имя:</p>
+              <p class="font-semibold">{{ $t('cartForm.name.name') }}:</p>
               <input v-model="form.name"
                      :class="{
                       'border-red-500': v$.form.name.$errors.length,
                     }"
-                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor" placeholder="Введите имя"
+                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor" :placeholder="$t('cartForm.name.placeholder')"
                      type="text">
             </div>
             <div class="block mb-1">
-              <p class="font-semibold">Email:</p>
+              <p class="font-semibold">{{ $t('cartForm.email.name') }}:</p>
               <input v-model="form.email"
                      :class="{
                       'border-red-500': v$.form.email.$errors.length,
                     }"
-                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor" placeholder="Введите email"
+                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor" :placeholder="$t('cartForm.email.placeholder')"
                      type="text">
             </div>
             <div class="block mb-1">
-              <p class="font-semibold">Телефон:</p>
+              <p class="font-semibold">{{ $t('cartForm.phone.name') }}:</p>
               <input v-model="form.phone"
                      :class="{
                       'border-red-500': v$.form.phone.$errors.length,
                     }"
-                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor" placeholder="Введите телефон"
+                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor" :placeholder="$t('cartForm.phone.placeholder')"
                      type="text">
             </div>
             <div class="block mb-1">
-              <p class="font-semibold">Адрес:</p>
+              <p class="font-semibold">{{ $t('cartForm.address.name') }}:</p>
               <input v-model="form.delivery_address"
                      :class="{
                       'border-red-500': v$.form.delivery_address.$errors.length,
                     }"
                      class="border rounded-md p-2 w-full mb-2 dark:text-blackColor"
-                     placeholder="Введите адрес" type="text">
+                     :placeholder="$t('cartForm.address.placeholder')" type="text">
             </div>
             <div class="block">
-              <p class="font-semibold">Тип доставки:</p>
+              <p class="font-semibold">{{ $t('cartForm.type_first.name') }}:</p>
               <input v-model="form.delivery_type"
                      :class="{
                       'border-red-500': v$.form.delivery_type.$errors.length,
                     }"
                      class="border rounded-md p-2 w-full mb-2 dark:text-blackColor"
-                     placeholder="Введите тип доставки" type="text">
+                     :placeholder="$t('cartForm.type_first.placeholder')" type="text">
             </div>
             <div class="">
-              <p class="font-semibold">Тип платежа:</p>
+              <p class="font-semibold">{{ $t('cartForm.type.name') }}:</p>
               <div class="flex items-center">
                 <input v-model="form.payment_type"
                        :class="{
@@ -110,7 +112,7 @@
                     }"
                        class="mr-2 dark:text-blackColor" type="radio"
                        value="cart" @click="() => form.payment_type = 'card'">
-                <p>Банковский платеж</p>
+                <p>{{ $t('cartForm.type.first') }}</p>
               </div>
               <div class="flex items-center">
                 <input v-model="form.payment_type"
@@ -119,7 +121,7 @@
                     }"
                        class="mr-2 dark:text-blackColor" type="radio"
                        value="by-manager" @click="() => form.payment_type = 'by-manager'">
-                <p>Через менеджера</p>
+                <p>{{ $t('cartForm.type.second') }}</p>
               </div>
               <p v-if="v$.form.payment_type.$errors.length" class="text-red-500 text-center">Заполните данные об
                 оплате</p>

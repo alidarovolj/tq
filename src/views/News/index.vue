@@ -5,7 +5,7 @@
   <div v-else class="pt-24 lg:pt-10">
     <div>
       <div v-if="getNews" class="container mx-auto px-4 lg:px-0">
-        <h2 class="text-2xl font-semibold mb-10 dark:text-whiteColor">Новости компании</h2>
+        <h2 class="text-2xl font-semibold mb-10 dark:text-whiteColor">{{ $t('news') }}</h2>
         <router-link :to="{ name: 'NewsDetails', params: { news_id: getNews.data[0].id } }"
                      class="w-full block lg:flex rounded-xl mb-10 bg-white dark:bg-darkBgColor text-blackColor dark:text-white shadow-lg">
           <img :src="getNews.data[0].img" alt="" class="w-full lg:w-1/3 rounded-l-xl">

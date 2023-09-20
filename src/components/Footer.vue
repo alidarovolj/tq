@@ -13,35 +13,24 @@
         </div>
         <div>
           <p class="text-lg font-semibold mb-4">Навигация</p>
-          <router-link :to="{ name: 'MainPage' }" class="hover:text-mainColor transition-all block no-underline mb-2">
-            Главная
+          <router-link :to="{ name: 'MainPage' }" class="block mb-3 hover:text-mainColor transition-all">
+            {{ $t('header.main') }}
           </router-link>
-          <router-link :to="{ name: 'MainPage' }" class="hover:text-mainColor transition-all block no-underline mb-2">О
-            компании
+          <router-link :to="{ name: 'AboutPage' }" class="block mb-3 hover:text-mainColor transition-all">
+            {{ $t('header.about') }}
           </router-link>
-          <router-link :to="{ name: 'MainPage' }" class="hover:text-mainColor transition-all block no-underline mb-2">
-            Владельцам
+          <router-link :to="{ name: 'NewsPage' }" class="block mb-3 hover:text-mainColor transition-all">
+            {{ $t('header.news') }}
           </router-link>
-          <router-link :to="{ name: 'MainPage' }" class="hover:text-mainColor transition-all block no-underline mb-2">
-            Модели
-          </router-link>
-          <router-link :to="{ name: 'MainPage' }" class="hover:text-mainColor transition-all block no-underline mb-2">
-            Новости
-          </router-link>
-          <router-link :to="{ name: 'MainPage' }" class="hover:text-mainColor transition-all block no-underline mb-2">
-            Контакты
+          <router-link :to="{ name: 'ContactsPage' }" class="block mb-3 hover:text-mainColor transition-all">
+            {{ $t('header.contacts') }}
           </router-link>
         </div>
       </div>
       <div class="text-xs">
-        <p class="mb-2">Все права на публикуемые на сайте материалы принадлежат компании Trust Quality © 2023</p>
-        <p class="mb-2">Пользователь уведомлен, что любые материалы, размещенные на сайте, являются объектами интеллектуальной
-          собственности Trust Quality(правообладателя). Пользователь не вправе без предварительного письменного разрешения
-          правообладателя осуществлять какие-либо действия с объектами интеллектуальной собственности, в противном случае,
-          правообладатель оставляет за собой право на взыскание штрафов, предусмотренных законодательством РК, а также на
-          обращение в компетентные органы за защитой своих прав и законных интересов.</p>
-        <p>Любая информация, представленная на данном сайте, носит исключительно информационный характер и ни при каких
-          условиях не является публичной офертой.</p>
+        <p class="mb-2">{{ $t('footer.first') }}</p>
+        <p class="mb-2">{{ $t('footer.second') }}</p>
+        <p>{{ $t('footer.third') }}</p>
       </div>
     </div>
   </div>

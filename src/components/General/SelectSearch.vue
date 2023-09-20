@@ -7,7 +7,7 @@
               v-model="inpValue"
               :class="{ 'rounded-b-none' : isDropdownOpen }"
               class="flex text-[#6E6B7B] items-center border w-full rounded-md px-5 py-3"
-              placeholder="Поиск по названию"
+              :placeholder="$t('mainPage.placeholder')"
               @input="setSearch($event)"
           />
         </div>
@@ -33,13 +33,14 @@
                     <p class="font-light text-xs">{{ option.product_description }}</p>
                   </div>
                 </div>
-                <p class="italic">Цена: {{ option.price }} {{ $t('general.tenge') }}</p>
+                <p class="italic">{{ $t('general.price') }}: {{ option.price }} {{ $t('general.tenge') }}</p>
               </div>
             </router-link>
           </div>
         </div>
       </div>
     </div>
+    <p>{{ $t('mainPage.example') }}: <span @click="setSearchFast('TQ')" class="underline cursor-pointer hover:no-underline">TQ</span></p>
   </div>
 </template>
 
@@ -103,6 +104,17 @@ export default {
         query: {
           ...this.$route.query,
           keyword: e.target.value,
+        },
+      });
+      await this.searchProduct();
+    },
+    async setSearchFast(e) {
+      this.inpValue = e;
+      this.secondValue = e
+      await this.$router.push({
+        query: {
+          ...this.$route.query,
+          keyword: e,
         },
       });
       await this.searchProduct();

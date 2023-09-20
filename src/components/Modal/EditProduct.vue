@@ -127,7 +127,7 @@
                   >
                     Категория
                   </label>
-                  <select v-if="getCategories"
+                  <select v-if="getCategoriesAll"
                           id=""
                           v-model="form.category_id"
                           :class="{
@@ -136,7 +136,7 @@
                           class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                           name="">
                     <option value="">Выберите категорию</option>
-                    <option v-for="(item, index) of getCategories.data" :value="item.id">{{ item.name }}</option>
+                    <option v-for="(item, index) of getCategoriesAll.data" :value="item.id">{{ item.name }}</option>
                   </select>
                 </div>
                 <div class="flex flex-col mb-2 w-full">
@@ -231,16 +231,16 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getCategories', 'getCreatedProduct']),
+    ...mapGetters(['getCategoriesAll', 'getCreatedProduct']),
   },
   async mounted() {
-    this.categories()
+    await this.categoriesAll()
     if (this.tranId) {
       this.form.name = this.tranId.name
       this.form.name_kz = this.tranId.name_kz
       this.form.description = this.tranId.description
       this.form.description_kz = this.tranId.description_kz
-      this.form.category_id = this.tranId.category_id
+      this.form.category_id = this.tranId.category.id
       this.form.price = this.tranId.price
       this.form.user_price = this.tranId.user_price
     } else {
@@ -248,7 +248,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['categories', 'createProduct', "editProduct", "products"]),
+    ...mapActions(['categoriesAll', 'createProduct', "editProduct", "products"]),
     attachFile(event) {
       const file = event.target.files[0];
       this.form.icon = file;

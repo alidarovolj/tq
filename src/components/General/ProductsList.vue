@@ -10,23 +10,23 @@
       {{ product.name }}
     </router-link>
     <router-link :to="{ name: 'Product', params: { prod_id: product.id } }"
-                 class="text-base font-semibold text-center my-3">{{ product.price }} тнг.
+                 class="text-base font-semibold text-center my-3">{{ product.price }} {{ $t('general.tenge') }}
     </router-link>
     <div class="block">
-      <p class="w-full text-center">В избранное</p>
+      <p class="w-full text-center">{{ $t('general.favorite') }}</p>
       <div v-if="isInCart(product).status === true"
            class="bg-mainColor my-3 text-center px-3 py-2 text-whiteColor rounded-md w-full hover:bg-mainColor transition-all flex items-center justify-between">
         <p
             class="w-5 h-5 bg-whiteColor rounded-full text-mainColor flex items-center justify-center"
             @click="addProduct({ product: product, method: 'minus' })">-</p>
-        <p>Кол-во: {{ isInCart(product).amount }}</p>
+        <p>{{ $t('general.quantity') }}: {{ isInCart(product).amount }}</p>
         <p
             class="w-5 h-5 bg-whiteColor rounded-full text-mainColor flex items-center justify-center"
             @click="addProduct({ product: product, method: 'plus' })">+</p>
       </div>
       <p v-else
          class="bg-blackColor my-3 dark:bg-whiteColor dark:text-blackColor text-center px-3 py-2 text-whiteColor rounded-md w-full hover:bg-mainColor transition-all"
-         @click="addProduct({ product: product, method: null })">В корзину
+         @click="addProduct({ product: product, method: null })">{{ $t('general.toCart') }}
       </p>
     </div>
   </div>

@@ -5,7 +5,7 @@
         <div class="shadow sticky top-44">
           <div
               class="text-center py-2 bg-blackColor dark:bg-darkBgColor dark:text-whiteColor dark:border-b dark:border-gray-700 text-white rounded-t-lg">
-            <p>Каталог товаров</p>
+            <p>{{ $t('mainPage.catalog.header') }}</p>
           </div>
           <div class="rounded-b-lg">
             <div v-for="(item, index) of getCatalogList.data"
@@ -38,7 +38,7 @@
       </div>
       <div class="w-full lg:w-3/4">
         <div class="mb-10">
-          <h2 class="text-2xl font-semibold mb-10 dark:text-whiteColor">Популярные категории</h2>
+          <h2 class="text-2xl font-semibold mb-10 dark:text-whiteColor">{{ $t('mainPage.catalog.popular') }}</h2>
           <div class="flex justify-between flex-wrap">
             <router-link v-for="(item, index) of getCatalogList.data"
                          :key="index"

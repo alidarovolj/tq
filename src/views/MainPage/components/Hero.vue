@@ -25,7 +25,6 @@
 <!--              <p>Найти</p>-->
 <!--            </button>-->
           </div>
-          <p>Например: <span class="underline cursor-pointer hover:no-underline">DCL750</span></p>
         </div>
       </div>
     </div>

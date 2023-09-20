@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto px-4 lg:px-0 py-10 mt-10">
-    <h2 class="text-2xl font-semibold mb-10 dark:text-whiteColor">Вы можете найти нас</h2>
+    <h2 class="text-2xl font-semibold mb-10 dark:text-whiteColor">{{ $t('form.heading') }}</h2>
     <div class="block lg:flex rounded-2xl bg-white dark:bg-darkBgColor text-blackColor dark:text-white">
       <div class="w-full lg:w-1/3">
         <iframe class="rounded-t-xl lg:rounded-tr-none lg:rounded-l-2xl"
@@ -10,45 +10,45 @@
                 width="100%"></iframe>
       </div>
       <div class="w-full lg:w-2/3 p-7 flex flex-col justify-center">
-        <h3 class="text-2xl font-semibold mb-3">Оставьте нам сообщение</h3>
-        <p class="text-sm mb-10">Оставьте заявку и мы перезвоним через 30 мин</p>
+        <h3 class="text-2xl font-semibold mb-3">{{ $t('form.header') }}</h3>
+        <p class="text-sm mb-10">{{ $t('form.text') }}</p>
         <form action="" @submit.prevent="sendForm">
           <div class="mb-4">
-            <p class="mb-1">Email</p>
+            <p class="mb-1">{{ $t('form.email.name') }}</p>
             <input
                 v-model="form.email"
                 :class="{
                       'border-red-500': v$.form.email.$errors.length,
                     }"
                 class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
-                placeholder="Введите email" type="text">
+                :placeholder="$t('form.email.placeholder')" type="text">
           </div>
           <div class="mb-4">
-            <p class="mb-1">Имя</p>
+            <p class="mb-1">{{ $t('form.name.name') }}</p>
             <input
                 v-model="form.name"
                 :class="{
                       'border-red-500': v$.form.name.$errors.length,
                     }"
                 class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
-                placeholder="Введите имя" type="text">
+                :placeholder="$t('form.name.placeholder')" type="text">
           </div>
           <div class="mb-4">
-            <p class="mb-1">Телефон</p>
+            <p class="mb-1">{{ $t('form.phone.name') }}</p>
             <input
                 v-model="form.phone"
                 :class="{
                       'border-red-500': v$.form.phone.$errors.length,
                     }"
                 class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
-                placeholder="Введите телефон" type="text">
+                :placeholder="$t('form.phone.placeholder')" type="text">
           </div>
           <div class="mb-4">
-            <p class="mb-1">Примечание</p>
+            <p class="mb-1">{{ $t('form.note.name') }}</p>
             <textarea
                 v-model="form.note"
                 class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
-                placeholder="Введите примечание" type="text"/>
+                :placeholder="$t('form.note.placeholder')" type="text"/>
           </div>
           <div class="flex flex-col lg:flex-row items-center">
             <div class="flex items-center mb-3 lg:mb-0">
@@ -57,12 +57,10 @@
                     }"
                      class="mr-2"
                      type="checkbox">
-              <p :class="{ 'text-red-500' : v$.form.agreement.$error }" class="text-xs">Подавая заявку, вы
-                принимаете условия офертового соглашения и соглашаетесь на обработку
-                ваших персональных данных в соответствии с политикой конфиденциальности</p>
+              <p :class="{ 'text-red-500' : v$.form.agreement.$error }" class="text-xs">{{ $t('form.agreement') }}</p>
             </div>
             <button class="bg-mainColor text-white px-4 py-2 rounded-md whitespace-nowrap" type="submit">
-              Отправить заявку
+              {{ $t('form.button') }}
             </button>
           </div>
         </form>
