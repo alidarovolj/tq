@@ -22,7 +22,7 @@
                 <LocaleSwitcher/>
                 <ThemeSwitcher/>
               </div>
-              <div v-if="!getCurrentUser" class="flex items-center justify-end flex-wrap">
+              <div v-if="!getCurrentUser" class="flex items-center justify-endnpm flex-wrap">
                 <p class="flex items-center cursor-pointer" @click="modalStateLogin = true">
                   <font-awesome-icon :icon="['fa', 'user']" class="text-mainColor mr-1"/>
                   <p>{{ $t('general.login') }}</p>
