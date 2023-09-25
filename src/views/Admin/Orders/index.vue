@@ -20,6 +20,16 @@
                  class="text-green-500 bg-green-500 bg-opacity-25 px-4 py-1 rounded-lg w-max">Да</p>
               <p v-else class="text-red-500 bg-red-500 bg-opacity-25 px-4 py-1 rounded-lg w-max">Нет</p>
             </template>
+            <template v-if="column.fname === 'products'">
+              <div>
+                <div class="flex items-start text-xs" v-for="(item, index) of row.products" :key="index">
+                  <p class="font-bold mr-2">x{{ item.count }}</p>
+                  <p class="whitespace-nowrap">
+                    {{ item.product_data.name }}
+                  </p>
+                </div>
+              </div>
+            </template>
             <template v-if="column.name === 'Действия'">
               <div v-if="row.is_paid === false" class="flex text-lg">
                 <div
@@ -77,6 +87,7 @@ export default {
       columns: [
         {name: "Имя", fname: "name"},
         {name: "Тип доставки", fname: "delivery_type"},
+        {name: "Продукты", fname: "products"},
         {name: "Адрес доставки", fname: "delivery_address"},
         {name: "Телефон", fname: "phone"},
         {name: "Стоимость заказа", fname: "amount"},

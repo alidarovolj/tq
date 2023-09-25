@@ -6,55 +6,58 @@
     <div>
       <div v-if="getNews" class="container mx-auto px-4 lg:px-0">
         <h2 class="text-2xl font-semibold mb-10 dark:text-whiteColor">{{ $t('news') }}</h2>
-        <router-link :to="{ name: 'NewsDetails', params: { news_id: getNews.data[0].id } }"
-                     class="w-full block lg:flex rounded-xl mb-10 bg-white dark:bg-darkBgColor text-blackColor dark:text-white shadow-lg">
-          <img :src="getNews.data[0].img" alt="" class="w-full lg:w-1/3 rounded-l-xl">
-          <div class="w-full lg:w-2/3 p-5 flex flex-col justify-between">
-            <div class="mb-5">
-              <p class="font-semibold mb-3 text-xl">{{ getNews.data[0].title }}</p>
-              <p class="no-underline">{{ getNews.data[0].description }}</p>
-            </div>
-            <div class="flex justify-between">
-              <div class="flex items-center">
-                <font-awesome-icon :icon="['fas', 'eye']" class="mr-2 text-xl"/>
-                <p>{{ getNews.data[0].views }}</p>
-              </div>
-              <div class="flex items-center">
-                <font-awesome-icon :icon="['fas', 'clock']" class="mr-2 text-xl"/>
-                <p>{{ getNews.data[0].created_at }}</p>
-              </div>
-            </div>
-          </div>
-        </router-link>
-        <carousel :breakpoints="breakpoints" v-bind="settings">
-          <slide
-              @click="$router.push({ name: 'NewsDetails', params: { news_id: item.id } })"
-              v-for="(item, index) in getNews.data"
-              :key="index"
-              class="bg-white relative flex flex-col dark:bg-darkBgColor dark:text-whiteColor justify-between mr-3 mb-3 p-4 rounded-2xl cursor-pointer shadow transition-all cursor-pointer">
-            <img :src="item.img" alt="" class="w-full rounded-t-xl h-32 object-cover">
-            <div class="p-5">
+        <div v-if="getNews.data.length > 0">
+          <router-link :to="{ name: 'NewsDetails', params: { news_id: getNews.data[0].id } }"
+                       class="w-full block lg:flex rounded-xl mb-10 bg-white dark:bg-darkBgColor text-blackColor dark:text-white shadow-lg">
+            <img :src="getNews.data[0].img" alt="" class="w-full lg:w-1/3 rounded-l-xl">
+            <div class="w-full lg:w-2/3 p-5 flex flex-col justify-between">
               <div class="mb-5">
-                <p class="font-semibold mb-3">{{ item.title }}</p>
-                <p>{{ item.description }}</p>
+                <p class="font-semibold mb-3 text-xl">{{ getNews.data[0].title }}</p>
+                <p class="no-underline">{{ getNews.data[0].description }}</p>
+              </div>
+              <div class="flex justify-between">
+                <div class="flex items-center">
+                  <font-awesome-icon :icon="['fas', 'eye']" class="mr-2 text-xl"/>
+                  <p>{{ getNews.data[0].views }}</p>
+                </div>
+                <div class="flex items-center">
+                  <font-awesome-icon :icon="['fas', 'clock']" class="mr-2 text-xl"/>
+                  <p>{{ getNews.data[0].created_at }}</p>
+                </div>
               </div>
             </div>
-            <div class="flex justify-between text-xs">
-              <div class="flex items-center mr-3">
-                <font-awesome-icon :icon="['fas', 'eye']" class="mr-2 text-xl"/>
-                <p>{{ item.views }}</p>
+          </router-link>
+          <carousel :breakpoints="breakpoints" v-bind="settings">
+            <slide
+                @click="$router.push({ name: 'NewsDetails', params: { news_id: item.id } })"
+                v-for="(item, index) in getNews.data"
+                :key="index"
+                class="bg-white relative flex flex-col dark:bg-darkBgColor dark:text-whiteColor justify-between mr-3 mb-3 p-4 rounded-2xl cursor-pointer shadow transition-all cursor-pointer">
+              <img :src="item.img" alt="" class="w-full rounded-t-xl h-32 object-cover">
+              <div class="p-5">
+                <div class="mb-5">
+                  <p class="font-semibold mb-3">{{ item.title }}</p>
+                  <p>{{ item.description }}</p>
+                </div>
               </div>
-              <div class="flex items-center">
-                <font-awesome-icon :icon="['fas', 'clock']" class="mr-2 text-xl"/>
-                <p>{{ item.created_at }}</p>
+              <div class="flex justify-between text-xs">
+                <div class="flex items-center mr-3">
+                  <font-awesome-icon :icon="['fas', 'eye']" class="mr-2 text-xl"/>
+                  <p>{{ item.views }}</p>
+                </div>
+                <div class="flex items-center">
+                  <font-awesome-icon :icon="['fas', 'clock']" class="mr-2 text-xl"/>
+                  <p>{{ item.created_at }}</p>
+                </div>
               </div>
-            </div>
-          </slide>
+            </slide>
 
-          <template #addons>
-            <navigation/>
-          </template>
-        </carousel>
+            <template #addons>
+              <navigation/>
+            </template>
+          </carousel>
+        </div>
+        <p class="text-center font-bold text-red-500">В данный момент новостей нет</p>
       </div>
     </div>
   </div>

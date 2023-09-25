@@ -8,8 +8,8 @@
         </div>
         <p class="text-red-500 cursor-pointer" @click="clearCart">{{ $t('cart.removeCart') }}</p>
       </div>
-      <div class="flex justify-between">
-        <div v-if="getCart.products.length > 0" class="w-[65%] dark:text-whiteColor">
+      <div class="block lg:flex justify-between">
+        <div v-if="getCart.products.length > 0" class="w-full lg:w-[65%] dark:text-whiteColor mb-10 lg:mb-0">
           <div v-for="(item, index) of getCart.products" :key="index"
                :class="{ '!mb-0' : index + 1 === getCart.products.length }"
                class="bg-white dark:bg-darkBgColor p-5 mb-5 rounded-xl block lg:flex items-center justify-between">
@@ -55,7 +55,7 @@
           {{ $t('cart.noItems') }}
         </p>
         <div
-            class="w-[33%] bg-white p-5 rounded-xl flex flex-col justify-between h-max sticky top-36 dark:bg-darkBgColor dark:text-whiteColor">
+            class="w-full lg:w-[33%] bg-white p-5 rounded-xl flex flex-col justify-between h-max sticky top-36 dark:bg-darkBgColor dark:text-whiteColor">
           <p class="text-xl font-semibold dark:text-whiteColor mb-3">{{ $t('cartForm.heading') }}</p>
           <div>
             <div class="block mb-1">

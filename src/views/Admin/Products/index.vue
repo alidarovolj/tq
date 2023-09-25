@@ -128,6 +128,8 @@ export default {
         {name: "Описание", fname: "description"},
         {name: "Цена", fname: "price"},
         {name: "Категории", fname: "category.name"},
+        {name: "Кол-во", fname: "quantity"},
+        {name: "uuid (Мой Склад)", fname: "uuid"},
         {name: "Статус", fname: "is_active"},
         {name: "Действия", fname: ""},
       ],

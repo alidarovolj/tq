@@ -13,6 +13,8 @@
                  class="text-base font-semibold text-center my-3">{{ product.price }} {{ $t('general.tenge') }}
     </router-link>
     <div class="block">
+      <p class="text-center text-green-500 font-bold mb-3" v-if="product.quantity > 0">Есть в наличии: {{ product.quantity }}</p>
+      <p class="text-center text-red-500 font-bold mb-3" v-else>Нет в наличии</p>
       <p class="w-full text-center">{{ $t('general.favorite') }}</p>
       <div v-if="isInCart(product).status === true"
            class="bg-mainColor my-3 text-center px-3 py-2 text-whiteColor rounded-md w-full hover:bg-mainColor transition-all flex items-center justify-between">
@@ -24,7 +26,7 @@
             class="w-5 h-5 bg-whiteColor rounded-full text-mainColor flex items-center justify-center"
             @click="addProduct({ product: product, method: 'plus' })">+</p>
       </div>
-      <p v-else
+      <p v-if="isInCart(product).status === false && product.quantity > 0"
          class="bg-blackColor my-3 dark:bg-whiteColor dark:text-blackColor text-center px-3 py-2 text-whiteColor rounded-md w-full hover:bg-mainColor transition-all"
          @click="addProduct({ product: product, method: null })">{{ $t('general.toCart') }}
       </p>

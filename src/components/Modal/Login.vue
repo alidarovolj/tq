@@ -131,26 +131,37 @@ export default {
         return;
       }
       await this.authUser(this.form)
-          .then(() => {
-            this.loading = false;
-            this.toast(true, "Авторизация успешна");
-            this.close_modal();
-            this.setUser();
-            this.currentUser()
-          })
-          .catch((error) => {
-            if (error.response.data.errors) {
-              if (Object.keys(error.response.data.errors).length > 0) {
-                Object.values(error.response.data.errors).forEach((err) => {
-                  this.toast(false, this.$t(err[0]))
-                })
-              }
-            } else {
-              this.toast(false, this.$t(error.response.data.message))
-            }
-          }).finally(() => {
-            this.loading = false;
-          })
+      console.log(this.getAuth)
+      if (!this.getAuth.data.errors) {
+        this.loading = false;
+        this.toast(true, "Авторизация успешна");
+        this.close_modal();
+        this.setUser();
+        this.currentUser()
+      } else {
+        this.loading = false;
+        this.toast(false, "Данные неверны");
+      }
+      // .then(() => {
+      //   this.loading = false;
+      //   this.toast(true, "Авторизация успешна");
+      //   this.close_modal();
+      //   this.setUser();
+      //   this.currentUser()
+      // })
+      // .catch((error) => {
+      //   if (error.response.data.errors) {
+      //     if (Object.keys(error.response.data.errors).length > 0) {
+      //       Object.values(error.response.data.errors).forEach((err) => {
+      //         this.toast(false, this.$t(err[0]))
+      //       })
+      //     }
+      //   } else {
+      //     this.toast(false, this.$t(error.response.data.message))
+      //   }
+      // }).finally(() => {
+      //   this.loading = false;
+      // })
     },
   },
 

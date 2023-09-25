@@ -30,12 +30,14 @@
             </div>
           </div>
           <p class="text-3xl font-bold mb-5">{{ getProduct.data.price }} {{ $t('general.tenge') }}</p>
+          <p class="text-center text-green-500 font-bold mb-3" v-if="getProduct.data.quantity > 0">Есть в наличии: {{ getProduct.data.quantity }}</p>
+          <p class="text-center text-red-500 font-bold mb-3" v-else>Нет в наличии</p>
           <div v-if="isInCart(getProduct.data)"
                class="bg-mainColor text-center py-3 font-bold text-white rounded-lg mb-5 cursor-pointer"
                @click="addProduct({ product: getProduct.data, method: 'minus' })">
             {{ $t('product.addToCart') }}
           </div>
-          <div v-else class="bg-mainColor text-center py-3 font-bold text-white rounded-lg mb-5 cursor-pointer"
+          <div v-if="!isInCart(getProduct.data) && getProduct.data.quantity >= 0" class="bg-mainColor text-center py-3 font-bold text-white rounded-lg mb-5 cursor-pointer"
                @click="addProduct(getProduct.data)">
             {{ $t('product.inCart') }}
           </div>
@@ -70,6 +72,8 @@
             <p class="text-center text-lg font-semibold">{{ product.name }}</p>
             <p class="text-base font-semibold text-center my-3">{{ product.price }} тнг.</p>
             <div class="block">
+              <p class="text-center text-green-500 font-bold mb-3" v-if="product.quantity > 0">Есть в наличии: {{ product.quantity }}</p>
+              <p class="text-center text-red-500 font-bold mb-3" v-else>Нет в наличии</p>
               <p class="w-full text-center">В избранное</p>
               <div v-if="isInCart(product).status === true"
                    class="bg-mainColor my-3 text-center px-3 py-2 text-whiteColor rounded-md w-full hover:bg-mainColor transition-all flex items-center justify-between">
@@ -81,7 +85,7 @@
                     class="w-5 h-5 bg-whiteColor rounded-full text-mainColor flex items-center justify-center"
                     @click="addProduct({ product: product, method: 'plus' })">+</p>
               </div>
-              <p v-else
+              <p v-if="isInCart(product).status === false && product.quantity > 0"
                  class="bg-blackColor my-3 dark:bg-whiteColor dark:text-blackColor text-center px-3 py-2 text-whiteColor rounded-md w-full hover:bg-mainColor transition-all"
                  @click="addProduct({ product: product, method: null })">В корзину
               </p>

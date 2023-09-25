@@ -48,7 +48,8 @@ import RefuseOrder from "@/components/Modal/RefuseOrder.vue";
 import ActivateProduct from "@/components/Modal/ActivateProduct.vue";
 import DeactivateProduct from "@/components/Modal/DeactivateProduct.vue";
 import ForgotPassword from "@/components/Modal/ForgotPassword.vue";
-
+import ConfirmVerify from "@/components/Modal/ConfirmVerify.vue";
+import RefuseVerify from "@/components/Modal/RefuseVerify.vue";
 export default {
   name: "ModalSlot",
   components: {
@@ -69,7 +70,9 @@ export default {
     RefuseOrder,
     ActivateProduct,
     DeactivateProduct,
-    ForgotPassword
+    ForgotPassword,
+    ConfirmVerify,
+    RefuseVerify
   },
   props: {
     isVisible: {
