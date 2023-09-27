@@ -7,6 +7,13 @@
         <p class="bg-mainColor text-white px-5 py-2 rounded-md cursor-pointer" @click="modalState = true">Добавить
           продукт</p>
       </div>
+      <div v-if="getProducts" class="w-full">
+        <Search
+            class="mb-3 lg:mb-0"
+            :placeholder="'Найти продукт'"
+            @changed="products"
+        />
+      </div>
       <div class="overflow-y-auto">
         <TableComponent
             v-if="getProducts"
@@ -19,7 +26,7 @@
           <template #default="{ row, column, index }">
             <template v-if="column.fname === 'is_active'">
               <p v-if="row.is_active === true"
-                 class="text-center text-green-500 bg-green-500 bg-opacity-25 px-4 py-1 rounded-lg w-full text-center">
+                 class="text-center text-green-500 bg-green-500 bg-opacity-25 px-4 py-1 rounded-lg w-full">
                 Активен</p>
               <p v-else class="w-full text-red-500 bg-red-500 bg-opacity-25 px-4 py-1 rounded-lg text-center">
                 Деактивирован</p>
@@ -101,14 +108,15 @@
 </template>
 
 <script>
-import TableComponent from "@/components/General/Table.vue";
-import {mapActions, mapGetters} from "vuex";
-import Modal from "@/components/Modal.vue";
 import {useMeta} from "vue-meta";
+import {mapActions, mapGetters} from "vuex";
+import Search from "@/components/General/Search.vue";
+import TableComponent from "@/components/General/Table.vue";
+import Modal from "@/components/Modal.vue";
 
 export default {
   name: "AdminProducts",
-  components: {Modal, TableComponent},
+  components: {Modal, TableComponent, Search},
   setup() {
     useMeta({title: "Продукты"});
   },

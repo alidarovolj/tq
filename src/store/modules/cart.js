@@ -17,6 +17,9 @@ const actions = {
     }, async clearCart({commit}) {
         commit("updateClearedCart");
         commit("updateCart");
+    }, async ordersCheck({commit}, form) {
+        const {data} = await axios.post("/orders/check", form);
+        commit("updateOrdersCheck", data);
     },
 };
 const mutations = {
@@ -91,13 +94,15 @@ const mutations = {
             result += symbols.charAt(randomIndex);
         }
         localStorage.setItem('orderNumber', JSON.stringify(result))
+    }, updateOrdersCheck: (state, res) => {
+        state.ordersCheck = res;
     },
 };
 const state = {
-    cart: null, createdOrder: null,
+    cart: null, createdOrder: null, ordersCheck: null,
 };
 const getters = {
-    getCart: (state) => state.cart, getCreatedOrder: (state) => state.createdOrder
+    getCart: (state) => state.cart, getCreatedOrder: (state) => state.createdOrder, getOrdersCheck: (state) => state.ordersCheck
 };
 
 export default {state, getters, mutations, actions};

@@ -13,7 +13,7 @@
                  class="text-base font-semibold text-center my-3">{{ product.price }} {{ $t('general.tenge') }}
     </router-link>
     <div class="block">
-      <p class="text-center text-green-500 font-bold mb-3" v-if="product.quantity > 0">Есть в наличии: {{ product.quantity }}</p>
+      <p class="text-center text-green-500 font-bold mb-3" v-if="product.quantity > 0">Есть в наличии</p>
       <p class="text-center text-red-500 font-bold mb-3" v-else>Нет в наличии</p>
       <p class="w-full text-center">{{ $t('general.favorite') }}</p>
       <div v-if="isInCart(product).status === true"

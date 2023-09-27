@@ -183,10 +183,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getProduct', 'getSameProducts', 'getCart', "getCurrentUser"])
+    ...mapGetters(['getProduct', 'getSameProducts', 'getCart', "getCurrentUser", "getOrdersCheck"])
   },
-  mounted() {
-    this.getCart.products.forEach((item) => {
+  async mounted() {
+    await this.getCart.products.forEach((item) => {
       let product = {
         id: item.id,
         count: item.amount
@@ -209,7 +209,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['cart', 'product', 'sameProducts', 'addProduct', 'createOrder', 'clearCart', 'removeProductFromCart']),
+    ...mapActions(['cart', 'product', 'sameProducts', 'addProduct', 'createOrder', 'clearCart', 'removeProductFromCart', 'ordersCheck']),
     async createOrderLocal() {
       this.loading = true;
       this.v$.$validate();

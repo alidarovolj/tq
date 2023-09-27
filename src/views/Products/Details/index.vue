@@ -72,7 +72,7 @@
             <p class="text-center text-lg font-semibold">{{ product.name }}</p>
             <p class="text-base font-semibold text-center my-3">{{ product.price }} тнг.</p>
             <div class="block">
-              <p class="text-center text-green-500 font-bold mb-3" v-if="product.quantity > 0">Есть в наличии: {{ product.quantity }}</p>
+              <p class="text-center text-green-500 font-bold mb-3" v-if="product.quantity > 0">Есть в наличии</p>
               <p class="text-center text-red-500 font-bold mb-3" v-else>Нет в наличии</p>
               <p class="w-full text-center">В избранное</p>
               <div v-if="isInCart(product).status === true"

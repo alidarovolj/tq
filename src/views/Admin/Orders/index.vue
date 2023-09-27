@@ -14,7 +14,7 @@
             :source="getOrders"
             @call_to_refresh="orders()"
         >
-          <template #default="{ row, column }">
+          <template #default="{ row, column, index }">
             <template v-if="column.fname === 'is_paid'">
               <p v-if="row.is_paid === true"
                  class="text-green-500 bg-green-500 bg-opacity-25 px-4 py-1 rounded-lg w-max">Да</p>
@@ -22,12 +22,19 @@
             </template>
             <template v-if="column.fname === 'products'">
               <div>
-                <div class="flex items-start text-xs" v-for="(item, index) of row.products" :key="index">
-                  <p class="font-bold mr-2">x{{ item.count }}</p>
-                  <p class="whitespace-nowrap">
-                    {{ item.product_data.name }}
-                  </p>
+                <div
+                    class="text-xs"
+                    v-for="(item, ind) of row.products.slice(0, showProducts.includes(index) ? row.products.length : 1)"
+                    :key="ind"
+                >
+                  <div class="flex items-start">
+                    <p class="font-bold mr-2">x{{ item.count }}</p>
+                    <p class="whitespace-nowrap">{{ item.product_data.name }}</p>
+                  </div>
                 </div>
+                <button class="text-mainColor" v-if="row.products.length > 1" @click="showProd(index)">
+                  {{ showProducts.includes(index) ? 'Скрыть' : 'Показать все' }}
+                </button>
               </div>
             </template>
             <template v-if="column.name === 'Действия'">
@@ -84,6 +91,7 @@ export default {
       modalStateRefuse: false,
       confirmData: null,
       refuseData: null,
+      showProducts: [], // Добавьте эту переменную
       columns: [
         {name: "Имя", fname: "name"},
         {name: "Тип доставки", fname: "delivery_type"},
@@ -94,17 +102,17 @@ export default {
         {name: "Оплачен", fname: "is_paid"},
         {name: "Действия", fname: "actions"},
       ],
-    }
+    };
   },
   computed: {
-    ...mapGetters(['getOrders'])
+    ...mapGetters(["getOrders"]),
   },
   components: {Modal, TableComponent},
   mounted() {
     this.orders();
   },
   methods: {
-    ...mapActions(['orders']),
+    ...mapActions(["orders"]),
     confirmOrder(id) {
       this.modalStateConfirm = true;
       this.confirmData = id;
@@ -113,6 +121,15 @@ export default {
       this.modalStateRefuse = true;
       this.refuseData = id;
     },
-  }
-}
+    showProd(index) {
+      const indexToRemove = this.showProducts.indexOf(index);
+
+      if (indexToRemove !== -1) {
+        this.showProducts.splice(indexToRemove, 1); // Remove the element
+      } else {
+        this.showProducts.push(index); // Add the element if it doesn't exist
+      }
+    },
+  },
+};
 </script>
