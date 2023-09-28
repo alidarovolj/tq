@@ -74,7 +74,7 @@
             <div class="block">
               <p class="text-center text-green-500 font-bold mb-3" v-if="product.quantity > 0">Есть в наличии</p>
               <p class="text-center text-red-500 font-bold mb-3" v-else>Нет в наличии</p>
-              <p class="w-full text-center">В избранное</p>
+<!--              <p class="w-full text-center">{{ $t('general.favorite') }}</p>-->
               <div v-if="isInCart(product).status === true"
                    class="bg-mainColor my-3 text-center px-3 py-2 text-whiteColor rounded-md w-full hover:bg-mainColor transition-all flex items-center justify-between">
                 <p
