@@ -39,11 +39,11 @@
       <div class="w-full lg:w-3/4">
         <div class="mb-10">
           <h2 class="text-2xl font-semibold mb-10 dark:text-whiteColor">{{ $t('mainPage.catalog.popular') }}</h2>
-          <div class="flex justify-between flex-wrap">
+          <div class="flex flex-wrap">
             <router-link v-for="(item, index) of getCatalogList.data"
                          :key="index"
                          :to="{ name: 'Category', params: { cat_id: item.id } }"
-                         class="w-half dark:bg-darkBgColor dark:text-whiteColor lg:w-fourth mb-2 bg-white p-4 rounded-2xl cursor-pointer hover:bg-mainColor hover:text-whiteColor transition-all">
+                         class="w-half mr-[3px] lg:mr-1 dark:bg-darkBgColor dark:text-whiteColor lg:w-fourth mb-2 bg-white p-4 rounded-2xl cursor-pointer hover:bg-mainColor hover:text-whiteColor transition-all">
               <img :src="item.icon" alt="" class="w-32 h-32 mx-auto object-contain">
               <p v-if="$i18n.locale === 'ru'" class="text-center font-semibold">{{ item.name }}</p>
               <p v-else class="text-center font-semibold">{{ item.name_kz }}</p>
@@ -57,7 +57,7 @@
                   item.name
                 }}</h2>
               <h2 v-else class="text-2xl font-semibold mb-10 dark:text-whiteColor">{{ item.name }}</h2>
-              <div class="flex justify-between overflow-x-auto">
+              <div class="flex overflow-x-auto">
                 <ProductsList :data="item.products"/>
               </div>
             </div>

@@ -10,11 +10,11 @@
             getCategory.data.name
           }}</h1>
         <div class=" mb-10">
-          <div class="flex items-center flex-wrap justify-between">
+          <div class="flex items-center flex-wrap">
             <router-link v-for="(item, index) of getCategory.data.sub_category_limitless"
                          :key="index"
                          :to="{ name: 'SubCategory', params: { cat_id: $route.params.cat_id, sub_id: item.id } }"
-                         class="w-full lg:w-fourth flex flex-col justify-between bg-white rounded-2xl p-4 mb-2 hover:bg-mainColor transition-all cursor-pointer hover:text-white dark:bg-darkBgColor dark:text-whiteColor">
+                         class="w-full mr-1 lg:w-fourth flex flex-col justify-between bg-white rounded-2xl p-4 mb-2 hover:bg-mainColor transition-all cursor-pointer hover:text-white dark:bg-darkBgColor dark:text-whiteColor">
               <img :src="item.icon" alt="" class="w-32 h-32 mx-auto object-contain">
               <p class=" text-center font-semibold">{{ item.name }}</p>
             </router-link>

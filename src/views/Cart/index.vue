@@ -4,22 +4,26 @@
       <div class="flex items-center justify-between mb-10">
         <div>
           <h1 class="text-2xl font-semibold dark:text-whiteColor mb-3">{{ $t('cart.header') }}</h1>
-          <p class="text-lg font-semibold dark:text-whiteColor">{{ $t('cart.overall') }}: {{ getCart.products.length }}</p>
+          <p class="text-lg font-semibold dark:text-whiteColor">{{ $t('cart.overall') }}: {{
+              getCart.products.length
+            }}</p>
         </div>
         <p class="text-red-500 cursor-pointer" @click="clearCart">{{ $t('cart.removeCart') }}</p>
       </div>
-      <div class="block lg:flex justify-between">
+      <div v-if="getOrdersCheck" class="block lg:flex justify-between">
         <div v-if="getCart.products.length > 0" class="w-full lg:w-[65%] dark:text-whiteColor mb-10 lg:mb-0">
           <div v-for="(item, index) of getCart.products" :key="index"
-               :class="{ '!mb-0' : index + 1 === getCart.products.length }"
+               :class="[{ '!mb-0' : index + 1 === getCart.products.length }, { 'border border-red-500' : getOrdersCheck.products[index].is_acceptable === false && getOrdersCheck.products[index].available_count < getCart.products[index].amount }]"
                class="bg-white dark:bg-darkBgColor p-5 mb-5 rounded-xl block lg:flex items-center justify-between">
             <div class="flex items-center">
-              <img :src="item.icon" alt="" class="w-[100px] mr-3 lg:mr-0">
+              <img :src="item.icon" alt="" class="w-[100px] mr-3">
               <div>
                 <p v-if="$i18n.locale === 'ru'" class="text-xl font-semibold">{{ item.name }}</p>
                 <p v-else class="text-xl font-semibold">{{ item.name_kz }}</p>
                 <p v-if="$i18n.locale === 'ru'" class="mb-3">{{ item.description }}</p>
                 <p v-else class="mb-3">{{ item.description_kz }}</p>
+                <p v-if="$i18n.locale === 'ru' && getOrdersCheck.products[index].is_acceptable === false && getOrdersCheck.products[index].available_count < getCart.products[index].amount"
+                   class="mb-3 text-red-500 font-bold">Данный товар не доступен в текущем количестве. (макс.: {{ getOrdersCheck.products[index].available_count }})</p>
                 <div v-if="isInCart(item)" class="flex items-center justify-between mb-5 text-lg w-max">
                   <p
                       class="w-7 h-7 bg-whiteColor rounded-full text-mainColor flex items-center justify-center text-lg cursor-pointer"
@@ -64,7 +68,8 @@
                      :class="{
                       'border-red-500': v$.form.name.$errors.length,
                     }"
-                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor" :placeholder="$t('cartForm.name.placeholder')"
+                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor"
+                     :placeholder="$t('cartForm.name.placeholder')"
                      type="text">
             </div>
             <div class="block mb-1">
@@ -73,7 +78,8 @@
                      :class="{
                       'border-red-500': v$.form.email.$errors.length,
                     }"
-                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor" :placeholder="$t('cartForm.email.placeholder')"
+                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor"
+                     :placeholder="$t('cartForm.email.placeholder')"
                      type="text">
             </div>
             <div class="block mb-1">
@@ -82,7 +88,8 @@
                      :class="{
                       'border-red-500': v$.form.phone.$errors.length,
                     }"
-                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor" :placeholder="$t('cartForm.phone.placeholder')"
+                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor"
+                     :placeholder="$t('cartForm.phone.placeholder')"
                      type="text">
             </div>
             <div class="block mb-1">
@@ -162,6 +169,9 @@ export default {
         is_payed: null,
         city: null,
         products: [],
+      },
+      check: {
+        products: []
       }
     }
   },
@@ -186,13 +196,12 @@ export default {
     ...mapGetters(['getProduct', 'getSameProducts', 'getCart', "getCurrentUser", "getOrdersCheck"])
   },
   async mounted() {
-    await this.getCart.products.forEach((item) => {
-      let product = {
-        id: item.id,
-        count: item.amount
-      }
-      this.form.products.push(product)
-    })
+    await this.checkProductsLocal();
+    await this.ordersCheck(this.check);
+    setInterval(async () => {
+      await this.checkProductsLocal();
+      await this.ordersCheck(this.check);
+    }, 10000);
     if (this.getCurrentUser) {
       this.form.name = this.getCurrentUser.data.name
       this.form.phone = this.getCurrentUser.data.phone
@@ -210,6 +219,17 @@ export default {
   },
   methods: {
     ...mapActions(['cart', 'product', 'sameProducts', 'addProduct', 'createOrder', 'clearCart', 'removeProductFromCart', 'ordersCheck']),
+    async checkProductsLocal() {
+      console.log('hey')
+      await this.getCart.products.forEach((item) => {
+        let product = {
+          id: item.id,
+          count: item.amount
+        }
+        this.form.products.push(product)
+        this.check.products.push(product)
+      })
+    },
     async createOrderLocal() {
       this.loading = true;
       this.v$.$validate();
@@ -219,6 +239,7 @@ export default {
         this.toast(false, "Не все поля заполнены");
         return;
       }
+      await this.checkProductsLocal();
       await this.createOrder(this.form)
           .then(() => {
             this.loading = false;

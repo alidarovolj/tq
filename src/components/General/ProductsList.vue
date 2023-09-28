@@ -1,7 +1,7 @@
 <template>
   <div v-for="(product, productIndex) in data"
        :key="productIndex"
-       class="bg-white flex flex-col dark:bg-darkBgColor dark:text-whiteColor justify-between w-full lg:w-[200px] mr-0 lg:mr-3 mb-3 p-4 rounded-2xl cursor-pointer shadow transition-all">
+       class="bg-white flex flex-col dark:bg-darkBgColor dark:text-whiteColor w-full lg:w-[200px] mr-0 lg:mr-3 mb-3 p-4 rounded-2xl cursor-pointer shadow transition-all">
     <!--    <img alt="" class="absolute left-3 top-3 w-10 h-10 object-contain" src="@/assets/img/logo_hor.png">-->
     <router-link :to="{ name: 'Product', params: { prod_id: product.id } }" class="w-32 h-32 mx-auto">
       <img :src="product.icon" alt="" class="w-full h-full object-contain">
@@ -17,7 +17,7 @@
       <p class="text-center text-red-500 font-bold mb-3" v-else>Нет в наличии</p>
       <p class="w-full text-center">{{ $t('general.favorite') }}</p>
       <div v-if="isInCart(product).status === true"
-           class="bg-mainColor my-3 text-center px-3 py-2 text-whiteColor rounded-md w-full hover:bg-mainColor transition-all flex items-center justify-between">
+           class="bg-mainColor my-3 text-center px-3 py-2 text-whiteColor rounded-md w-full hover:bg-mainColor transition-all flex items-center">
         <p
             class="w-5 h-5 bg-whiteColor rounded-full text-mainColor flex items-center justify-center"
             @click="addProduct({ product: product, method: 'minus' })">-</p>

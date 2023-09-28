@@ -95,6 +95,7 @@ const mutations = {
         }
         localStorage.setItem('orderNumber', JSON.stringify(result))
     }, updateOrdersCheck: (state, res) => {
+        state.ordersCheck = null
         state.ordersCheck = res;
     },
 };
@@ -102,7 +103,9 @@ const state = {
     cart: null, createdOrder: null, ordersCheck: null,
 };
 const getters = {
-    getCart: (state) => state.cart, getCreatedOrder: (state) => state.createdOrder, getOrdersCheck: (state) => state.ordersCheck
+    getCart: (state) => state.cart,
+    getCreatedOrder: (state) => state.createdOrder,
+    getOrdersCheck: (state) => state.ordersCheck
 };
 
 export default {state, getters, mutations, actions};

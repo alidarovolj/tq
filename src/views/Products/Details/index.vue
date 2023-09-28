@@ -30,7 +30,7 @@
             </div>
           </div>
           <p class="text-3xl font-bold mb-5">{{ getProduct.data.price }} {{ $t('general.tenge') }}</p>
-          <p class="text-center text-green-500 font-bold mb-3" v-if="getProduct.data.quantity > 0">Есть в наличии: {{ getProduct.data.quantity }}</p>
+          <p class="text-center text-green-500 font-bold mb-3" v-if="getProduct.data.quantity > 0">Есть в наличии</p>
           <p class="text-center text-red-500 font-bold mb-3" v-else>Нет в наличии</p>
           <div v-if="isInCart(getProduct.data)"
                class="bg-mainColor text-center py-3 font-bold text-white rounded-lg mb-5 cursor-pointer"
