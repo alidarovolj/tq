@@ -105,7 +105,9 @@
     },
     "address": {
       "name": "Адрес",
-      "placeholder": "Введите адрес"
+      "city": "Город",
+      "placeholder": "Введите адрес",
+      "city_placeholder": "Введите город"
     },
     "type_first": {
       "name": "Тип доставки",

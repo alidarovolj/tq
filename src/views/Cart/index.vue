@@ -23,7 +23,8 @@
                 <p v-if="$i18n.locale === 'ru'" class="mb-3">{{ item.description }}</p>
                 <p v-else class="mb-3">{{ item.description_kz }}</p>
                 <p v-if="$i18n.locale === 'ru' && getOrdersCheck.products[index].is_acceptable === false && getOrdersCheck.products[index].available_count < getCart.products[index].amount"
-                   class="mb-3 text-red-500 font-bold">Данный товар не доступен в текущем количестве. (макс.: {{ getOrdersCheck.products[index].available_count }})</p>
+                   class="mb-3 text-red-500 font-bold">Данный товар не доступен в текущем количестве. (макс.:
+                  {{ getOrdersCheck.products[index].available_count }})</p>
                 <div v-if="isInCart(item)" class="flex items-center justify-between mb-5 text-lg w-max">
                   <p
                       class="w-7 h-7 bg-whiteColor rounded-full text-mainColor flex items-center justify-center text-lg cursor-pointer"
@@ -101,6 +102,15 @@
                      class="border rounded-md p-2 w-full mb-2 dark:text-blackColor"
                      :placeholder="$t('cartForm.address.placeholder')" type="text">
             </div>
+            <div class="block mb-1">
+              <p class="font-semibold">{{ $t('cartForm.address.city') }}:</p>
+              <input v-model="form.city"
+                     :class="{
+                      'border-red-500': v$.form.city.$errors.length,
+                    }"
+                     class="border rounded-md p-2 w-full mb-2 dark:text-blackColor"
+                     :placeholder="$t('cartForm.address.city_placeholder')" type="text">
+            </div>
             <div class="block">
               <p class="font-semibold">{{ $t('cartForm.type_first.name') }}:</p>
               <input v-model="form.delivery_type"
@@ -157,16 +167,17 @@ export default {
   },
   data() {
     return {
+      ready: false,
       form: {
         name: null,
         phone: null,
         email: null,
-        order_number: null,
+        order_number: String(localStorage.getItem('orderNumber')),
         delivery_address: null,
         delivery_type: null,
         payment_type: null,
         amount: null,
-        is_payed: null,
+        is_payed: false,
         city: null,
         products: [],
       },
@@ -187,8 +198,7 @@ export default {
         payment_type: {required},
         amount: {required},
         is_payed: {required},
-        city: {required},
-        products: {required}
+        city: {required}
       },
     };
   },
@@ -198,10 +208,7 @@ export default {
   async mounted() {
     await this.checkProductsLocal();
     await this.ordersCheck(this.check);
-    setInterval(async () => {
-      await this.checkProductsLocal();
-      await this.ordersCheck(this.check);
-    }, 10000);
+    this.form.amount = this.getCart.price_main
     if (this.getCurrentUser) {
       this.form.name = this.getCurrentUser.data.name
       this.form.phone = this.getCurrentUser.data.phone
@@ -210,7 +217,6 @@ export default {
       this.form.delivery_address = this.getCurrentUser.data.delivery_address
       this.form.delivery_type = this.getCurrentUser.data.delivery_type
       this.form.payment_type = this.getCurrentUser.data.payment_type
-      this.form.amount = this.getCart.price_main
       this.form.is_payed = false
       this.form.city = this.getCurrentUser.data.city
     } else {
@@ -220,7 +226,6 @@ export default {
   methods: {
     ...mapActions(['cart', 'product', 'sameProducts', 'addProduct', 'createOrder', 'clearCart', 'removeProductFromCart', 'ordersCheck']),
     async checkProductsLocal() {
-      console.log('hey')
       await this.getCart.products.forEach((item) => {
         let product = {
           id: item.id,
@@ -239,7 +244,7 @@ export default {
         this.toast(false, "Не все поля заполнены");
         return;
       }
-      await this.checkProductsLocal();
+      // await this.checkProductsLocal();
       await this.createOrder(this.form)
           .then(() => {
             this.loading = false;
@@ -253,7 +258,6 @@ export default {
               result += symbols.charAt(randomIndex);
             }
             localStorage.setItem('orderNumber', JSON.stringify(result))
-            this.$router.go({name: "MainPage"})
           })
           .catch((error) => {
             if (error.response.data.errors) {
@@ -268,6 +272,7 @@ export default {
           }).finally(() => {
             this.loading = false;
           })
+      this.$router.go()
     },
     isInCart(product) {
       const cartProducts = this.getCart.products;

@@ -145,7 +145,7 @@ export default {
         return;
       }
       this.removeSymbols()
-      this.$router.push({query: {phone: this.cleanPhoneNumber}})
+      await this.$router.push({query: {phone: this.cleanPhoneNumber}})
       await this.sendMessage()
           .then(response => {
             console.log(response)
