@@ -89,6 +89,14 @@
                  class="bg-blackColor my-3 dark:bg-whiteColor dark:text-blackColor text-center px-3 py-2 text-whiteColor rounded-md w-full hover:bg-mainColor transition-all"
                  @click="addProduct({ product: product, method: null })">В корзину
               </p>
+              <div v-else>
+                <!--        <p class="w-full text-center">{{ $t('general.favorite') }}</p>-->
+                <p
+                   class="bg-blackColor my-3 dark:bg-whiteColor dark:text-blackColor text-center px-3 py-2 text-whiteColor rounded-md w-full hover:bg-mainColor transition-all"
+                   :class="{ 'bg-gray-400 cursor-not-allowed' : product.quantity <= 0 }"
+                   @click="addProduct({ product: product, method: null })">{{ $t('general.toCart') }}
+                </p>
+              </div>
               <router-link :to="{ name: 'Product', params: { prod_id: product.id } }"
                            class="text-center mx-auto w-max flex justify-center">Перейти на страницу
               </router-link>

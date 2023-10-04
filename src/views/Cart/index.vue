@@ -209,6 +209,10 @@ export default {
     await this.checkProductsLocal();
     await this.ordersCheck(this.check);
     this.form.amount = this.getCart.price_main
+    setInterval(async () => {
+      await this.checkProductsLocal();
+      await this.ordersCheck(this.check);
+    }, 10000);
     if (this.getCurrentUser) {
       this.form.name = this.getCurrentUser.data.name
       this.form.phone = this.getCurrentUser.data.phone
@@ -244,35 +248,57 @@ export default {
         this.toast(false, "Не все поля заполнены");
         return;
       }
-      // await this.checkProductsLocal();
-      await this.createOrder(this.form)
-          .then(() => {
-            this.loading = false;
-            this.toast(true, "Заказ успешно выполнен");
-            localStorage.setItem('cart', JSON.stringify([]))
 
-            const symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            let result = "";
-            for (let i = 0; i < 6; i++) {
-              const randomIndex = Math.floor(Math.random() * symbols.length);
-              result += symbols.charAt(randomIndex);
+      try {
+        const checkResults = await Promise.all(this.getCart.products.map(async (item, index) => {
+          if (item.amount > this.getOrdersCheck.products[index].available_count) {
+            throw new Error("Пожалуйста, проверьте наличие товара");
+          } else {
+            return "Все ок";
+          }
+        }));
+
+        // Если все проверки прошли успешно, создаем заказ
+        if (checkResults.every(result => result === "Все ок")) {
+          let prods = []
+          this.getCart.products.forEach((item) => {
+            let product = {
+              id: item.id,
+              count: item.amount
             }
-            localStorage.setItem('orderNumber', JSON.stringify(result))
+            prods.push(product)
           })
-          .catch((error) => {
-            if (error.response.data.errors) {
-              if (Object.keys(error.response.data.errors).length > 0) {
-                Object.values(error.response.data.errors).forEach((err) => {
-                  this.toast(false, this.$t(err[0]))
-                })
-              }
-            } else {
-              this.toast(false, this.$t(error.response.data.message))
+          this.form.products = prods
+          await this.createOrder(this.form);
+          this.loading = false;
+          this.toast(true, "Заказ успешно выполнен");
+          localStorage.setItem('cart', JSON.stringify([]));
+
+          const symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+          let result = "";
+          for (let i = 0; i < 6; i++) {
+            const randomIndex = Math.floor(Math.random() * symbols.length);
+            result += symbols.charAt(randomIndex);
+          }
+          localStorage.setItem('orderNumber', JSON.stringify(result));
+          this.$router.go();
+        }
+      } catch (error) {
+        this.loading = false;
+        if (error.message === "Пожалуйста, проверьте наличие товара") {
+          this.toast(false, "Пожалуйста, проверьте наличие товара");
+        } else {
+          if (error.response.data.errors) {
+            if (Object.keys(error.response.data.errors).length > 0) {
+              Object.values(error.response.data.errors).forEach((err) => {
+                this.toast(false, this.$t(err[0]));
+              });
             }
-          }).finally(() => {
-            this.loading = false;
-          })
-      this.$router.go()
+          } else {
+            this.toast(false, this.$t(error.response.data.message));
+          }
+        }
+      }
     },
     isInCart(product) {
       const cartProducts = this.getCart.products;

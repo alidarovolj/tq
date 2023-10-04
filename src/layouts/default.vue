@@ -5,7 +5,7 @@
       <slot/>
     </div>
     <NewsList/>
-    <LeaveMessage/>
+    <LeaveMessage v-if="$route.name != 'SuccessPage' || $route.name != 'FailurePage'"/>
     <FooterBlock/>
   </div>
 </template>

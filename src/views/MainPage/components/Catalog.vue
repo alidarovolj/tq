@@ -52,7 +52,7 @@
         </div>
         <div>
           <div>
-            <div v-for="(item, index) of getCategoriesWithProducts.data" :key="index" class="mb-10">
+            <div v-for="(item, index) of getCategoriesWithProducts.data.slice(0, visibleCategoriesCount)" :key="index" class="mb-10">
               <h2 v-if="$i18n.locale === 'ru'" class="text-2xl font-semibold mb-10 dark:text-whiteColor">{{
                   item.name
                 }}</h2>
@@ -61,6 +61,19 @@
                 <ProductsList :data="item.products"/>
               </div>
             </div>
+            <!-- Кнопка для открытия всех данных -->
+            <button
+                v-if="!showAll && visibleCategories < getCategoriesWithProducts.data.length"
+                class="bg-mainColor text-whiteColor px-4 py-2 rounded-md mt-4 mx-auto block"
+                @click="showAll = true">Открыть все данные
+            </button>
+
+            <!-- Кнопка для скрытия дополнительных данных -->
+            <button
+                v-if="showAll && visibleCategories < getCategoriesWithProducts.data.length"
+                class="bg-mainColor text-whiteColor px-4 py-2 rounded-md mt-4 mx-auto block"
+                @click="showAll = false">Скрыть дополнительные данные
+            </button>
           </div>
         </div>
       </div>
@@ -77,7 +90,10 @@ export default {
   name: "CatalogComponent",
   components: {ProductsList},
   computed: {
-    ...mapGetters(['getCategoriesWithProducts', 'getCatalogList'])
+    ...mapGetters(['getCategoriesWithProducts', 'getCatalogList']),
+    visibleCategoriesCount() {
+      return this.showAll ? this.getCategoriesWithProducts.data.length : this.visibleCategories;
+    }
   },
   mounted() {
     this.categoriesWithProducts()
@@ -90,6 +106,8 @@ export default {
     return {
       openedTab: null,
       openedBlock: false,
+      visibleCategories: 5, // Начальное количество отображаемых продуктов
+      showAll: false, // Переменная для отслеживания открытия всех данных
     }
   }
 }

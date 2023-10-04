@@ -4,7 +4,7 @@
        class="bg-white flex flex-col dark:bg-darkBgColor justify-between dark:text-whiteColor w-full lg:w-[200px] mr-0 lg:mr-3 mb-3 p-4 rounded-2xl cursor-pointer shadow transition-all">
     <!--    <img alt="" class="absolute left-3 top-3 w-10 h-10 object-contain" src="@/assets/img/logo_hor.png">-->
     <router-link :to="{ name: 'Product', params: { prod_id: product.id } }" class="w-32 h-32 mx-auto">
-      <img :src="product.icon" alt="" class="w-full h-full object-contain">
+      <v-lazy-image :src="product.icon" alt="" class="w-full h-full object-contain" />
     </router-link>
     <router-link :to="{ name: 'Product', params: { prod_id: product.id } }" class="text-center text-lg font-semibold">
       {{ product.name }}
@@ -28,11 +28,11 @@
         </div>
       </div>
       <div>
-<!--        <p class="w-full text-center">{{ $t('general.favorite') }}</p>-->
+        <!--        <p class="w-full text-center">{{ $t('general.favorite') }}</p>-->
         <p v-if="isInCart(product).status === false"
-           class="bg-blackColor cursor-not-allowed my-3 dark:bg-whiteColor dark:text-blackColor text-center px-3 py-2 text-whiteColor rounded-md w-full hover:bg-mainColor transition-all"
-           :class="{ 'bg-gray-400' : product.quantity <= 0 }"
-           @click="addProduct({ product: product, method: null })">{{ $t('general.toCart') }}
+           class="bg-blackColor my-3 dark:bg-whiteColor dark:text-blackColor text-center px-3 py-2 text-whiteColor rounded-md w-full hover:bg-mainColor transition-all"
+           :class="{ 'bg-gray-400 cursor-not-allowed' : product.quantity <= 0 }"
+           v-on="product.quantity > 0 ? { click: () => addProduct({ product: product, method: null }) } : {}">{{ $t('general.toCart') }}
         </p>
       </div>
     </div>
@@ -41,6 +41,7 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
+import VLazyImage from "v-lazy-image";
 
 export default {
   name: "ProductsList",
@@ -49,6 +50,9 @@ export default {
       type: Array,
       required: true
     }
+  },
+  components: {
+    "v-lazy-image": VLazyImage,
   },
   computed: {
     ...mapGetters(['getCart'])

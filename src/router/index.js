@@ -15,6 +15,8 @@ import AdminNews from "@/views/Admin/News/index.vue"
 import Profile from "@/views/Profile/index.vue";
 import NewsDetails from "@/views/News/Details/index.vue"
 import AdminFeedback from "@/views/Admin/Feedback/index.vue"
+import SuccessPage from "@/views/Payment/Success.vue";
+import FailurePage from "@/views/Payment/Failure.vue";
 
 const router = createRouter({
     history: createWebHistory(), routes: [{
@@ -25,6 +27,10 @@ const router = createRouter({
         path: "/about", name: "AboutPage", component: AboutPage
     }, {
         path: "/contacts", name: "ContactsPage", component: ContactsPage
+    }, {
+        path: "/success", name: "SuccessPage", component: SuccessPage
+    }, {
+        path: "/failure", name: "FailurePage", component: FailurePage
     }, {
         path: "/news", name: "NewsPage", component: NewsPage, children: [{
             path: ":news_id", name: "NewsDetails", component: NewsDetails
@@ -53,7 +59,6 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    window.scrollTo(0, 0);
     const isAuthenticated = localStorage.getItem("token");
     if (to.matched.some((record) => record.meta.requiresAuth)) {
         if (!isAuthenticated) {
@@ -66,5 +71,8 @@ router.beforeEach((to, from, next) => {
     }
 });
 
+router.afterEach((to) => {
+    window.scrollTo(0, 0);
+});
 
 export default router;

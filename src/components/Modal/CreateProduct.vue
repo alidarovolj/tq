@@ -17,6 +17,24 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
+                    UUID
+                  </label>
+                  <input
+                      v-model="form.uuid"
+                      :class="{
+                      'border-red-500': v$.form.name.$errors.length,
+                    }"
+                      class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
+                      name="first_name"
+                      placeholder="Введите название"
+                      type="text"
+                  />
+                </div>
+                <div class="flex flex-col mb-2 w-full">
+                  <label
+                      class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
+                      for="first_name"
+                  >
                     Название
                   </label>
                   <input
@@ -208,6 +226,7 @@ export default {
         category_id: "",
         price: "",
         user_price: "",
+        uuid: ""
       }
     }
   },
@@ -222,6 +241,7 @@ export default {
         category_id: {required},
         price: {required},
         user_price: {required},
+        uuid: {required}
       },
     };
   },
