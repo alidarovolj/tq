@@ -20,11 +20,26 @@ export default {
     useMeta({title: "Успешная оплата"});
   },
   methods: {
-    ...mapActions('confirmOrder')
+    ...mapActions('setConfirmOrder')
   },
   async mounted() {
     console.log(this.$route.query.order_id)
-    await this.confirmOrder({ conf_state: 1, id: this.$route.query.order_id})
+    await this.setConfirmOrder({ id: this.$route.query.order_id, conf_state: 1}).then(() => {
+      console.log(this.getConfirmedOrder())
+    })
+        .catch((error) => {
+          if (error.response.data.errors) {
+            if (Object.keys(error.response.data.errors).length > 0) {
+              Object.values(error.response.data.errors).forEach((err) => {
+                this.toast(false, this.$t(err[0]))
+              })
+            }
+          } else {
+            this.toast(false, this.$t(error.response.data.message))
+          }
+        }).finally(() => {
+          this.loading = false;
+        })
   }
 }
 </script>

@@ -10,6 +10,9 @@ const actions = {
     }, async confirmOrder({commit}, {conf_state, id}) {
         const {data} = await axios.patch("/orders/" + id + "/status?status=" + conf_state);
         commit("updateConfirmedOrder", data);
+    }, async setConfirmOrder({commit}, {conf_state, id}) {
+        const {data} = await axios.patch("/orders/" + id + "/status?status=" + conf_state);
+        commit("updateConfirmedOrder", data);
     },
 };
 const mutations = {
@@ -17,10 +20,12 @@ const mutations = {
         state.orders = res;
     }, updateConfirmedOrder: (state, res) => {
         state.confirmedOrder = res;
+    }, updateSetConfirmedOrder: (state, res) => {
+        state.setConfirmedOrder = res;
     },
 };
 const state = {
-    orders: null, confirmedOrder: null,
+    orders: null, confirmedOrder: null, setConfirmedOrder: null
 };
 const getters = {
     getOrders: (state) => state.orders, getConfirmedOrder: (state) => state.confirmedOrder
