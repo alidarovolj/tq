@@ -22,8 +22,8 @@ export default {
   methods: {
     ...mapActions('confirmOrder')
   },
-  mounted() {
-    this.confirmOrder({ conf_state: 1, id: this.$route.query.order_id})
+  async mounted() {
+    await this.confirmOrder({ conf_state: 1, id: this.$route.query.order_id})
   }
 }
 </script>
