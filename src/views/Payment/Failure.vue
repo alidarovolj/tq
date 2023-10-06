@@ -20,11 +20,12 @@ export default {
   setup() {
     useMeta({title: "Неудачная оплата"});
   },
+  async mounted() {
+    console.log(this.$route.query.order_id)
+    await this.confirmOrder({ conf_state: 0, id: this.$route.query.order_id})
+  },
   methods: {
     ...mapActions('confirmOrder')
   },
-  async mounted() {
-    await this.confirmOrder({ conf_state: 0, id: this.$route.query.order_id})
-  }
 }
 </script>
