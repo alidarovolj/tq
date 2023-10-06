@@ -13,11 +13,18 @@
 
 <script>
 import {useMeta} from "vue-meta";
+import {mapActions} from "vuex";
 
 export default {
-  name: "SuccessPayment",
+  name: "FailurePayment",
   setup() {
     useMeta({title: "Неудачная оплата"});
   },
+  methods: {
+    ...mapActions('confirmOrder')
+  },
+  mounted() {
+    this.confirmOrder({ conf_state: 0, id: this.$route.query.order_id})
+  }
 }
 </script>

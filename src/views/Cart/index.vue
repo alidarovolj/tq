@@ -3,7 +3,7 @@
     <form class="container mx-auto px-4 lg:px-0" @submit.prevent="createOrderLocal">
       <div class="flex items-center justify-between mb-10">
         <div>
-          <h1 class="text-2xl font-semibold dark:text-whiteColor mb-3">{{ $t('cart.header') }}</h1>
+          <h1 @click="redirectToExternalLink" class="text-2xl font-semibold dark:text-whiteColor mb-3">{{ $t('cart.header') }}</h1>
           <p class="text-lg font-semibold dark:text-whiteColor">{{ $t('cart.overall') }}: {{
               getCart.products.length
             }}</p>
@@ -128,7 +128,7 @@
                       'border-red-500': v$.form.payment_type.$errors.length,
                     }"
                        class="mr-2 dark:text-blackColor" type="radio"
-                       value="cart" @click="() => form.payment_type = 'card'">
+                       value="cart">
                 <p>{{ $t('cartForm.type.first') }}</p>
               </div>
               <div class="flex items-center">
@@ -137,7 +137,7 @@
                       'border-red-500': v$.form.payment_type.$errors.length,
                     }"
                        class="mr-2 dark:text-blackColor" type="radio"
-                       value="by-manager" @click="() => form.payment_type = 'by-manager'">
+                       value="by-manager">
                 <p>{{ $t('cartForm.type.second') }}</p>
               </div>
               <p v-if="v$.form.payment_type.$errors.length" class="text-red-500 text-center">Заполните данные об
@@ -203,7 +203,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getProduct', 'getSameProducts', 'getCart', "getCurrentUser", "getOrdersCheck"])
+    ...mapGetters(['getProduct', 'getSameProducts', 'getCart', "getCurrentUser", "getOrdersCheck", "getCreatedOrder"])
   },
   async mounted() {
     await this.checkProductsLocal();
@@ -239,6 +239,9 @@ export default {
         this.check.products.push(product)
       })
     },
+    redirectToExternalLink(link) {
+      window.location.href = link;
+    },
     async createOrderLocal() {
       this.loading = true;
       this.v$.$validate();
@@ -258,7 +261,6 @@ export default {
           }
         }));
 
-        // Если все проверки прошли успешно, создаем заказ
         if (checkResults.every(result => result === "Все ок")) {
           let prods = []
           this.getCart.products.forEach((item) => {
@@ -281,23 +283,14 @@ export default {
             result += symbols.charAt(randomIndex);
           }
           localStorage.setItem('orderNumber', JSON.stringify(result));
-          this.$router.go();
+          if(this.form.payment_type === "cart") {
+            this.redirectToExternalLink(this.getCreatedOrder.pg_redirect_url)
+          } else {
+            this.$router.go()
+          }
         }
       } catch (error) {
         this.loading = false;
-        if (error.message === "Пожалуйста, проверьте наличие товара") {
-          this.toast(false, "Пожалуйста, проверьте наличие товара");
-        } else {
-          if (error.response.data.errors) {
-            if (Object.keys(error.response.data.errors).length > 0) {
-              Object.values(error.response.data.errors).forEach((err) => {
-                this.toast(false, this.$t(err[0]));
-              });
-            }
-          } else {
-            this.toast(false, this.$t(error.response.data.message));
-          }
-        }
       }
     },
     isInCart(product) {

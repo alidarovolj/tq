@@ -12,11 +12,18 @@
 
 <script>
 import {useMeta} from "vue-meta";
+import {mapActions} from "vuex";
 
 export default {
   name: "SuccessPayment",
   setup() {
     useMeta({title: "Успешная оплата"});
   },
+  methods: {
+    ...mapActions('confirmOrder')
+  },
+  mounted() {
+    this.confirmOrder({ conf_state: 1, id: this.$route.query.order_id})
+  }
 }
 </script>
