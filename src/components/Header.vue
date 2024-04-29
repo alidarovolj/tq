@@ -7,14 +7,22 @@
           <div class="flex justify-between items-center text-xs lg:text-sm">
             <div class="block lg:flex items-center">
               <div class="flex justify-end items-center mr-3">
-                <font-awesome-icon :icon="['fas', 'message']" class="text-mainColor"/>
+                <font-awesome-icon :icon="['fas', 'envelope']" class="text-mainColor"/>
                 <a class="ml-1" href="mailto:office@tq.kz">office@tq.kz</a>
               </div>
               <div class="text-mainColor text-base">
-                <font-awesome-icon :icon="['fab', 'instagram']" class="mr-3 cursor-pointer"/>
-                <font-awesome-icon :icon="['fab', 'twitter']" class="mr-3 cursor-pointer"/>
-                <font-awesome-icon :icon="['fab', 'vk']" class="mr-3 cursor-pointer"/>
-                <font-awesome-icon :icon="['fab', 'youtube']" class="cursor-pointer"/>
+                <a href="https://www.instagram.com/trust_quality_official/">
+                  <font-awesome-icon :icon="['fab', 'instagram']" class="mr-3 cursor-pointer"/>
+                </a>
+                <a href="https://www.tiktok.com/@tq_company">
+                  <font-awesome-icon :icon="['fab', 'tiktok']" class="mr-3 cursor-pointer"/>
+                </a>
+                <a href="https://web.telegram.org/">
+                  <font-awesome-icon :icon="['fab', 'telegram']" class="mr-3 cursor-pointer"/>
+                </a>
+                <a href="https://www.youtube.com/">
+                  <font-awesome-icon :icon="['fab', 'youtube']" class="cursor-pointer"/>
+                </a>
               </div>
             </div>
             <div class="flex flex-col lg:flex-row">
@@ -26,10 +34,6 @@
                 <p class="flex items-center cursor-pointer" @click="modalStateLogin = true">
                   <font-awesome-icon :icon="['fa', 'user']" class="text-mainColor mr-1"/>
                   <p>{{ $t('general.login') }}</p>
-                </p>
-                <p class="flex items-center ml-3 cursor-pointer" @click="modalStateForgot = true">
-                  <font-awesome-icon :icon="['fa', 'key']" class="text-mainColor mr-1"/>
-                  <p class="whitespace-nowrap">{{ $t('general.forgotPass') }}</p>
                 </p>
                 <p class="flex items-center ml-3 cursor-pointer" @click="modalStateVerify = true">
                   <font-awesome-icon :icon="['fas', 'key']" class="text-mainColor mr-1"/>
@@ -81,8 +85,9 @@
               </router-link>
               </span>
             </div>
-            <div v-if="getCart"
-                 class="text-sm lg:text-2xl text-mainColor flex items-center justify-between w-full lg:w-max">
+            <div
+                v-if="getCart"
+                class="text-sm lg:text-2xl text-mainColor flex items-center justify-between w-full lg:w-max">
               <div class="flex items-center">
                 <div class="mr-4 relative">
                   <font-awesome-icon :icon="['fas', 'heart']" class="cursor-pointer"/>
@@ -113,7 +118,7 @@
       <div v-if="menu === true" class="px-4 lg:px-0 fixed w-full top-44">
         <div class="container mx-auto">
           <div class="px-4 py-5 w-full bg-white dark:bg-darkBg dark:text-darkText shadow-xl rounded-2xl">
-            <div class="text-lg">
+            <div class="text-base">
               <router-link :to="{ name: 'MainPage' }" class="block hover:text-mainColor transition-all"
                            @click="menu = false">
                 {{ $t('header.main') }}
@@ -154,11 +159,6 @@
       component-name="Verification"
       @acc_data="receiveVerification"
       @close_modal="(val) => (modalStateVerify = val)"
-  />
-  <Modal
-      :is-visible="modalStateForgot"
-      component-name="ForgotPassword"
-      @close_modal="(val) => (modalStateForgot = val)"
   />
   <Modal
       :is-visible="modalStateLogin"

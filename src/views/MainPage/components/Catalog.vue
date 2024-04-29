@@ -8,11 +8,12 @@
             <p>{{ $t('mainPage.catalog.header') }}</p>
           </div>
           <div class="rounded-b-lg">
-            <div v-for="(item, index) of getCatalogList.data"
-                 :key="index" :class="{ 'mb-3 rounded-b-lg' : index + 1 === getCatalogList.data.length }"
-                 class="relative bg-white flex items-center justify-between px-2 py-1 cursor-pointer dark:text-whiteColor hover:bg-mainColor hover:text-whiteColor transition-all dark:bg-darkBgColor dark:hover:bg-mainColor"
-                 @mouseleave="openedTab = null"
-                 @mouseover="openedTab = index">
+            <div
+                v-for="(item, index) of getCatalogList.data"
+                :key="index" :class="{ 'mb-3 rounded-b-lg' : index + 1 === getCatalogList.data.length }"
+                class="relative bg-white flex items-center justify-between px-2 py-1 cursor-pointer dark:text-whiteColor hover:bg-mainColor hover:text-whiteColor transition-all dark:bg-darkBgColor dark:hover:bg-mainColor"
+                @mouseleave="openedTab = null"
+                @mouseover="openedTab = index">
               <div class="flex items-center">
                 <img :src="item.icon" alt="" class="w-10 h-10 object-contain mr-2">
                 <p v-if="$i18n.locale === 'ru'">{{ item.name }}</p>
@@ -21,10 +22,12 @@
               <font-awesome-icon :icon="['fas', 'chevron-right']"/>
               <div
                   v-if="openedTab === index"
-                  class="static lg:absolute left-full h-max w-full z-50 overflow-y-hidden top-0 shadow-lg">
+                  class="absolute left-10 lg:left-full h-max w-max lg:w-full z-50 overflow-y-hidden top-full lg:top-0 shadow-lg">
                 <router-link
                     v-for="(it, ind) of item.sub_category"
-                    v-if="openedTab === index" :key="ind" :to="{ name: 'Category', params: { cat_id: it.id } }"
+                    v-if="openedTab === index"
+                    :key="ind"
+                    :to="{ name: 'Category', params: { cat_id: it.id } }"
                     class="flex items-center dark:bg-darkBgColor dark:hover:bg-mainColor hover:bg-mainColor text-blackColor dark:text-whiteColor hover:text-whiteColor bg-white overflow-y-hidden p-2"
                     @mouseover="openedTab = index">
                   <img :src="it.icon" alt="" class="w-10 h-10 object-contain mr-2">
@@ -36,9 +39,9 @@
           </div>
         </div>
       </div>
-      <div class="w-full lg:w-3/4">
+      <div class="w-full lg:w-3/4 mt-10 lg:mt-0">
         <div class="mb-10">
-          <h2 class="text-2xl font-semibold mb-10 dark:text-whiteColor">{{ $t('mainPage.catalog.popular') }}</h2>
+          <h2 class="text-2xl font-semibold mb-5 dark:text-whiteColor">{{ $t('mainPage.catalog.popular') }}</h2>
           <div class="flex flex-wrap">
             <router-link v-for="(item, index) of getCatalogList.data"
                          :key="index"
@@ -52,12 +55,13 @@
         </div>
         <div>
           <div>
-            <div v-for="(item, index) of getCategoriesWithProducts.data.slice(0, visibleCategoriesCount)" :key="index" class="mb-10">
+            <div v-for="(item, index) of getCategoriesWithProducts.data.slice(0, visibleCategoriesCount)" :key="index"
+                 class="mb-10">
               <h2 v-if="$i18n.locale === 'ru'" class="text-2xl font-semibold mb-10 dark:text-whiteColor">{{
                   item.name
                 }}</h2>
               <h2 v-else class="text-2xl font-semibold mb-10 dark:text-whiteColor">{{ item.name }}</h2>
-              <div class="flex overflow-x-auto">
+              <div class="flex gap-4 lg:gap-0 overflow-x-auto">
                 <ProductsList :data="item.products"/>
               </div>
             </div>

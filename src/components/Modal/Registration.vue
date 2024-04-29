@@ -1,23 +1,23 @@
 <template>
   <div>
     <div class="lg:w-full mb-5">
-      <h2 class="text-center text-2xl font-medium mb-2">Регистрация</h2>
+      <h2 class="text-center text-2xl font-medium mb-2">
+        {{ $t('general.registration') }}
+      </h2>
     </div>
-    <div
-        class="flex flex-col justify-between h-full text-xs"
-    >
-      <form action="" @submit.prevent="registerUserLocal">
+    <div class="flex flex-col justify-between h-full text-xs">
+      <form
+          action=""
+          @submit.prevent="registerUserLocal">
         <div class="block lg:flex">
-          <div
-              class="w-full mt-0 lg:mt-0 h-max scroll-container lg:h-max overflow-y-auto pb-5 px-1"
-          >
+          <div class="w-full mt-0 lg:mt-0 h-max scroll-container lg:h-max overflow-y-auto pb-5 px-1">
             <div class="content h-max">
               <div class="flex flex-col mb-2 w-full">
                 <label
                     class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                     for="first_name"
                 >
-                  Имя
+                  {{ $t('form.name.name') }}
                 </label>
                 <input
                     v-model="form.name"
@@ -26,7 +26,7 @@
                     }"
                     class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                     name="first_name"
-                    placeholder="Введите имя"
+                    :placeholder="$t('form.name.placeholder')"
                     type="text"
                 />
               </div>
@@ -53,7 +53,7 @@
                     class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                     for="first_name"
                 >
-                  Телефон
+                  {{ $t('form.phone.name') }}
                 </label>
                 <input
                     v-model="form.phone"
@@ -73,7 +73,7 @@
                     class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                     for="first_name"
                 >
-                  Город
+                  {{ $t('form.address.city') }}
                 </label>
                 <input
                     v-model="form.city"
@@ -82,21 +82,24 @@
                     }"
                     class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                     name="first_name"
-                    placeholder="Введите название города"
+                    :placeholder="$t('form.address.city_placeholder')"
                     type="text"
                 />
               </div>
               <div class="flex flex-col mb-2 w-full">
                 <YandexMap @send_data="addressSet"/>
-                <p v-if="v$.form.delivery_address.$errors.length" class="text-red-500 text-center font-semibold">
-                  Пожалуйста, укажите адрес</p>
+                <p
+                    v-if="v$.form.delivery_address.$errors.length"
+                    class="text-red-500 text-center font-semibold">
+                  {{ $t('errors.address') }}
+                </p>
               </div>
               <div class="flex flex-col mb-2 w-full">
                 <label
                     class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                     for="first_name"
                 >
-                  Тип доставки
+                  {{ $t('cartForm.type_first.name') }}
                 </label>
                 <input
                     v-model="form.delivery_type"
@@ -105,7 +108,7 @@
                     }"
                     class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                     name="first_name"
-                    placeholder="Введите тип доставки"
+                    :placeholder="$t('cartForm.type_first.placeholder')"
                     type="text"
                 />
               </div>
@@ -114,7 +117,7 @@
                     class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                     for="first_name"
                 >
-                  Пароль
+                  {{ $t('login.password') }}
                 </label>
                 <input
                     v-model="form.password"
@@ -123,34 +126,37 @@
                     }"
                     class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                     name="first_name"
-                    placeholder="Введите пароль"
+                    :placeholder="$t('login.placeholder')"
                     type="password"
                 />
               </div>
             </div>
           </div>
         </div>
-        <p class="text-xs">Регистрацией на сайте GazBas.kz вы подтверждаете что являетесь оптовым клиентом.
-          Оптовые цены будут отображены после проверки учетной записи модератором.</p>
+        <p class="text-xs">
+          {{ registration.subHeader }}
+        </p>
         <div class="flex justify-center mt-3">
           <div
               class="w-max text-black mr-3 flex items-center rounded-md px-5 py-2 cursor-pointer"
               @click="close_modal"
           >
-            <p class="dark:text-white">Отменить</p>
+            <p class="dark:text-white">
+              {{ $t('general.cancel') }}
+            </p>
           </div>
           <div>
             <button
                 v-if="loading === false"
                 class="w-max px-6 py-2.5 rounded-md text-center bg-mainColor dark:bg-mainColor text-white cursor-pointer"
                 type="submit">
-              Зарегистрироваться
+              {{ $t('registration.save') }}
             </button>
             <div
                 v-else
                 class="w-max px-6 py-2.5 rounded-md text-center bg-mainColor dark:bg-mainColor text-white cursor-pointer flex items-center">
               <p class="spinner mr-2"></p>
-              Подождите
+              {{ $t('general.wait') }}
             </div>
           </div>
         </div>

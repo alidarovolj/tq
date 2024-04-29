@@ -2,19 +2,21 @@
   <div>
     <div class="mb-3 lg:mb-5 lg:w-full">
       <h2 class="text-center text-2xl mb-5 font-medium dark:text-darkText">
-        Введите ваш телефон
+        {{ $t('verification.title') }}
       </h2>
       <p class="text-sm text-center">
-        Введите ваш телефон, а после подтвердите его кодом, что придет на данный номер.
+        {{ $t('verification.subTitle') }}
       </p>
     </div>
-    <form class="flex flex-col justify-center text-sm mt-5" @submit.prevent="verifyPhone">
+    <form
+        class="flex flex-col justify-center text-sm mt-5"
+        @submit.prevent="verifyPhone">
       <div class="flex flex-col mb-2 w-full">
         <label
             class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
             for="first_name"
         >
-          Телефон
+          {{ $t('form.phone.name') }}
         </label>
         <input
             v-model="form.phone"
@@ -25,12 +27,12 @@
             :disabled="secondPhase === true"
             class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
             name="first_name"
-            placeholder="+7(###) ###-##-##"
+            :placeholder="$t('form.phone.placeholder')"
             type="text"
         />
       </div>
       <div v-if="secondPhase === true" class="my-3 w-1/2 mx-auto flex items-center justify-center flex-col">
-        <p class="text-xl font-bold mb-2">Введите код:</p>
+        <p class="text-xl font-bold mb-2">{{ $t('verification.code') }}:</p>
         <input
             v-model="verification.code"
             class="w-1/2 mx-auto py-2 border border-solid border-[#D8D6DE] rounded-md dark:bg-darkBgColor dark:text-white text-2xl text-center"
@@ -41,20 +43,20 @@
             class="w-max text-black mr-3 flex items-center rounded-md px-5 py-2 cursor-pointer"
             @click="close_modal"
         >
-          <p class="dark:text-red-500">Отменить</p>
+          <p class="dark:text-red-500">{{ $t('general.cancel') }}</p>
         </div>
         <div v-if="!secondPhase">
           <button
               v-if="loading === false"
               class="w-max px-6 py-2.5 rounded-md text-center bg-red-500 dark:bg-mainColor text-white cursor-pointer"
               type="submit">
-            Отправить
+            {{ $t('general.send') }}
           </button>
           <div
               v-else
               class="w-max px-6 py-2.5 rounded-md text-center bg-red-500 dark:bg-red-500 text-white cursor-pointer flex items-center">
             <p class="spinner mr-2"></p>
-            Подождите
+            {{ $t('general.wait') }}
           </div>
         </div>
         <div v-else>
@@ -62,13 +64,13 @@
               v-if="loading === false"
               class="w-max px-6 py-2.5 rounded-md text-center bg-red-500 dark:bg-mainColor text-white cursor-pointer"
               @click="verifyCode">
-            Верифицировать
+            {{ $t('verification.send') }}
           </p>
           <div
               v-else
               class="w-max px-6 py-2.5 rounded-md text-center bg-red-500 dark:bg-red-500 text-white cursor-pointer flex items-center">
             <p class="spinner mr-2"></p>
-            Подождите
+            {{ $t('general.wait') }}
           </div>
         </div>
       </div>

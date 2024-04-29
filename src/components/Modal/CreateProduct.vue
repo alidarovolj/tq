@@ -1,12 +1,18 @@
 <template>
   <div>
     <div class="lg:w-full mb-5">
-      <h2 class="text-center text-2xl font-medium mb-2">Добавить продукт</h2>
-      <p class="text-center text-sm">Выполните добавление товара в список</p>
+      <h2 class="text-center text-2xl font-medium mb-2">
+        {{ $t('createProduct.title') }}
+      </h2>
+      <p class="text-center text-sm">
+        {{ $t('createProduct.subTitle') }}
+      </p>
       <div
           class="flex flex-col justify-between h-full text-xs"
       >
-        <form action="" @submit.prevent="sendForm">
+        <form
+            action=""
+            @submit.prevent="sendForm">
           <div class="block lg:flex">
             <div
                 class="w-full mt-0 lg:mt-0 h-max scroll-container lg:h-max overflow-y-auto pb-5 px-1"
@@ -26,7 +32,7 @@
                     }"
                       class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                       name="first_name"
-                      placeholder="Введите название"
+                      :placeholder="$t('createProduct.fillUUID')"
                       type="text"
                   />
                 </div>
@@ -35,7 +41,7 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Название
+                    {{ $t('createProduct.name') }}
                   </label>
                   <input
                       v-model="form.name"
@@ -44,7 +50,7 @@
                     }"
                       class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                       name="first_name"
-                      placeholder="Введите название"
+                      :placeholder="$t('createProduct.placeholder')"
                       type="text"
                   />
                 </div>
@@ -53,7 +59,7 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Название на каз
+                    {{ $t('createProduct.name_kz') }}
                   </label>
                   <input
                       v-model="form.name_kz"
@@ -62,7 +68,7 @@
                     }"
                       class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                       name="first_name"
-                      placeholder="Введите название на каз"
+                      :placeholder="$t('createProduct.placeholder_kz')"
                       type="text"
                   />
                 </div>
@@ -71,7 +77,7 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Описание
+                    {{ $t('createProduct.description') }}
                   </label>
                   <textarea
                       v-model="form.description"
@@ -80,7 +86,7 @@
                     }"
                       class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                       name="first_name"
-                      placeholder="Введите описание"
+                      :placeholder="$t('createProduct.placeholder_description')"
                       type="text"
                   />
                 </div>
@@ -89,7 +95,7 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Описание на каз
+                    {{ $t('createProduct.description_kz') }}
                   </label>
                   <textarea
                       v-model="form.description_kz"
@@ -98,7 +104,7 @@
                     }"
                       class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                       name="first_name"
-                      placeholder="Введите описание на каз"
+                      :placeholder="$t('createProduct.placeholder_description_kz')"
                       type="text"
                   />
                 </div>
@@ -107,7 +113,7 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Розничная цена
+                    {{ $t('createProduct.retailPrice') }}
                   </label>
                   <input
                       v-model="form.price"
@@ -116,7 +122,7 @@
                     }"
                       class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                       name="first_name"
-                      placeholder="Введите розничную цену"
+                      :placeholder="$t('createProduct.placeholder_retailPrice')"
                       type="text"
                   />
                 </div>
@@ -125,7 +131,7 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Оптовая цена
+                    {{ $t('createProduct.wholesalePrice') }}
                   </label>
                   <input
                       v-model="form.user_price"
@@ -134,7 +140,7 @@
                     }"
                       class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                       name="first_name"
-                      placeholder="Введите оптовую цену"
+                      :placeholder="$t('createProduct.placeholder_wholesalePrice')"
                       type="text"
                   />
                 </div>
@@ -143,7 +149,7 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Категория
+                    {{ $t('createProduct.category') }}
                   </label>
                   <select v-if="getCategoriesAll"
                           id=""
@@ -153,7 +159,7 @@
                   }"
                           class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                           name="">
-                    <option value="">Выберите категорию</option>
+                    <option value="">{{ $t('createProduct.placeholder_category') }}</option>
                     <option v-for="(item, index) of getCategoriesAll.data" :value="item.id">{{ item.name }}</option>
                   </select>
                 </div>
@@ -162,10 +168,12 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Картинка
+                    {{ $t('createProduct.image') }}
                   </label>
                   <input type="file" @change="attachFile"/>
-                  <p v-if="v$.form.icon.$errors.length" class="text-red-500">Пожалуйста, загрузите картинку</p>
+                  <p v-if="v$.form.icon.$errors.length" class="text-red-500">
+                    {{ $t('createProduct.fillImage') }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -175,20 +183,22 @@
                 class="w-max text-black dark:text-white mr-3 flex items-center rounded-md px-5 py-2 cursor-pointer"
                 @click="close_modal"
             >
-              <p class="dark:text-red-500">Отменить</p>
+              <p class="dark:text-red-500">
+                {{ $t('general.cancel') }}
+              </p>
             </div>
             <div>
               <button
                   v-if="loading === false"
                   class="w-max px-6 py-2.5 rounded-md text-center bg-mainColor dark:bg-mainColor text-white cursor-pointer"
                   type="submit">
-                Сохранить
+                {{ $t('general.save') }}
               </button>
               <div
                   v-else
                   class="w-max px-6 py-2.5 rounded-md text-center bg-mainColor dark:bg-mainColor text-white cursor-pointer flex items-center">
                 <p class="spinner mr-2"></p>
-                Подождите
+                {{ $t('general.wait') }}
               </div>
             </div>
           </div>

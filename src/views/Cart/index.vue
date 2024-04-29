@@ -3,7 +3,8 @@
     <form class="container mx-auto px-4 lg:px-0" @submit.prevent="createOrderLocal">
       <div class="flex items-center justify-between mb-10">
         <div>
-          <h1 @click="redirectToExternalLink" class="text-2xl font-semibold dark:text-whiteColor mb-3">{{ $t('cart.header') }}</h1>
+          <h1 @click="redirectToExternalLink" class="text-2xl font-semibold dark:text-whiteColor mb-3">
+            {{ $t('cart.header') }}</h1>
           <p class="text-lg font-semibold dark:text-whiteColor">{{ $t('cart.overall') }}: {{
               getCart.products.length
             }}</p>
@@ -23,13 +24,13 @@
                 <p v-if="$i18n.locale === 'ru'" class="mb-3">{{ item.description }}</p>
                 <p v-else class="mb-3">{{ item.description_kz }}</p>
                 <p v-if="$i18n.locale === 'ru' && getOrdersCheck.products[index].is_acceptable === false && getOrdersCheck.products[index].available_count < getCart.products[index].amount"
-                   class="mb-3 text-red-500 font-bold">Данный товар не доступен в текущем количестве. (макс.:
+                   class="mb-3 text-red-500 font-bold">{{ $t('cart.notEnough') }}.:
                   {{ getOrdersCheck.products[index].available_count }})</p>
                 <div v-if="isInCart(item)" class="flex items-center justify-between mb-5 text-lg w-max">
                   <p
                       class="w-7 h-7 bg-whiteColor rounded-full text-mainColor flex items-center justify-center text-lg cursor-pointer"
                       @click="addProduct({ product: item, method: 'minus' })">-</p>
-                  <p class="mx-3">Кол-во: {{ isInCart(item).amount }}</p>
+                  <p class="mx-3">{{ $t('cart.amount') }}: {{ isInCart(item).amount }}</p>
                   <p
                       class="w-7 h-7 bg-whiteColor rounded-full text-mainColor flex items-center justify-center text-lg cursor-pointer"
                       @click="addProduct({ product: item, method: 'plus' })">+</p>
@@ -38,17 +39,18 @@
             </div>
             <div class="flex items-center justify-between">
               <div class="flex items-center justify-between text-lg mr-3">
-                <p>{{ $t('general.price') }}:</p>
-                <p class="font-semibold">{{ item.price_main }} {{ $t('general.tenge') }}</p>
+                <p class="mr-1">{{ $t('general.price') }}:</p>
+                <p class="font-semibold whitespace-nowrap">{{ item.price_main }} {{ $t('general.tenge') }}</p>
               </div>
               <div>
-                <font-awesome-icon :icon="['fas', 'trash']" class="text-red-500 text-2xl cursor-pointer"
-                                   @click="removeProductFromCart(item)"/>
+                <font-awesome-icon
+                    :icon="['fas', 'trash']" class="text-red-500 text-2xl cursor-pointer"
+                    @click="removeProductFromCart(item)"/>
               </div>
             </div>
           </div>
           <div class="flex items-center justify-between mt-5">
-            <p class="text-lg lg:text-2xl font-semibold">Итого: {{ getCart.price_main }} {{ $t('general.tenge') }}</p>
+            <p class="text-lg lg:text-2xl font-semibold">{{ $t('general.overall') }}: {{ getCart.price_main }} {{ $t('general.tenge') }}</p>
             <button
                 class="bg-mainColor text-center py-2 lg:py-3 font-bold text-white rounded-lg lg:mb-5 cursor-pointer px-10 text-sm lg:text-base"
                 type="submit">
@@ -140,8 +142,9 @@
                        value="by-manager">
                 <p>{{ $t('cartForm.type.second') }}</p>
               </div>
-              <p v-if="v$.form.payment_type.$errors.length" class="text-red-500 text-center">Заполните данные об
-                оплате</p>
+              <p v-if="v$.form.payment_type.$errors.length" class="text-red-500 text-center">
+                {{ $t('cart.fillData') }}
+              </p>
             </div>
           </div>
         </div>
@@ -283,7 +286,7 @@ export default {
             result += symbols.charAt(randomIndex);
           }
           localStorage.setItem('orderNumber', JSON.stringify(result));
-          if(this.form.payment_type === "cart") {
+          if (this.form.payment_type === "cart") {
             this.redirectToExternalLink(this.getCreatedOrder.pg_redirect_url)
           } else {
             this.$router.go()

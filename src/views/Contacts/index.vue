@@ -4,7 +4,6 @@
       <h1 class="text-2xl font-semibold mb-10 dark:text-whiteColor">{{ $t('contacts.header') }}</h1>
       <div class="relative">
         <div class="dark:text-whiteColor">
-          <p class="text-xl font-semibold">{{ $t('contacts.secondHeader') }}:</p>
           <div class="block lg:flex justify-between my-4">
             <div class="bg-white p-5 rounded-lg w-full lg:w-third dark:bg-darkBgColor mb-3 lg:mb-0">
               <p class="font-semibold text-lg mb-3">{{ $t('contacts.first') }}</p>
@@ -14,12 +13,12 @@
             </div>
             <div class="bg-white p-5 rounded-lg w-full lg:w-third dark:bg-darkBgColor mb-3 lg:mb-0">
               <p class="font-semibold text-lg mb-3">{{ $t('contacts.second') }}</p>
-              <p><a class="text-mainColor" href="tel:77075557645">+7 707 555 76 45</a> Мустафаев Олжас</p>
+<!--              <p><a class="text-mainColor" href="tel:77075557645">+7 707 555 76 45</a> Мустафаев Олжас</p>-->
             </div>
             <div class="bg-white p-5 rounded-lg w-full lg:w-third dark:bg-darkBgColor mb-3 lg:mb-0">
               <p class="font-semibold text-lg mb-3">{{ $t('contacts.third') }}</p>
               <p><a class="text-mainColor" href="tel:77058441541">+7 705 844 15 41</a> Бектас Бердан</p>
-              <p><a class="text-mainColor" href="tel:77472377975">+7 747 237 79 75</a> Касымжан Ерболсын</p>,
+              <p><a class="text-mainColor" href="tel:77472377975">+7 747 237 79 75</a> Касымжан Ерболсын</p>
             </div>
           </div>
         </div>

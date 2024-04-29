@@ -1,10 +1,11 @@
 import {createI18n} from "vue-i18n";
 import ru from "./ru.json"
 import kz from "./kz.json"
+import en from "./en.json"
 
 
 const messages = {
-    ru: ru, kz: kz,
+    ru: ru, kz: kz, en: en
 };
 
 export default createI18n({

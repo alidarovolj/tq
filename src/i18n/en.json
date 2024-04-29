@@ -1,0 +1,337 @@
+{
+  "general": {
+    "tenge": "KZT",
+    "login": "Login",
+    "registration": "Registration",
+    "forgotPass": "Forgot password?",
+    "price": "Price",
+    "favorite": "Add to Favorites",
+    "toCart": "Add to Cart",
+    "quantity": "Quantity",
+    "overall": "Total",
+    "cancel": "Cancel",
+    "save": "Save",
+    "wait": "Please wait",
+    "backToAuth": "Back to login",
+    "send": "Send",
+    "confirm": "Confirm",
+    "remove": "Remove"
+  },
+  "errors": {
+    "address": "Please specify the address"
+  },
+  "about": {
+    "header": "About the Company",
+    "text": "We are your trusted partner for solutions and efficient automotive lighting solutions. Since 2016, we have been a leading automotive accessories sales and distribution company, ensuring quality and reliability with every delivery.",
+    "about": {
+      "first": {
+        "name": "Company name",
+        "value": "Trust Quality/TQ"
+      },
+      "second": {
+        "name": "Field of activity",
+        "value": "Sales and distribution of automotive accessories"
+      },
+      "third": {
+        "name": "Year of establishment",
+        "value": "2016"
+      },
+      "fourth": {
+        "name": "Location",
+        "value": "Almaty, Kazakhstan, Sadovnikov 99"
+      }
+    },
+    "description": {
+      "header": "Company Description",
+      "text": "TrustQuality specializes in supplying high-quality automotive wipers and bulbs for a wide range of vehicles. Our main goal is to ensure safety and comfort on the road by providing clients with access to the most modern and reliable automotive accessories."
+    },
+    "benefits": {
+      "header": "Our Advantages",
+      "text": "TrustQuality only offers quality products and provides a 12-month warranty on almost all products."
+    },
+    "products": {
+      "header": "Our Products",
+      "first": {
+        "name": "Wipers",
+        "value": "We offer wipers for all types of weather conditions, including summer, winter, and hybrid wipers. They provide excellent moisture removal and enhance visibility during rain and snow."
+      },
+      "second": {
+        "name": "Automotive Lamps",
+        "value": "Our lamps provide bright and even lighting of the road, enhancing safety during night trips. We have lamps of various types, including halogen and LED."
+      }
+    },
+    "praim": {
+      "header": "Our Key Advantages",
+      "first": {
+        "name": "Wide Assortment",
+        "value": "We offer a rich selection of wipers and lamps of various types, sizes, and models to satisfy the needs of all car owners."
+      },
+      "second": {
+        "name": "Quality",
+        "value": "TrustQuality works only with leading manufacturers known for their reliability and quality of products. All goods undergo strict quality control."
+      },
+      "third": {
+        "name": "Professional Advice",
+        "value": "Our experts are always ready to provide advice on choosing the most suitable wipers, automotive lamps, and accessories, taking into account the brand and model of your vehicle."
+      },
+      "fourth": {
+        "name": "Delivery",
+        "value": "We provide convenient delivery options throughout Kazakhstan and the CIS to make the purchase process as comfortable as possible for customers."
+      },
+      "fifth": {
+        "name": "Prices and Promotions",
+        "value": "We always have current prices and special offers for our customers. We strive to make our products accessible to a wide audience."
+      }
+    },
+    "last_text": "We are proud to help motorists ensure safety and comfort on the roads. TrustQuality – trust in quality"
+  },
+  "news": "Company News",
+  "contacts": {
+    "header": "Company Contacts",
+    "secondHeader": "Contacts",
+    "first": "For partnership inquiries across Kazakhstan and the CIS countries",
+    "second": "For partnership inquiries in the city of Almaty",
+    "third": "For partnership inquiries with the retail outlet at Bayanaul district 57a, Carsiti Shopping Center, 2nd tier, boutique 236"
+  },
+  "cart": {
+    "header": "TrustQuality Cart",
+    "overall": "Total Items",
+    "noItems": "Your cart is currently empty",
+    "removeCart": "Clear Cart",
+    "amount": "Quantity",
+    "notEnough": "This item is not available in the current quantity. (max",
+    "fillData": "Fill in payment details"
+  },
+  "cartForm": {
+    "heading": "Fill in Order Details",
+    "email": {
+      "name": "Email",
+      "placeholder": "Enter email"
+    },
+    "name": {
+      "name": "Full Name",
+      "placeholder": "Enter full name"
+    },
+    "phone": {
+      "name": "Phone",
+      "placeholder": "Enter phone number"
+    },
+    "address": {
+      "name": "Address",
+      "city": "City",
+      "placeholder": "Enter address",
+      "city_placeholder": "Enter city"
+    },
+    "type_first": {
+      "name": "Type of Delivery",
+      "placeholder": "Enter type of delivery"
+    },
+    "type": {
+      "name": "Type of Payment",
+      "first": "Bank Payment",
+      "second": "Through Manager"
+    },
+    "button": "Place Order"
+  },
+  "form": {
+    "heading": "You can find us",
+    "header": "Leave us a message",
+    "text": "Leave a request and we will call you back within 30 minutes",
+    "email": {
+      "name": "Email",
+      "placeholder": "Enter email"
+    },
+    "name": {
+      "name": "Name",
+      "placeholder": "Enter name"
+    },
+    "phone": {
+      "name": "Phone",
+      "placeholder": "Enter phone number"
+    },
+    "note": {
+      "name": "Note",
+      "placeholder": "Enter a note"
+    },
+    "agreement": "By submitting a request, you accept the terms of the offer agreement and agree to the processing of your personal data in accordance with the privacy policy",
+    "button": "Submit Request"
+  },
+  "header": {
+    "main": "Home",
+    "about": "About Us",
+    "owners": "For Owners",
+    "models": "Models",
+    "news": "News",
+    "contacts": "Contacts",
+    "cart": "Cart",
+    "refund": "Process a Refund",
+    "admin": "Admin Panel"
+  },
+  "mainPage": {
+    "placeholder": "Search by name",
+    "example": "For example",
+    "catalog": {
+      "header": "Product Catalog",
+      "popular": "Popular Categories"
+    }
+  },
+  "product": {
+    "description": "Description",
+    "addToCart": "Add to Cart",
+    "delivery": "Shipping",
+    "sameProd": "Similar Products",
+    "varanty": "Low Price Guarantee",
+    "inCart": "Item already in cart"
+  },
+  "footer": {
+    "first": "All rights to materials published on the website belong to Trust Quality Company © 2023",
+    "second": "The user is notified that any materials placed on the site are objects of intellectual property of Trust Quality (the rights holder). The user is not entitled to perform any actions with the objects of intellectual property without the prior written permission of the rights holder, otherwise, the rights holder reserves the right to demand penalties provided by the legislation of the Republic of Kazakhstan, as well as to apply to competent authorities for the protection of their rights and lawful interests.",
+    "third": "Any information presented on this site is for informational purposes only and under no circumstances is it considered a public offer."
+  },
+  "login": {
+    "header": "Login",
+    "subTitle": "Perform authorization",
+    "password": "Password",
+    "placeholder": "Enter password"
+  },
+  "registration": {
+    "subHeader": "By registering on the site GazBas.kz, you confirm that you are a wholesale client.\n          Wholesale prices will be displayed after the account is verified by a moderator.",
+    "header": "Registration",
+    "save": "Register"
+  },
+  "verification": {
+    "title": "Enter your phone number",
+    "subTitle": "Enter your phone number, and then confirm it with the code that will be sent to this number.",
+    "code": "Enter the code",
+    "send": "Verify"
+  },
+  "activateProd": {
+    "title": "Activate Product",
+    "subTitle": "Are you sure you want to activate this product?"
+  },
+  "order": {
+    "title": "Confirm Order",
+    "subTitle": "Are you sure you want to confirm payment for this order?"
+  },
+  "verify": {
+    "title": "Confirm Verification",
+    "subTitle": "Are you sure you want to confirm verification for this user?"
+  },
+  "createCategory": {
+    "title": "Create Category",
+    "subTitle": "Enter category name",
+    "name": "Name",
+    "name_kz": "Name in Kazakh",
+    "placeholder": "Enter name",
+    "placeholder_kz": "Enter name in Kazakh",
+    "image": "Image",
+    "image_placeholder": "Please upload an image",
+    "create": "Create"
+  },
+  "refuseOrder": {
+    "title": "Confirm Order Cancellation",
+    "subTitle": "Are you sure you want to cancel payment for this order?"
+  },
+  "refuseVerify": {
+    "title": "Confirm Cancellation of Verification",
+    "subTitle": "Are you sure you want to cancel verification for this user?",
+    "send": "Cancel Verification"
+  },
+  "removeCategory": {
+    "title": "Confirm Deletion of Category",
+    "subTitle": "Are you sure you want to delete this category? You will not be able to restore this data."
+  },
+  "removeNews": {
+    "title": "Confirm Deletion of News",
+    "subTitle": "Are you sure you want to delete this news? You will not be able to restore this data."
+  },
+  "removeProduct": {
+    "title": "Confirm Deletion of Product",
+    "subTitle": "Are you sure you want to delete this product? You will not be able to restore this data."
+  },
+  "removeUser": {
+    "title": "Confirm Deletion of User",
+    "subTitle": "Are you sure you want to delete this user? You will not be able to restore this data."
+  },
+  "createNews": {
+    "title": "Add News",
+    "subTitle": "Perform adding news to the list",
+    "name": "Name",
+    "placeholder": "Enter name",
+    "name_kz": "Name in Kazakh",
+    "placeholder_kz": "Enter name in Kazakh",
+    "description": "Description",
+    "placeholder_description": "Enter description",
+    "description_kz": "Description in Kazakh",
+    "placeholder_description_kz": "Enter description in Kazakh",
+    "chooseLang": "Choose language",
+    "content": "Content",
+    "placeholder_content": "Enter content",
+    "fillContent": "Fill content",
+    "content_kz": "Content in Kazakh",
+    "image": "Image",
+    "fillImg": "Upload image"
+  },
+  "createProduct": {
+    "title": "Add Product",
+    "subTitle": "Perform adding product to the list",
+    "fillUUID": "Fill UUID",
+    "name": "Name",
+    "placeholder": "Enter name",
+    "name_kz": "Name in Kazakh",
+    "placeholder_kz": "Enter name in Kazakh",
+    "description": "Description",
+    "placeholder_description": "Enter description",
+    "description_kz": "Description in Kazakh",
+    "placeholder_description_kz": "Enter description in Kazakh",
+    "price": "Price",
+    "placeholder_price": "Enter price",
+    "category": "Category",
+    "placeholder_category": "Select category",
+    "image": "Image",
+    "fillImg": "Upload image",
+    "fillContent": "Fill content",
+    "content": "Content",
+    "placeholder_content": "Enter content",
+    "content_kz": "Content in Kazakh",
+    "placeholder_content_kz": "Enter content in Kazakh",
+    "amount": "Amount",
+    "placeholder_amount": "Enter amount",
+    "fillAmount": "Fill amount",
+    "retailPrice": "Retail Price",
+    "placeholder_retailPrice": "Enter retail price",
+    "fillRetailPrice": "Fill retail price",
+    "wholesalePrice": "Wholesale Price",
+    "placeholder_wholesalePrice": "Enter wholesale price",
+    "fillWholesalePrice": "Fill wholesale price"
+  },
+  "deactivateProd": {
+    "title": "Deactivate Product",
+    "subTitle": "Are you sure you want to deactivate this product?",
+    "send": "Deactivate"
+  },
+  "editCategory": {
+    "title": "Edit Category",
+    "subTitle": "Perform editing of the category"
+  },
+  "editNews": {
+    "title": "Edit News",
+    "subTitle": "Perform editing of the news"
+  },
+  "editProduct": {
+    "title": "Edit Product",
+    "subTitle": "Perform editing of the product"
+  },
+  "adminHeader": {
+    "back": "Return to the website",
+    "main": "Home",
+    "categories": "Categories",
+    "products": "Products",
+    "news": "News",
+    "users": "Users",
+    "orders": "Orders",
+    "mails": "Mails",
+    "verifications": "Verifications",
+    "logout": "Logout"
+  }
+}

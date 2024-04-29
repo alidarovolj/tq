@@ -2,33 +2,36 @@
   <div>
     <div class="mb-3 lg:mb-5 lg:w-full">
       <h2 class="text-center text-2xl mb-5 font-medium dark:text-darkText">
-        Подтвердите удаление
+        {{ $t('removeNews.title') }}
       </h2>
       <p class="text-sm text-center">
-        Вы уверены что хотите удалить данную новость? Вы больше не сможете
-        восстановить эти данные.
+        {{ $t('removeNews.subTitle') }}
       </p>
     </div>
-    <form class="flex justify-center text-sm mt-5" @submit.prevent="removeNewsLocal">
+    <form
+        class="flex justify-center text-sm mt-5"
+        @submit.prevent="removeNewsLocal">
       <div class="flex justify-center">
         <div
             class="w-max text-black mr-3 flex items-center rounded-md px-5 py-2 cursor-pointer"
             @click="close_modal"
         >
-          <p class="dark:text-red-500">Отменить</p>
+          <p class="dark:text-red-500">
+            {{ $t('general.cancel') }}
+          </p>
         </div>
         <div>
           <button
               v-if="loading === false"
               class="w-max px-6 py-2.5 rounded-md text-center bg-red-500 dark:bg-red-500 text-white cursor-pointer"
               type="submit">
-            Удалить
+            {{ $t('general.remove') }}
           </button>
           <div
               v-else
               class="w-max px-6 py-2.5 rounded-md text-center bg-red-500 dark:bg-red-500 text-white cursor-pointer flex items-center">
             <p class="spinner mr-2"></p>
-            Подождите
+            {{ $t('general.wait') }}
           </div>
         </div>
       </div>

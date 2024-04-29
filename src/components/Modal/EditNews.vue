@@ -1,23 +1,27 @@
 <template>
   <div>
     <div class="lg:w-full mb-5">
-      <h2 class="text-center text-2xl font-medium mb-2">Добавить новость</h2>
-      <p class="text-center text-sm">Выполните добавление новости в список</p>
+      <h2 class="text-center text-2xl font-medium mb-2">
+        {{ $t('editNews.title') }}
+      </h2>
+      <p class="text-center text-sm">
+        {{ $t('editNews.subTitle') }}
+      </p>
       <div
           class="flex flex-col justify-between h-full text-xs"
       >
-        <form action="" @submit.prevent="sendForm">
+        <form
+            action=""
+            @submit.prevent="sendForm">
           <div class="block lg:flex">
-            <div
-                class="w-full mt-0 lg:mt-0 h-max scroll-container lg:h-max overflow-y-auto pb-5 px-1"
-            >
+            <div class="w-full mt-0 lg:mt-0 h-max scroll-container lg:h-max overflow-y-auto pb-5 px-1">
               <div class="content h-max">
                 <div class="flex flex-col mb-2 w-full">
                   <label
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Название
+                    {{ $t('createNews.name') }}
                   </label>
                   <input
                       v-model="form.title"
@@ -26,7 +30,7 @@
                     }"
                       class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                       name="first_name"
-                      placeholder="Введите название"
+                      :placeholder="$t('createNews.placeholder')"
                       type="text"
                   />
                 </div>
@@ -35,13 +39,13 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Название на каз
+                    {{ $t('createNews.name_kz') }}
                   </label>
                   <input
                       v-model="form.title_kz"
                       class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                       name="first_name"
-                      placeholder="Введите название на каз"
+                      :placeholder="$t('createNews.placeholder_kz')"
                       type="text"
                   />
                 </div>
@@ -50,7 +54,7 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Описание
+                    {{ $t('createNews.description') }}
                   </label>
                   <textarea
                       v-model="form.description"
@@ -59,7 +63,7 @@
                     }"
                       class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                       name="first_name"
-                      placeholder="Введите описание"
+                      :placeholder="$t('createNews.placeholder_description')"
                       type="text"
                   />
                 </div>
@@ -68,53 +72,65 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Описание на каз
+                    {{ $t('createNews.description_kz') }}
                   </label>
                   <textarea
                       v-model="form.description_kz"
                       class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                       name="first_name"
-                      placeholder="Введите описание на каз"
+                      :placeholder="$t('createNews.placeholder_description_kz')"
                       type="text"
                   />
                 </div>
-                <p class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText">Выберите язык</p>
+                <p class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText">
+                  {{ $t('createNews.chooseLang') }}
+                </p>
                 <div class="flex mb-2">
                   <p :class="{ 'bg-mainColor text-white' : current_lang === true }"
                      class="w-max px-5 py-2 rounded-lg font-semibold"
-                     @click="current_lang = true">РУС</p>
+                     @click="current_lang = true">RU</p>
                   <p :class="{ 'bg-mainColor text-white' : current_lang === false }"
                      class="w-max px-5 py-2 rounded-lg font-semibold"
-                     @click="current_lang = false">КАЗ</p>
+                     @click="current_lang = false">KZ</p>
                 </div>
                 <div v-if="current_lang" class="flex flex-col mb-2 w-full">
                   <label
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Контент
+                    {{ $t('createNews.content') }}
                   </label>
-                  <quill-editor v-model:content="form.content" class="h-48" contentType="html"
-                                theme="snow"></quill-editor>
-                  <p v-if="v$.form.content.$errors.length">Заполните контент</p>
+                  <quill-editor
+                      v-model:content="form.content"
+                      class="h-48"
+                      contentType="html"
+                      theme="snow"></quill-editor>
+                  <p v-if="v$.form.content.$errors.length">
+                    {{ $t('createNews.fillContent') }}
+                  </p>
                 </div>
                 <div v-else class="flex flex-col mb-2 w-full">
                   <label
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Контент на каз
+                    {{ $t('createNews.content_kz') }}
                   </label>
-                  <quill-editor v-model:content="form.content_kz" class="h-48" contentType="html"
-                                theme="snow"></quill-editor>
-                  <p v-if="v$.form.content_kz.$errors.length">Заполните контент</p>
+                  <quill-editor
+                      v-model:content="form.content_kz"
+                      class="h-48"
+                      contentType="html"
+                      theme="snow"></quill-editor>
+                  <p v-if="v$.form.content_kz.$errors.length">
+                    {{ $t('createNews.fillContent') }}
+                  </p>
                 </div>
                 <div class="flex flex-col mb-2 w-full">
                   <label
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Картинка
+                    {{ $t('createNews.image') }}
                   </label>
                   <input type="file" @change="attachFile"/>
                 </div>
@@ -126,20 +142,22 @@
                 class="w-max text-black dark:text-white mr-3 flex items-center rounded-md px-5 py-2 cursor-pointer"
                 @click="close_modal"
             >
-              <p class="dark:text-red-500">Отменить</p>
+              <p class="dark:text-red-500">
+                {{ $t('general.cancel') }}
+              </p>
             </div>
             <div>
               <button
                   v-if="loading === false"
                   class="w-max px-6 py-2.5 rounded-md text-center bg-mainColor dark:bg-mainColor text-white cursor-pointer"
                   type="submit">
-                Сохранить
+                {{ $t('general.save') }}
               </button>
               <div
                   v-else
                   class="w-max px-6 py-2.5 rounded-md text-center bg-mainColor dark:bg-mainColor text-white cursor-pointer flex items-center">
                 <p class="spinner mr-2"></p>
-                Подождите
+                {{ $t('general.wait') }}
               </div>
             </div>
           </div>
@@ -230,7 +248,7 @@ export default {
         this.toast(false, "Не все поля заполнены");
         return;
       }
-      await this.editNews({ id: this.tranId.id, form: this.form })
+      await this.editNews({id: this.tranId.id, form: this.form})
           .then(() => {
             this.loading = false;
             this.toast(true, "Новость успешно отредактирована");

@@ -1,8 +1,12 @@
 <template>
   <div>
     <div class="lg:w-full mb-5">
-      <h2 class="text-center text-2xl font-medium mb-2">Добавить категорию</h2>
-      <p class="text-center text-sm">Выполните добавление категории в список</p>
+      <h2 class="text-center text-2xl font-medium mb-2">
+        {{ $t('createCategory.title') }}
+      </h2>
+      <p class="text-center text-sm">
+        {{ $t('createCategory.subTitle') }}
+      </p>
       <div
           class="flex flex-col justify-between h-full text-xs"
       >
@@ -17,7 +21,7 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Название
+                    {{ $t('createCategory.name') }}
                   </label>
                   <input
                       v-model="form.name"
@@ -26,7 +30,7 @@
                     }"
                       class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                       name="first_name"
-                      placeholder="Введите название"
+                      :placeholder="$t('createCategory.placeholder')"
                       type="text"
                   />
                 </div>
@@ -35,7 +39,7 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Название на каз
+                    {{ $t('createCategory.name_kz') }}
                   </label>
                   <input
                       v-model="form.name_kz"
@@ -44,7 +48,7 @@
                     }"
                       class="py-2 pl-4 border border-solid border-[#D8D6DE] rounded-md w-full dark:bg-darkBgColor dark:text-white"
                       name="first_name"
-                      placeholder="Введите название на каз"
+                      :placeholder="$t('createCategory.placeholder_kz')"
                       type="text"
                   />
                 </div>
@@ -53,10 +57,12 @@
                       class="text-xs font-normal text-[#6E6B7B] mb-1 dark:text-darkText"
                       for="first_name"
                   >
-                    Картинка
+                    {{ $t('createCategory.image') }}
                   </label>
                   <input type="file" @change="attachFile"/>
-                  <p v-if="v$.form.icon.$errors.length" class="text-red-500">Пожалуйста, загрузите картинку</p>
+                  <p v-if="v$.form.icon.$errors.length" class="text-red-500">
+                    {{ $t('createCategory.image_placeholder') }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -66,20 +72,22 @@
                 class="w-max text-black dark:text-white mr-3 flex items-center rounded-md px-5 py-2 cursor-pointer"
                 @click="close_modal"
             >
-              <p class="dark:text-red-500">Отменить</p>
+              <p class="dark:text-red-500">
+                {{ $t('general.cancel') }}
+              </p>
             </div>
             <div>
               <button
                   v-if="loading === false"
                   class="w-max px-6 py-2.5 rounded-md text-center bg-mainColor dark:bg-mainColor text-white cursor-pointer"
                   type="submit">
-                Сохранить
+                {{ $t('general.confirm') }}
               </button>
               <div
                   v-else
                   class="w-max px-6 py-2.5 rounded-md text-center bg-mainColor dark:bg-mainColor text-white cursor-pointer flex items-center">
                 <p class="spinner mr-2"></p>
-                Подождите
+                {{ $t('general.wait') }}
               </div>
             </div>
           </div>

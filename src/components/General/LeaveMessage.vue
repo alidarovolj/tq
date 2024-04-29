@@ -1,7 +1,6 @@
 <template>
   <div class="container mx-auto px-4 lg:px-0 py-10 mt-10">
-    <h2 class="text-2xl font-semibold mb-10 dark:text-whiteColor">{{ $t('form.heading') }}</h2>
-    <div class="block lg:flex rounded-2xl bg-white dark:bg-darkBgColor text-blackColor dark:text-white w-full lg:w-1/2 mx-auto">
+    <div class="block lg:flex rounded-2xl bg-white dark:bg-darkBgColor text-blackColor dark:text-white w-full lg:w-1/2">
 <!--      <div class="w-full lg:w-1/3">-->
 <!--        <iframe class="rounded-t-xl lg:rounded-tr-none lg:rounded-l-2xl"-->
 <!--                frameborder="0"-->
@@ -9,7 +8,7 @@
 <!--                src="https://yandex.ru/map-widget/v1/?um=constructor%3A8a9d23a8cc635bd099bc33d6ccc533d8d18c977c429689eaf69c699df8b5ee23&amp;source=constructor"-->
 <!--                width="100%"></iframe>-->
 <!--      </div>-->
-      <div class="w-full p-7 flex flex-col justify-center">
+      <div class="w-full p-7 flex flex-col">
         <h3 class="text-2xl font-semibold mb-3">{{ $t('form.header') }}</h3>
         <p class="text-sm mb-10">{{ $t('form.text') }}</p>
         <form action="" @submit.prevent="sendForm">
