@@ -17,8 +17,8 @@
                 <a href="https://www.tiktok.com/@tq_company">
                   <font-awesome-icon :icon="['fab', 'tiktok']" class="mr-3 cursor-pointer"/>
                 </a>
-                <a href="https://web.telegram.org/">
-                  <font-awesome-icon :icon="['fab', 'telegram']" class="mr-3 cursor-pointer"/>
+                <a href="https://wa.me/+77714142525?text=MESSAGE" target="_blank">
+                  <font-awesome-icon :icon="['fab', 'whatsapp']" class="mr-3 cursor-pointer"/>
                 </a>
                 <a href="https://www.youtube.com/">
                   <font-awesome-icon :icon="['fab', 'youtube']" class="cursor-pointer"/>

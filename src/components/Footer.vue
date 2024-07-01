@@ -8,7 +8,7 @@
         </div>
         <div class="mr-10">
           <p class="text-lg font-semibold mb-2">Call Center</p>
-          <a class="block" href="tel:77472367503">+7 (747) 236-75-03</a>
+          <a class="block" href="tel:77714142525">+7 (771) 414-25-25</a>
           <a class="block" href="mailto:support@tq.kz">support@tq.kz</a>
         </div>
         <div>
