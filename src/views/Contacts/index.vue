@@ -5,19 +5,21 @@
       <div class="relative">
         <div class="dark:text-whiteColor">
           <div class="block lg:flex justify-between my-4">
-            <div class="bg-white p-5 rounded-lg w-full lg:w-third dark:bg-darkBgColor mb-3 lg:mb-0">
+            <div class="bg-white p-5 rounded-lg w-full lg:w-fourth dark:bg-darkBgColor mb-3 lg:mb-0">
               <p class="font-semibold text-lg mb-3">{{ $t('contacts.first') }}</p>
-              <p><a class="text-mainColor" href="tel:77071119781">+7 707 111 97 81</a> Нугман Даулет</p>
-              <p><a class="text-mainColor" href="tel:77089549985">+7 708 954 99 85</a> Утимов Шахмардан</p>
+              <p><a class="text-mainColor" href="tel:77767131333">+7 776 713-13-33</a> Жанбиров Дамир Бауржанович</p>
             </div>
-            <div class="bg-white p-5 rounded-lg w-full lg:w-third dark:bg-darkBgColor mb-3 lg:mb-0">
+            <div class="bg-white p-5 rounded-lg w-full lg:w-fourth dark:bg-darkBgColor mb-3 lg:mb-0">
               <p class="font-semibold text-lg mb-3">{{ $t('contacts.second') }}</p>
               <p><a class="text-mainColor" href="tel:77752453303">+7 775 245-33-03</a> Ордабек Аят</p>
             </div>
-            <div class="bg-white p-5 rounded-lg w-full lg:w-third dark:bg-darkBgColor mb-3 lg:mb-0">
+            <div class="bg-white p-5 rounded-lg w-full lg:w-fourth dark:bg-darkBgColor mb-3 lg:mb-0">
+              <p class="font-semibold text-lg mb-3">{{ $t('contacts.fourth') }}</p>
+              <p><a class="text-mainColor" href="tel:77071119781">+7 707 111 97 81</a> Нугман Даулет</p>
+            </div>
+            <div class="bg-white p-5 rounded-lg w-full lg:w-fourth dark:bg-darkBgColor mb-3 lg:mb-0">
               <p class="font-semibold text-lg mb-3">{{ $t('contacts.third') }}</p>
-              <p><a class="text-mainColor" href="tel:77058441541">+7 705 844 15 41</a> Бектас Бердан</p>
-              <p><a class="text-mainColor" href="tel:77472377975">+7 747 237 79 75</a> Касымжан Ерболсын</p>
+              <p><a class="text-mainColor" href="tel:77472377975">+7 747 237-79-75</a> Қасымжан Ерболсын Дауренұлы</p>
             </div>
           </div>
         </div>

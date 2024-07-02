@@ -8,10 +8,10 @@
             <div class="block lg:flex items-center">
               <div class="flex justify-end items-center mr-3">
                 <font-awesome-icon :icon="['fas', 'envelope']" class="text-mainColor"/>
-                <a class="ml-1" href="mailto:office@tq.kz">office@tq.kz</a>
+                <a class="ml-1" href="mailto:tq.gazbas@gmail.com">tq.gazbas@gmail.com</a>
               </div>
               <div class="text-mainColor text-base">
-                <a href="https://www.instagram.com/trust_quality_official/">
+                <a href="https://www.instagram.com/tq_company_/">
                   <font-awesome-icon :icon="['fab', 'instagram']" class="mr-3 cursor-pointer"/>
                 </a>
                 <a href="https://www.tiktok.com/@tq_company">
