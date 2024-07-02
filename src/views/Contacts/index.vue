@@ -8,12 +8,11 @@
             <div class="bg-white p-5 rounded-lg w-full lg:w-third dark:bg-darkBgColor mb-3 lg:mb-0">
               <p class="font-semibold text-lg mb-3">{{ $t('contacts.first') }}</p>
               <p><a class="text-mainColor" href="tel:77071119781">+7 707 111 97 81</a> Нугман Даулет</p>
-              <p><a class="text-mainColor" href="tel:77752453303">+7 775 245 33 03</a> Ордабек Аят</p>
               <p><a class="text-mainColor" href="tel:77089549985">+7 708 954 99 85</a> Утимов Шахмардан</p>
             </div>
             <div class="bg-white p-5 rounded-lg w-full lg:w-third dark:bg-darkBgColor mb-3 lg:mb-0">
               <p class="font-semibold text-lg mb-3">{{ $t('contacts.second') }}</p>
-<!--              <p><a class="text-mainColor" href="tel:77075557645">+7 707 555 76 45</a> Мустафаев Олжас</p>-->
+              <p><a class="text-mainColor" href="tel:77752453303">+7 775 245-33-03</a> Ордабек Аят</p>
             </div>
             <div class="bg-white p-5 rounded-lg w-full lg:w-third dark:bg-darkBgColor mb-3 lg:mb-0">
               <p class="font-semibold text-lg mb-3">{{ $t('contacts.third') }}</p>
