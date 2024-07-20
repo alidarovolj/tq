@@ -6,19 +6,45 @@
         <div class="dark:text-whiteColor">
           <div class="block lg:flex justify-between my-4">
             <div class="bg-white p-5 rounded-lg w-full lg:w-fourth dark:bg-darkBgColor mb-3 lg:mb-0">
-              <p class="font-semibold text-lg mb-3">{{ $t('contacts.first') }}</p>
-              <p><a class="text-mainColor" href="tel:77767131333">+7 776 713-13-33</a> Жанбиров Дамир Бауржанович</p>
-            </div>
-            <div class="bg-white p-5 rounded-lg w-full lg:w-fourth dark:bg-darkBgColor mb-3 lg:mb-0">
-              <p class="font-semibold text-lg mb-3">{{ $t('contacts.second') }}</p>
+              <p class="font-semibold text-lg mb-3">{{ $t('contacts.question') }}</p>
+              <ul class="list-disc pl-4 mb-4">
+                <li>{{ $t('contacts.cities.first.first') }}</li>
+                <li>{{ $t('contacts.cities.first.second') }}</li>
+                <li>{{ $t('contacts.cities.first.third') }}</li>
+                <li>{{ $t('contacts.cities.first.fourth') }}</li>
+                <li>{{ $t('contacts.cities.first.fifth') }}</li>
+                <li>{{ $t('contacts.cities.first.sixth') }}</li>
+                <li>{{ $t('contacts.cities.first.seventh') }}</li>
+              </ul>
               <p><a class="text-mainColor" href="tel:77752453303">+7 775 245-33-03</a> Ордабек Аят</p>
             </div>
             <div class="bg-white p-5 rounded-lg w-full lg:w-fourth dark:bg-darkBgColor mb-3 lg:mb-0">
-              <p class="font-semibold text-lg mb-3">{{ $t('contacts.fourth') }}</p>
+              <p class="font-semibold text-lg mb-3">{{ $t('contacts.question') }}</p>
+              <ul class="list-disc pl-4 mb-4">
+                <li>{{ $t('contacts.cities.second.first') }}</li>
+                <li>{{ $t('contacts.cities.second.second') }}</li>
+                <li>{{ $t('contacts.cities.second.third') }}</li>
+                <li>{{ $t('contacts.cities.second.fourth') }}</li>
+              </ul>
+              <p><a class="text-mainColor" href="tel:77767131333">+7 776 713-13-33</a> Жанбиров Дамир Бауржанович</p>
+            </div>
+            <div class="bg-white p-5 rounded-lg w-full lg:w-fourth dark:bg-darkBgColor mb-3 lg:mb-0">
+              <p class="font-semibold text-lg mb-3">{{ $t('contacts.question') }}</p>
+              <ul class="list-disc pl-4 mb-4">
+                <li>{{ $t('contacts.cities.third.first') }}</li>
+                <li>{{ $t('contacts.cities.third.second') }}</li>
+                <li>{{ $t('contacts.cities.third.third') }}</li>
+                <li>{{ $t('contacts.cities.third.fourth') }}</li>
+                <li>{{ $t('contacts.cities.third.fifth') }}</li>
+                <li>{{ $t('contacts.cities.third.sixth') }}</li>
+                <li>{{ $t('contacts.cities.third.seventh') }}</li>
+                <li>{{ $t('contacts.cities.third.eighth') }}</li>
+                <li>{{ $t('contacts.cities.third.ninth') }}</li>
+              </ul>
               <p><a class="text-mainColor" href="tel:77071119781">+7 707 111 97 81</a> Нугман Даулет</p>
             </div>
             <div class="bg-white p-5 rounded-lg w-full lg:w-fourth dark:bg-darkBgColor mb-3 lg:mb-0">
-              <p class="font-semibold text-lg mb-3">{{ $t('contacts.third') }}</p>
+              <p class="font-semibold text-lg mb-3">{{ $t('contacts.last_one') }}</p>
               <p><a class="text-mainColor" href="tel:77472377975">+7 747 237-79-75</a> Қасымжан Ерболсын Дауренұлы</p>
             </div>
           </div>

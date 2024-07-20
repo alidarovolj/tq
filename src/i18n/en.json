@@ -89,10 +89,36 @@
   "contacts": {
     "header": "Company Contacts",
     "secondHeader": "Contacts",
-    "first": "For partnership inquiries across Kazakhstan and the CIS countries",
-    "second": "For partnership inquiries in the city of Astana",
-    "third": "For partnership inquiries with the retail outlet at Bayanaul district 57a, Carsiti Shopping Center, 2nd tier, boutique 236",
-    "fourth": "For partnership inquiries in the city of Almaty"
+    "question": "For cooperation inquiries:",
+    "last_one": "For cooperation inquiries with the TC 'Car City' (2nd tier, 222 boutique) address: Bayanaul district 57.",
+    "cities": {
+      "first": {
+        "first": "city of Astana",
+        "second": "Akmola region",
+        "third": "Ulytau region",
+        "fourth": "Karaganda region",
+        "fifth": "Pavlodar region",
+        "sixth": "North Kazakhstan region",
+        "seventh": "Kostanay region"
+      },
+      "second": {
+        "first": "Aktobe region",
+        "second": "West Kazakhstan region",
+        "third": "Atyrau region",
+        "fourth": "Mangystau region"
+      },
+      "third": {
+        "first": "East Kazakhstan region",
+        "second": "Abai region",
+        "third": "Almaty region",
+        "fourth": "Zhambyl region",
+        "fifth": "Turkestan region",
+        "sixth": "Kyzylorda region",
+        "seventh": "Zhetysu region",
+        "eighth": "city of Almaty",
+        "ninth": "city of Shymkent"
+      }
+    }
   },
   "cart": {
     "header": "TrustQuality Cart",
